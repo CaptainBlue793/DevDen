@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Palak portfolio ? planning preview</title>
+<style>
+:root{color-scheme:dark;font-family:Inter,Segoe UI,sans-serif;background:#0b1020;color:#f4f7fc}*{box-sizing:border-box}body{margin:0;line-height:1.65}header,main{max-width:1120px;margin:auto;padding:32px 24px}header{padding-bottom:0}h1{line-height:1.2;font-size:clamp(28px,4vw,42px)}h2{margin-top:36px}h3{margin-top:28px}a{color:#78a7ff}a:focus-visible{outline:3px solid #78a7ff;outline-offset:5px}nav{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0}nav a{padding:10px 16px;border:1px solid #72829f;border-radius:10px;text-decoration:none}section{padding:24px;background:#121b30;border-radius:16px;margin-bottom:28px;scroll-margin-top:24px;overflow-wrap:anywhere}.notice{padding:16px 20px;background:#19243b;border-left:4px solid #78a7ff;border-radius:8px;color:#b1bdd1}table{display:block;overflow-x:auto;width:100%;border-collapse:collapse;font-size:15px}th,td{padding:10px 12px;border:1px solid #2a3855;text-align:left;vertical-align:top}th{background:#19243b}pre{overflow:auto;padding:16px;background:#0b1020;border-radius:8px;font-size:13px}code{font-family:Consolas,monospace}p code,li code,td code{background:#19243b;padding:2px 5px;border-radius:4px}.document{white-space:pre-wrap}blockquote{border-left:3px solid #78a7ff;padding-left:20px;color:#b1bdd1}@media(max-width:600px){header,main{padding:20px 14px}section{padding:18px}}
+</style></head><body><header><p>PALAK DEB PATRA / PORTFOLIO</p><h1>Portfolio planning preview</h1><p class="notice">Planning documents only. The React + Vite portfolio has not been implemented or deployed yet. This page presents the requirements, proposed design, and build plan.</p><nav aria-label="Planning documents"><a href="#requirements">Requirements</a><a href="#design">Design specification</a><a href="#implementation">Implementation plan</a></nav></header><main><section id="requirements"><h1>Portfolio requirements</h1>
+<p>Version 0.1 · Planning draft · 7 October 2026</p>
+<h2>1. Purpose and audience</h2>
+<p>The portfolio should help a visitor understand who Palak is, see evidence of engineering ability, explore relevant projects, and find a contact channel. Aim for a visitor to identify Palak's focus and open a featured project within roughly 30 seconds.</p>
+<p>Primary audience, provisionally: recruiters and engineering teams. Secondary audience: collaborators and people interested in the projects. The emphasis can change without changing the core architecture.</p>
+<p>User stories:</p>
+<ul>
+<li>As a recruiter, I can scan the homepage, open a relevant case study, and find a resume or contact link when supplied.</li>
+<li>As an engineer, I can understand a project's problem, architecture, tradeoffs, and limitations, then inspect its source.</li>
+<li>As a collaborator, I can see Palak's interests and find a reliable way to reach out.</li>
+<li>As the owner, I can add or reorder a project by editing content files without modifying the page layouts.</li>
+</ul>
+<h2>2. Confirmed constraints and assumptions</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Personal portfolio showcasing projects</td>
+<td>Requested</td>
+</tr>
+<tr>
+<td>React + Vite frontend</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>Deployment to <code>palakdebpatra.com</code> through Cloudflare</td>
+<td>Required deployment capability</td>
+</tr>
+<tr>
+<td>Plan, requirements, and design before implementation</td>
+<td>Current scope</td>
+</tr>
+<tr>
+<td>TypeScript, pre-rendering, and CSS Modules</td>
+<td>Recommended technical choices</td>
+</tr>
+<tr>
+<td>Dark navy and blue visual direction</td>
+<td>Proposed; adjustable</td>
+</tr>
+<tr>
+<td>Recruiter and collaborator audience</td>
+<td>Assumption pending preference</td>
+</tr>
+<tr>
+<td>Repository-based content editing</td>
+<td>Recommended launch workflow</td>
+</tr>
+<tr>
+<td>Domain registered, active Cloudflare zone, and account access</td>
+<td>Unverified deployment prerequisites</td>
+</tr>
+</tbody>
+</table>
+<p>Use the existing <code>Portfolio/</code> directory as the project boundary. Keep neighboring repositories independent. Any Python utility used during implementation or validation must use the existing <code>starGPU</code> environment; frontend tools use Node.js.</p>
+<h2>3. Launch requirements</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Acceptance condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-01</td>
+<td>Personal introduction</td>
+<td>Name, approved headline, short introduction, and a clear link to featured work</td>
+</tr>
+<tr>
+<td>FR-02</td>
+<td>Featured work</td>
+<td>Three selected projects with useful visuals, a short problem statement, and a case-study link</td>
+</tr>
+<tr>
+<td>FR-03</td>
+<td>Project index</td>
+<td>Published projects are listed at <code>/projects</code>, with category filters and a clear reset option</td>
+</tr>
+<tr>
+<td>FR-04</td>
+<td>Case studies</td>
+<td>Every published project has a direct URL and explains the problem, contribution, approach, outcome, and limitations</td>
+</tr>
+<tr>
+<td>FR-05</td>
+<td>About and capabilities</td>
+<td>Concise bio and capabilities connected to actual projects; no unsupported proficiency scores</td>
+</tr>
+<tr>
+<td>FR-06</td>
+<td>Contact</td>
+<td>Approved email link and verified professional profiles; copying the email has a fallback when unavailable</td>
+</tr>
+<tr>
+<td>FR-07</td>
+<td>Resume</td>
+<td>View/download link appears only when a real, current PDF is supplied</td>
+</tr>
+<tr>
+<td>FR-08</td>
+<td>Navigation</td>
+<td>Home, Projects, About, and Contact work on keyboard, touch, and direct links</td>
+</tr>
+<tr>
+<td>FR-09</td>
+<td>Maintainable content</td>
+<td>Adding a published project generates its index entry, detail route, and sitemap entry</td>
+</tr>
+<tr>
+<td>FR-10</td>
+<td>Missing content</td>
+<td>Optional demo, resume, and profile links are omitted when absent; no dead buttons or invented URLs</td>
+</tr>
+<tr>
+<td>FR-11</td>
+<td>Not found</td>
+<td>Unknown page and project URLs show a helpful page and return HTTP 404 on direct requests</td>
+</tr>
+<tr>
+<td>FR-12</td>
+<td>Custom domain</td>
+<td>Valid HTTPS at the apex, <code>www</code> redirect, and working direct project URLs</td>
+</tr>
+</tbody>
+</table>
+<p>Project categories begin with All, AI &amp; ML, Developer Tools, and Learning. Assign them editorially during content preparation; hide any category with no published projects. Projects may belong to more than one category. The default order is curated rather than based on stars or repository dates.</p>
+<p>Contact is an email/profile workflow for launch. A message form with email delivery would require a separate backend feature and is deferred.</p>
+<h2>4. Candidate content from this workspace</h2>
+<p>These summaries come from local READMEs, not an independent implementation audit. Featured order is an editorial proposal, not a claim about production readiness.</p>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Draft description</th>
+<th>Proposed placement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Memex</td>
+<td>Local document question answering with retrieval and citations</td>
+<td>Featured: applied AI and privacy-conscious architecture</td>
+</tr>
+<tr>
+<td>CodeShift</td>
+<td>Python-to-TypeScript migration with dependency ordering and behavior verification</td>
+<td>Featured: developer tooling and verification</td>
+</tr>
+<tr>
+<td>The Engineering Atlas</td>
+<td>Browser-based engineering courses with interactive explanations</td>
+<td>Featured: teaching and frontend breadth</td>
+</tr>
+<tr>
+<td>FrameSmith</td>
+<td>Graphics-settings optimization using local measurement and search</td>
+<td>Catalog; candidate for a deeper technical case study</td>
+</tr>
+<tr>
+<td>SummaScribe</td>
+<td>PDF/text summaries with extractive mode and optional local AI</td>
+<td>Catalog: document processing</td>
+</tr>
+<tr>
+<td>Tagify</td>
+<td>Topic discovery and explainable dictionary-based industry labels</td>
+<td>Catalog: text analysis</td>
+</tr>
+<tr>
+<td>WatchWise</td>
+<td>Content-based movie discovery with filters and session watchlists</td>
+<td>Catalog: recommendation systems</td>
+</tr>
+<tr>
+<td>NetChat</td>
+<td>Questions grounded in the contents of a public webpage</td>
+<td>Catalog after reviewing demo readiness and implementation</td>
+</tr>
+<tr>
+<td>Project X</td>
+<td>Reusable system-design draft rather than an implemented application</td>
+<td>Omit at launch, or explicitly label as a design study</td>
+</tr>
+</tbody>
+</table>
+<p>If the preferred lead projects are Tagify, SummaScribe, and WatchWise, change the featured flags and ordering; no structural redesign is needed.</p>
+<p>Source repositories for the first seven projects were found in local Git remote configuration under the <code>CaptainBlue793</code> GitHub account. Repository visibility, public links, licensing, demo availability, and image rights must be checked when publishing content. Do not repeat README test counts or performance claims without current evidence.</p>
+<h2>5. Case-study content contract</h2>
+<p>Each published project needs:</p>
+<ol>
+<li>Title, stable slug, one-sentence summary, categories, technologies, and an accurate status.</li>
+<li>The problem and who benefits from solving it.</li>
+<li>Palak's role and contribution, distinguishing personal work from team or third-party work.</li>
+<li>One authentic screenshot or a diagram clearly identified as a diagram.</li>
+<li>The approach, architecture, and one or two meaningful engineering decisions.</li>
+<li>Outcomes supported by evidence; qualitative outcomes are acceptable when measurements are unavailable.</li>
+<li>Limitations and lessons learned.</li>
+<li>Source link when public, optional live demo, and optional additional screenshots.</li>
+</ol>
+<p>A portfolio hosts descriptions, images, diagrams, and links. Running the projects themselves is separate work. Existing Python/Streamlit applications, local LLMs, Windows tooling, and GPU workloads will retain their own runtime and hosting arrangements. Projects without a public demo can still have strong case studies.</p>
+<h2>6. Quality requirements</h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Launch target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Responsive layout</td>
+<td>Verify 360, 390, 768, 1024, and 1440 px widths; support narrower screens without horizontal overflow</td>
+</tr>
+<tr>
+<td>Accessibility</td>
+<td>Target WCAG 2.2 AA: semantic structure, contrast, visible focus, keyboard operation, alt text, and reduced motion</td>
+</tr>
+<tr>
+<td>Performance</td>
+<td>Aim for mobile Lighthouse Performance &gt;= 90 on home and one detail page under documented conditions</td>
+</tr>
+<tr>
+<td>Other audits</td>
+<td>Aim for Lighthouse Accessibility, Best Practices, and SEO &gt;= 95; supplement automation with manual checks</td>
+</tr>
+<tr>
+<td>Loading</td>
+<td>Home's initial compressed JavaScript target &lt;= 180 KB; optimize if the chosen framework exceeds this</td>
+</tr>
+<tr>
+<td>Images</td>
+<td>Responsive WebP/AVIF where practical, explicit dimensions, lazy loading below the fold</td>
+</tr>
+<tr>
+<td>Search and sharing</td>
+<td>Pre-rendered route content, unique titles/descriptions, canonical links, and social text metadata</td>
+</tr>
+<tr>
+<td>Discoverability</td>
+<td>Sitemap generated from published routes, robots configuration, favicon, and accurate Person structured data</td>
+</tr>
+<tr>
+<td>Reliability</td>
+<td>Production build passes; no hydration errors, blocking console errors, broken internal links, or missing assets</td>
+</tr>
+<tr>
+<td>Privacy</td>
+<td>No trackers or external font requests by default; analytics is a separate optional decision</td>
+</tr>
+</tbody>
+</table>
+<p>Performance scores are acceptance targets, not promises about every device or network. The main content and navigation should remain readable in initial HTML before JavaScript loads; filters and email-copy behavior enhance that content.</p>
+<h2>7. Deferred features</h2>
+<p>Blog/writing archive, a visual CMS, admin authentication, automated GitHub synchronization, visitor analytics, contact-form delivery, theme switching, embedded live applications, and elaborate 3D effects are possible follow-up work. They are not launch dependencies.</p>
+<h2>8. Content decisions still open</h2>
+<ul>
+<li>Primary audience and visual preference.</li>
+<li>Final project selection and order.</li>
+<li>Professional title, short bio, and public contact details.</li>
+<li>Current resume and optional experience/education information.</li>
+<li>Screenshots, ownership details, outcomes, and verified public demo links.</li>
+</ul>
+<p>These can be resolved while the foundation is built. Missing personal details should remain marked in draft content and prevent publication of that section, rather than becoming fabricated facts.</p>
+</section><section id="design"><h1>Portfolio design specification</h1>
+<p>Version 0.1 · Proposed visual direction · 7 October 2026</p>
+<h2>1. Design concept</h2>
+<p>A calm, precise engineering portfolio with dark navy surfaces, bright blue accents, spacious typography, and real evidence of the work. Projects carry most of the visual weight. The personality comes from Palak's writing, the variety of projects, and thoughtful presentation.</p>
+<p>Use a small <code>PD</code> monogram as a provisional brand mark. Confirm the public name and initials before finalizing it. Avoid simulated terminal output, skill percentage bars, invented metrics, and decorative animations that delay access to projects.</p>
+<p>Provisional hero copy:</p>
+<blockquote>
+<p>Palak Deb Patra</p>
+<p>Building software that makes complex ideas usable.</p>
+<p>Explore my work across AI applications, developer tools, and interactive learning.</p>
+</blockquote>
+<p>This is proposed positioning derived from the local project collection. A professional title, employment status, location, and availability require supplied facts.</p>
+<h2>2. Information architecture</h2>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/</code></td>
+<td>Introduction, featured work, About, capabilities, and Contact</td>
+</tr>
+<tr>
+<td><code>/#work</code></td>
+<td>Featured work anchor</td>
+</tr>
+<tr>
+<td><code>/#about</code></td>
+<td>About and capabilities anchor</td>
+</tr>
+<tr>
+<td><code>/#contact</code></td>
+<td>Contact anchor</td>
+</tr>
+<tr>
+<td><code>/projects</code></td>
+<td>Full published project index with category filtering</td>
+</tr>
+<tr>
+<td><code>/projects/:slug</code></td>
+<td>Individual case study</td>
+</tr>
+<tr>
+<td>Any unknown path</td>
+<td>Branded not-found page</td>
+</tr>
+</tbody>
+</table>
+<p>Header navigation: Projects, About, Contact, and Resume when supplied. The monogram/name returns home. About and Contact links work from every page by pointing to the homepage anchors.</p>
+<h2>3. Homepage layout</h2>
+<p>Desktop wireframe, reading from top to bottom:</p>
+<pre><code class="language-text">┌──────────────────────────────────────────────────────────────────┐
+│ PD / Palak                  Projects  About  Contact  [Resume]    │
+├──────────────────────────────────────────────────────────────────┤
+│ Palak Deb Patra               │ Visual from selected work         │
+│ Large, concise headline      │ with an honest caption            │
+│ Short introduction           │                                    │
+│ [Explore projects] [Contact] │                                    │
+├──────────────────────────────────────────────────────────────────┤
+│ Selected work                                  View all projects │
+│ ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐       │
+│ │ Project visual  │ │ Project visual  │ │ Project visual  │       │
+│ │ Title + summary │ │ Title + summary │ │ Title + summary │       │
+│ │ Stack + link    │ │ Stack + link    │ │ Stack + link    │       │
+│ └─────────────────┘ └─────────────────┘ └─────────────────┘       │
+├──────────────────────────────────────────────────────────────────┤
+│ About: short personal story │ Capabilities with project evidence  │
+├──────────────────────────────────────────────────────────────────┤
+│ Contact statement           Email / copy / verified profiles     │
+├──────────────────────────────────────────────────────────────────┤
+│ Palak Deb Patra                                      Back to top │
+└──────────────────────────────────────────────────────────────────┘
+</code></pre>
+<p>The hero should occupy approximately 60–75% of a desktop viewport so selected work begins near the fold. On mobile, content determines the height; the headline and primary action should be immediately accessible. Use a cropped project screenshot or a compact static architecture visual on the right. A portrait is optional if one is supplied.</p>
+<p>Featured cards use consistent image ratios, a project title, a two-line summary, up to three representative technologies, and a descriptive case-study link. A visible demo/source link may appear where available; do not nest interactive links inside a card-wide anchor.</p>
+<p>About stays brief: two short paragraphs and three capability groups. Connect each capability to a project, such as document retrieval to Memex or verification tooling to CodeShift. Experience and education can be added here after factual content is supplied.</p>
+<p>Contact offers an email action, a copy-email button, and a small set of verified profile links. Do not claim the owner is open to work or freelancing without confirmation.</p>
+<h2>4. Project index</h2>
+<ul>
+<li>Page title and one short introductory sentence.</li>
+<li>Category buttons: All plus populated categories.</li>
+<li>Three columns on wide screens, two on tablets, one on phones.</li>
+<li>Curated project order with a readable status when supplied.</li>
+<li>Persist category in a query parameter, for example <code>/projects?category=ai-ml</code>.</li>
+<li>Unknown category values fall back to All; no matches show a clear message and reset button.</li>
+<li>Updating a filter does not move keyboard focus; announce the result count through a polite live region.</li>
+<li>Browser back/forward restores the filter. No infinite scrolling for this project count.</li>
+</ul>
+<p>Without JavaScript, the pre-rendered index lists all projects and case-study links remain available. The query parameter changes the browser interaction, not the canonical index URL.</p>
+<h2>5. Case-study layout</h2>
+<pre><code class="language-text">← All projects
+Project title
+One-sentence summary
+Category · role · status, when verified
+[Source] [Live demo, when available]
+
+Large screenshot and caption
+
+Problem                    Desktop: compact section navigation
+My contribution            alongside the reading column
+Approach and architecture
+Engineering decisions
+Outcomes and evidence
+Limitations and lessons
+
+Next project / Contact
+</code></pre>
+<p>Use a readable 65–75 character text column and a wider image column. The section navigation becomes a compact in-page list on mobile. Architecture visuals use SVG or static diagrams with a textual explanation. Code snippets appear only when they explain a specific decision.</p>
+<p>Show facts and evidence rather than a uniform wall of technology badges. A short case study is preferable to filler. A private repository or local-only application gets an accurate explanation and omits the unavailable action.</p>
+<h2>6. Design tokens</h2>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Initial value</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Background</td>
+<td><code>#0B1020</code></td>
+<td>Main canvas</td>
+</tr>
+<tr>
+<td>Surface</td>
+<td><code>#121B30</code></td>
+<td>Cards and supporting panels</td>
+</tr>
+<tr>
+<td>Raised surface</td>
+<td><code>#19243B</code></td>
+<td>Hover and selected backgrounds</td>
+</tr>
+<tr>
+<td>Primary text</td>
+<td><code>#F4F7FC</code></td>
+<td>Headings and body text</td>
+</tr>
+<tr>
+<td>Secondary text</td>
+<td><code>#B1BDD1</code></td>
+<td>Supporting copy and captions</td>
+</tr>
+<tr>
+<td>Accent</td>
+<td><code>#78A7FF</code></td>
+<td>Links, highlights, focus</td>
+</tr>
+<tr>
+<td>Button fill</td>
+<td><code>#78A7FF</code> with <code>#0B1020</code> text</td>
+<td>Primary actions</td>
+</tr>
+<tr>
+<td>Decorative divider</td>
+<td><code>#2A3855</code></td>
+<td>Nonessential separation</td>
+</tr>
+<tr>
+<td>Control outline</td>
+<td><code>#72829F</code></td>
+<td>Visible interactive boundaries</td>
+</tr>
+</tbody>
+</table>
+<p>All text and control combinations need contrast verification at implementation time, including hover, selected, and focus states. Decorative dividers must not be the only indicator of an interactive element.</p>
+<p>Typography: self-hosted variable sans-serif, provisionally Inter, with system fallbacks. Use the same family for headings and body; a monospace family is optional for code, with a system fallback. Keep font licensing in the repository.</p>
+<ul>
+<li>Body: 16–18 px, line-height around 1.6.</li>
+<li>Hero heading: fluid 40–76 px, tight but readable line-height.</li>
+<li>Section heading: fluid 28–40 px.</li>
+<li>Spacing scale: 4, 8, 12, 16, 24, 32, 48, 64, and 96 px.</li>
+<li>Container: maximum 1200 px; gutters 20 px mobile, 32 px tablet, 48 px desktop.</li>
+<li>Reading column: approximately 720 px.</li>
+<li>Card radius: 16 px; buttons 10 px; badges lightly rounded.</li>
+<li>Shadows: restrained; hierarchy primarily comes from spacing, typography, and surfaces.</li>
+</ul>
+<h2>7. Responsive behavior</h2>
+<p>Use content-driven breakpoints, starting near 640 and 1024 px.</p>
+<ul>
+<li>Mobile: one column, compact header, accessible menu, full-width project visuals, wrapping actions.</li>
+<li>Tablet: two-column cards; stack the hero if the text becomes cramped.</li>
+<li>Desktop: split hero, three-column cards, optional case-study section sidebar.</li>
+<li>Do not reorder content in a way that makes keyboard order differ from the visual reading order.</li>
+<li>Maintain touch targets of approximately 44 × 44 px and room between adjacent controls.</li>
+<li>Sticky navigation must not obscure anchor targets or focused elements; apply scroll margins.</li>
+</ul>
+<h2>8. Interaction and accessibility</h2>
+<ul>
+<li>Primary actions have clear labels: Explore projects, Read case study, View source, Contact.</li>
+<li>Focus uses a visible high-contrast outline; skip-to-content link is available.</li>
+<li>Mobile menu uses a labelled button and expanded state, closes on Escape, and restores focus appropriately.</li>
+<li>Use short CSS transitions, approximately 150–220 ms. Motion must not hide content before scripts load.</li>
+<li>Respect reduced-motion preferences and avoid scroll-jacking, parallax, and continuous decorative motion.</li>
+<li>Copy email reports success or failure through an accessible status message. The email link remains available if clipboard access fails.</li>
+<li>Images include meaningful alt text or empty alt text when decorative; captions clarify what the visual demonstrates.</li>
+<li>Heading structure and link names communicate destination and purpose.</li>
+<li>Unknown routes provide Home and Projects links; a missing image keeps its reserved space and an honest fallback.</li>
+</ul>
+<h2>9. Assets and content rules</h2>
+<p>Prefer real screenshots from the projects and existing project artwork after verifying usage rights. Crop them consistently but preserve the application's meaning. Do not use generated screenshots to imply functionality that does not exist.</p>
+<p>The favicon uses the approved monogram and palette. Launch includes Open Graph title/description metadata; a custom social preview image can be added if requested. No unsupported employers, dates, degrees, user counts, or performance claims may appear.</p>
+<h2>10. Design review criteria</h2>
+<p>The homepage should identify Palak, show a clear route to the work, and feel coherent at mobile and desktop widths. Project cards must communicate differences between projects. Case studies should be comfortable to read and contain concrete engineering detail. Missing optional content must not leave empty sections, dummy links, or unexplained placeholders in the published version.</p>
+</section><section id="implementation"><h1>Portfolio implementation and deployment plan</h1>
+<p>Version 0.1 · Recommended architecture · 7 October 2026</p>
+<h2>1. Architecture decisions</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Proposed choice</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UI</td>
+<td>React + TypeScript</td>
+<td>Requested React stack with typed reusable components</td>
+</tr>
+<tr>
+<td>Build/development</td>
+<td>Vite</td>
+<td>Requested build tooling and fast local development</td>
+</tr>
+<tr>
+<td>Routing/rendering</td>
+<td>React Router framework mode with its Vite plugin; build-time pre-rendering</td>
+<td>Direct project URLs with meaningful initial HTML and route metadata</td>
+</tr>
+<tr>
+<td>Styling</td>
+<td>CSS Modules plus global design tokens</td>
+<td>A compact custom design system with few dependencies</td>
+</tr>
+<tr>
+<td>Icons</td>
+<td>Small, selectively imported SVG icon set</td>
+<td>Consistent controls without a large asset payload</td>
+</tr>
+<tr>
+<td>Content</td>
+<td>Typed local project/profile data and structured case-study sections</td>
+<td>Easy updates and predictable rendering without a backend</td>
+</tr>
+<tr>
+<td>Hosting</td>
+<td>Cloudflare Workers Static Assets</td>
+<td>Static delivery and custom-domain integration</td>
+</tr>
+<tr>
+<td>Quality</td>
+<td>Type checking, linting, targeted Playwright checks, manual accessibility review</td>
+<td>Verify build integrity and real visitor journeys</td>
+</tr>
+</tbody>
+</table>
+<p>React Router is an additional routing/build layer on the requested React + Vite stack. Set <code>ssr: false</code> and explicitly enumerate <code>/</code>, <code>/projects</code>, and every published project slug for pre-rendering. This produces HTML at build time without an application server in production. See <a href="https://reactrouter.com/how-to/pre-rendering">React Router pre-rendering</a>.</p>
+<p>Use the current stable compatible package releases at implementation time, then commit the lockfile and pin the Node version used by local and hosted builds. Do not select versions from an outdated template guide. The workspace currently has Node <code>v24.19.0</code> and npm <code>11.17.0</code>; on this Windows setup, use <code>npm.cmd</code> because PowerShell blocks the <code>npm.ps1</code> shim. Node compatibility must be checked against the chosen releases. See <a href="https://vite.dev/guide/">Vite's setup requirements</a>.</p>
+<h2>2. Data and runtime boundaries</h2>
+<pre><code class="language-mermaid">flowchart LR
+    A[Profile and project content] --&gt; B[React components and Vite build]
+    B --&gt; C[Pre-rendered pages and static assets]
+    C --&gt; D[Cloudflare Workers Static Assets]
+    D --&gt; E[palakdebpatra.com]
+    E --&gt; F[Visitor browser]
+    F --&gt; G[Source repositories and separately hosted demos]
+</code></pre>
+<p>The launch site needs no database, authentication, or API server. Visitors can browse content and follow links; projects are not executed inside the portfolio. No GitHub API request is needed for initial rendering. Do not put provider credentials into browser code or <code>VITE_*</code> values.</p>
+<h2>3. Planned repository structure</h2>
+<pre><code class="language-text">Portfolio/
+  README.md
+  docs/
+    requirements.md
+    design-spec.md
+    implementation-plan.md
+  app/
+    root.tsx
+    routes.ts
+    routes/
+      home.tsx
+      projects.tsx
+      project-detail.tsx
+      not-found.tsx
+    components/
+      SiteHeader.tsx
+      SiteFooter.tsx
+      ProjectCard.tsx
+      ProjectFilters.tsx
+      CaseStudySections.tsx
+    content/
+      profile.ts
+      projects.ts
+      case-studies/
+    styles/
+      tokens.css
+      global.css
+  public/
+    favicon.svg
+    images/projects/
+    fonts/
+    resume/                  # only when supplied
+    _headers
+  scripts/
+    validate-content.mjs
+    finalize-static-output.mjs
+  tests/
+    portfolio.spec.ts
+  react-router.config.ts
+  vite.config.ts
+  wrangler.jsonc
+  package.json
+  package-lock.json
+</code></pre>
+<p>This is a proposed structure, not existing application code. The project will become its own Git repository during implementation, keeping neighboring repositories untouched. Run its commands from <code>Portfolio/</code>.</p>
+<h2>4. Content model</h2>
+<p>Each project record contains:</p>
+<table>
+<thead>
+<tr>
+<th>Fields</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>slug</code>, <code>title</code>, <code>summary</code></td>
+<td>Identity, URL, and card copy</td>
+</tr>
+<tr>
+<td><code>categories</code>, <code>technologies</code></td>
+<td>Filtering and technical context</td>
+</tr>
+<tr>
+<td><code>featured</code>, <code>order</code>, <code>published</code></td>
+<td>Editorial placement and publication control</td>
+</tr>
+<tr>
+<td><code>status</code>, <code>role</code></td>
+<td>Accurate project state and contribution</td>
+</tr>
+<tr>
+<td><code>cover</code>, <code>coverAlt</code>, <code>gallery</code></td>
+<td>Images, dimensions, captions, and alternatives</td>
+</tr>
+<tr>
+<td><code>sourceUrl</code>, <code>demoUrl</code></td>
+<td>Optional verified destinations</td>
+</tr>
+<tr>
+<td><code>caseStudy</code></td>
+<td>Problem, contribution, approach, decisions, outcomes, limitations</td>
+</tr>
+<tr>
+<td><code>evidence</code></td>
+<td>References supporting any measured outcomes</td>
+</tr>
+</tbody>
+</table>
+<p>Use structured text/section data for launch. Add Markdown/MDX later if writing volume makes it worthwhile. A private or draft record must not be included in public bundles, generated routes, or sitemap content.</p>
+<p>The profile record contains the public name, approved headline and bio, optional resume path, public email, and verified social links. Separate editorial review notes from public records.</p>
+<p>Build validation checks unique slugs, required fields on published records, referenced local assets, valid category identifiers, supported URL schemes, and matching case-study records. Optional absent fields should render cleanly. External URL reachability is a release review rather than a network dependency for every build.</p>
+<h2>5. Rendering and static output</h2>
+<p>Pre-render all published routes from the same content manifest used by the project index. Each route gets its own title, description, canonical address, and visible project content in HTML. Optional browser enhancements handle filtering and clipboard behavior after hydration.</p>
+<p>Expected publish directory: <code>build/client</code> for the proposed React Router build. Confirm this with the selected releases. A finalization step generates <code>sitemap.xml</code>, <code>robots.txt</code>, and <code>404.html</code>, and validates that every published slug has an HTML document. Keep any build-time server bundle outside the upload directory.</p>
+<p>Set Cloudflare asset handling to <code>not_found_handling: &quot;404-page&quot;</code> and <code>html_handling: &quot;drop-trailing-slash&quot;</code> for the proposed URL convention. Publish a real <code>404.html</code> and test that direct requests to unknown routes return HTTP 404. Avoid a catch-all SPA rewrite that would turn unknown project URLs into success responses. See <a href="https://developers.cloudflare.com/workers/static-assets/routing/static-site-generation/">Cloudflare static generation and 404 routing</a>.</p>
+<p>Test both direct requests and browser navigation: generated <code>.data</code> files, project paths, trailing-slash normalization, and unknown slugs. Canonical URLs and sitemap URLs must use the same convention.</p>
+<h2>6. Delivery milestones</h2>
+<table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Work</th>
+<th>Exit condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Foundation and visual slice</td>
+<td>Set up React/TypeScript/Vite, routing, tokens, header, hero, and one project card</td>
+<td>Recognizable homepage; production build and one pre-rendered detail route work</td>
+</tr>
+<tr>
+<td>2. Complete visitor journeys</td>
+<td>Featured work, index/filtering, reusable case-study layout, About, Contact, mobile navigation, 404</td>
+<td>Browse home → index → detail → contact on desktop and phone</td>
+</tr>
+<tr>
+<td>3. Content and assets</td>
+<td>Prepare shortlisted projects, verify claims and links, capture/crop screenshots, add supplied bio/resume</td>
+<td>Published content contains accurate facts and no draft placeholders</td>
+</tr>
+<tr>
+<td>4. Quality and deployment preparation</td>
+<td>Metadata, sitemap, static routing, headers, accessibility/performance review, targeted tests</td>
+<td>Build and release checks pass; deployment artifact is reviewable</td>
+</tr>
+<tr>
+<td>5. Hosting and domain</td>
+<td>Connect repository, deploy preview, connect apex, configure <code>www</code> redirect, verify HTTPS</td>
+<td>Portfolio works at <code>palakdebpatra.com</code> with working direct links</td>
+</tr>
+</tbody>
+</table>
+<p>The current request completes planning only. Later implementation starts with milestone 1. Content work can overlap component development. Publication requires the necessary account access and reviewed public content; the present turn makes no hosting or DNS changes.</p>
+<h2>7. Validation strategy</h2>
+<p>Run type checking, linting, and a production build from the portfolio repository. Use a small set of browser tests focused on behavior:</p>
+<ul>
+<li>Navigation and direct loading of a project URL.</li>
+<li>Project filtering, reset, query parameters, and browser back/forward.</li>
+<li>Mobile menu operation with keyboard and Escape.</li>
+<li>Email-copy feedback and fallback, with resume omitted when absent.</li>
+<li>Useful unknown-route handling; independently verify HTTP status at the hosting layer.</li>
+</ul>
+<p>Inspect initial HTML for the homepage and representative detail pages to verify content, canonical metadata, and titles before JavaScript runs. Inspect the generated sitemap and static output. Manually review keyboard order, contrast, reduced motion, zoom, and small-screen layouts; automated accessibility checks supplement that review.</p>
+<p>Measure one mobile Lighthouse run on home and one representative detail page, recording browser/tool version and throttling conditions. Re-run only after changes that materially affect the result or to resolve a failing target.</p>
+<p>No tests or dependency installations are needed for these planning documents. Python helpers, if later required, use <code>C:/Users/palak/anaconda3/envs/starGPU/python.exe</code>.</p>
+<h2>8. Cloudflare deployment plan</h2>
+<p>Recommended: deploy the pre-rendered output through Workers Static Assets. Cloudflare supports static files without a custom application Worker script; its <a href="https://developers.cloudflare.com/workers/framework-guides/web-apps/react/">React + Vite guide</a> also covers the broader frontend/API setup. We only need the static delivery capability at launch. See <a href="https://developers.cloudflare.com/workers/static-assets/">Static Assets</a>.</p>
+<p>Deployment configuration will identify the portfolio Worker, compatibility date, <code>build/client</code> asset directory, and static routing rules. Use repository-based builds with a committed lockfile. Build command: <code>npm run build</code>; deployment command: <code>npx wrangler deploy</code>. Configure nonproduction branches for preview/version URLs and <code>main</code> for production according to the current Workers Builds controls. See <a href="https://developers.cloudflare.com/workers/ci-cd/builds/">Workers Builds</a>.</p>
+<p>Domain sequence:</p>
+<ol>
+<li>Confirm control of <code>palakdebpatra.com</code>, an active Cloudflare zone, account access, and any existing web records.</li>
+<li>Deploy and review the portfolio at its Cloudflare preview address.</li>
+<li>Attach <code>palakdebpatra.com</code> as the Worker's Custom Domain. Cloudflare handles associated DNS/certificate setup; inspect any conflicting existing web record before replacing it.</li>
+<li>Set up a proxied DNS record and a permanent redirect for <code>www.palakdebpatra.com</code> to the apex, preserving path and query string.</li>
+<li>Verify certificate activation, HTTP-to-HTTPS behavior, apex responses, redirect behavior, static assets, and direct detail routes.</li>
+<li>Preserve unrelated MX/TXT records and existing services. Do not assume Cloudflare DNS registration alone means the portfolio is already hosted.</li>
+</ol>
+<p>The Custom Domain and <code>www</code> redirect requirements are described in <a href="https://developers.cloudflare.com/workers/configuration/routing/custom-domains/">Cloudflare's Custom Domains documentation</a>. Nameserver/account status and existing records remain unverified.</p>
+<p>Alternative: Cloudflare Pages can also publish static Vite output with Git integration. For this proposed architecture, use <code>npm run build</code> and <code>build/client</code>; a plain Vite React build would normally use <code>dist</code>. Attaching an apex domain through Pages requires that domain to be a zone in the same Cloudflare account with the appropriate nameservers. See <a href="https://developers.cloudflare.com/pages/framework-guides/deploy-a-vite3-project/">Pages Vite deployment</a> and <a href="https://developers.cloudflare.com/pages/configuration/custom-domains/">Pages custom domains</a>. Keep one deployment target rather than maintaining both.</p>
+<h2>9. Release and maintenance</h2>
+<p>Store the last known-good deployment/version identifier and document rollback through Cloudflare. Content updates follow edit → local validation → preview → production. Keep asset caching appropriate for fingerprinted files, allow HTML to update promptly, and review security headers against the actual asset sources.</p>
+<p>No paid service is a prerequisite in this design. Check applicable hosting limits and domain renewal costs at deployment time rather than promising unlimited free hosting. Demo services, GPU hosts, analytics, and email delivery would have separate requirements and costs if added.</p>
+<h2>10. Decisions for implementation</h2>
+<p>The default plan can proceed with its proposed palette, audience, and shortlist. Final personal copy, contact details, project contribution/outcomes, public repository/demo URLs, and any resume must come from verified material before publication. Verify Cloudflare access and domain ownership when preparing the hosting milestone.</p>
+</section></main></body></html>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+  <defs>
+    <path id="petal" d="M80 48Q94 64 80 80Q66 64 80 48Z"/>
+  </defs>
+  <g fill="none" stroke="#a396b1" stroke-opacity=".18" stroke-width=".85">
+    <path d="M80 17L143 80L80 143L17 80Z" stroke-dasharray="2.5 4"/>
+    <path d="M80 39L90 56L109 51L104 70L121 80L104 90L109 109L90 104L80 121L70 104L51 109L56 90L39 80L56 70L51 51L70 56Z"/>
+    <use href="#petal"/>
+    <use href="#petal" transform="rotate(45 80 80)"/>
+    <use href="#petal" transform="rotate(90 80 80)"/>
+    <use href="#petal" transform="rotate(135 80 80)"/>
+    <use href="#petal" transform="rotate(180 80 80)"/>
+    <use href="#petal" transform="rotate(225 80 80)"/>
+    <use href="#petal" transform="rotate(270 80 80)"/>
+    <use href="#petal" transform="rotate(315 80 80)"/>
+    <circle cx="80" cy="80" r="8"/>
+    <circle cx="80" cy="80" r="3"/>
+    <path d="M80 0V10M80 150V160M0 80H10M150 80H160" stroke-dasharray="2 3"/>
+    <path d="M16 11L26 21M26 11L16 21M134 11L144 21M144 11L134 21M16 139L26 149M26 139L16 149M134 139L144 149M144 139L134 149"/>
+  </g>
+  <g fill="none" stroke="#b29d83" stroke-opacity=".14" stroke-width=".8">
+    <path d="M80 22L85 27L80 32L75 27ZM80 128L85 133L80 138L75 133ZM22 80L27 75L32 80L27 85ZM128 80L133 75L138 80L133 85Z"/>
+    <circle cx="0" cy="0" r="8"/>
+    <circle cx="160" cy="0" r="8"/>
+    <circle cx="0" cy="160" r="8"/>
+    <circle cx="160" cy="160" r="8"/>
+  </g>
+</svg>

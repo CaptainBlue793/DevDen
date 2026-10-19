@@ -1,0 +1,46 @@
+Portfolio icon attribution
+
+Simple Icons contributors: https://github.com/simple-icons/simple-icons
+SVG icons distributed under CC0 1.0 Universal:
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Font Awesome Free by Fonticons, Inc.: https://fontawesome.com
+LinkedIn, Java, and AWS SVG icons used under CC BY 4.0:
+https://creativecommons.org/licenses/by/4.0/
+https://fontawesome.com/license/free
+Icon paths are unmodified. Display sizes and brand colors are styled by CSS.
+Simple Icons' published hex colors are used; black marks use white on dark surfaces.
+LinkedIn blue: https://brand.linkedin.com/in-logo
+
+Additional official brand assets:
+Chroma: https://www.trychroma.com/
+Source: https://www.trychroma.com/_next/static/immutable/media/chroma-wordmark.3omc55d6a9e1l.svg
+Only the colored logomark is retained; its paths and colors are unchanged.
+NLTK: https://www.nltk.org/
+Source: https://www.nltk.org/_static/img/favicon-32x32.png
+Oracle: https://static.oracle.com/cdn/fnd/gallery/2610.0.0/images/preview/index.html
+Source: https://static.oracle.com/cdn/fnd/gallery/2610.0.0/images/ico-oracle-o.svg
+NLTK's original black lettermark is displayed without recoloring on a white surface.
+Oracle's unmodified asset is displayed as a CSS mask in its brand red #C74634.
+Oracle color source: https://www.oracle.com/europe/a/ocom/docs/oracle-brand-guidelines.pdf
+
+LangChain and LangGraph standalone icons from the official documentation:
+https://docs.langchain.com/oss/python/langgraph/overview
+Brand guidelines: https://www.langchain.com/brand-assets
+Sources:
+https://mintcdn.com/langchain-5e9cc07a/nQm-sjd_MByLhgeW/images/brand/langchain-icon.png
+https://mintcdn.com/langchain-5e9cc07a/nQm-sjd_MByLhgeW/images/brand/langgraph-icon.png
+Both PNGs retain their original blue backgrounds and dark symbols without modification.
+
+Devicon contributors: https://github.com/devicons/devicon
+Angular, AWS, Java, Jupyter, MySQL, OpenCV, Python, and scikit-learn SVGs:
+https://github.com/devicons/devicon/tree/master/icons
+Distributed under MIT; full license: images/brands/devicon-LICENSE.txt
+Original colors and paths retained. AWS's dark variant changes only the navy
+lettering to white; the orange smile is unchanged.
+
+Hugging Face full-color logo: https://huggingface.co/brand
+Source: https://huggingface.co/front/assets/huggingface_logo-noborder.svg
+A viewBox is added for responsive sizing; paths and colors are unchanged.
+
+Brand names and marks belong to their respective owners.

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-labelledby="fsTitle fsDesc">
+  <title id="fsTitle">FrameSmith</title>
+  <desc id="fsDesc">An anvil with a forge spark, on a rounded indigo-to-cyan badge.</desc>
+
+  <defs>
+    <linearGradient id="fsBadge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#6366F1"/>
+      <stop offset="55%"  stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+    <linearGradient id="fsAnvil" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#DBEAFE"/>
+    </linearGradient>
+  </defs>
+
+  <!-- badge -->
+  <rect x="4" y="4" width="120" height="120" rx="28" fill="url(#fsBadge)"/>
+
+  <!-- forge spark -->
+  <path d="M100 18 Q100 30 112 30 Q100 30 100 42 Q100 30 88 30 Q100 30 100 18 Z"
+        fill="#FBBF24"/>
+
+  <!-- anvil -->
+  <path d="M24 42 L84 42 L104 52 L84 62 L72 62 L64 78 L86 78 L86 94 L32 94 L32 78 L54 78 L46 62 L24 62 Z"
+        fill="url(#fsAnvil)" stroke="url(#fsAnvil)" stroke-width="3" stroke-linejoin="round"/>
+</svg>

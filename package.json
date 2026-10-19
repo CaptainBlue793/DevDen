@@ -1,0 +1,37 @@
+{
+  "name": "palak-powershell-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 3000 --strictPort",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 3000 --strictPort",
+    "lint": "eslint .",
+    "test": "playwright test"
+  },
+  "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^7.3.1",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "simple-icons": "^16.34.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "latest",
+    "@playwright/test": "1.64.0",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@vitejs/plugin-react": "6.1.2",
+    "eslint": "latest",
+    "eslint-plugin-react-hooks": "latest",
+    "eslint-plugin-react-refresh": "latest",
+    "globals": "latest",
+    "typescript": "6.0.3",
+    "typescript-eslint": "latest",
+    "vite": "8.3.4"
+  }
+}

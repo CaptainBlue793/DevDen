@@ -1,0 +1,184 @@
+# Portfolio content sources
+
+The implementation follows `INSTRUCTIONS.md`. Earlier planning documents and
+`planning-preview.html` remain historical proposals; their navy palette and
+multi-page architecture are superseded by the six-tab PowerShell interface.
+After the original loading screen, Welcome appears inside the portfolio window
+beside the left profile pane. Its six navigation buttons open Skills, Resume,
+Experience, Projects, Publications, and Activities in that order. Welcome disappears
+after selecting a section and is excluded from the content tabs until the webpage
+restarts. Experience contains
+only the two NatWest roles; the undergraduate research entry was removed at the
+user's request. Source attribution lives
+in this document; public records focus on the work itself. Highlights and
+workflow diagrams use the same verified descriptions, without adding metrics.
+The latest editorial pass removes repeated headings, generic introductions,
+Description labels, duplicate skill and project summaries, and idle workflow
+instructions. Shortened copy uses the same sources. Project details are now visible
+as a summary and three engineering bullets, without a case-study accordion.
+CodeShift's benchmark result is explicitly tied to its August 19, 2026 recorded
+run, and FrameSmith remains a prototype with unvalidated performance improvements.
+GitHub, the Atlas demo, benchmark evidence, and measurement status remain directly
+accessible. Detailed source notes are retained in the content data for provenance.
+
+Content checked October 9, 2026:
+
+- Personal source: `PalakDebPatra_OffCampus_Resume.pdf`, modified January 25, 2026,
+  found in the connected Google Drive Resumes folder. Education, internship,
+  research, skills, achievements, NITRUTSAV, and AASRA come from this resume.
+  Quantitative achievements are attributed as resume-reported.
+- Current NatWest role and July 2025 start date: `INSTRUCTIONS.md`. The resume
+  omits this role; no additional job details were inferred. Personal interests
+  also use the explicitly supplied starting data. ArxivLens, EZPay, and INDICON
+  remain editorial drafts below and are omitted from visitor-facing sections.
+- Public repository URLs: GitHub user repositories API for `CaptainBlue793`.
+  Descriptions use local READMEs and public metadata; no README benchmarks or
+  test counts are presented as independently verified portfolio results.
+- LinkedIn, Hugging Face, LeetCode: neighboring GitHub profile README.
+- Email and phone: personal resume; email also appears in the publications repo.
+- Profile image: user-supplied `IMG20260503104934.jpg.jpeg`, copied unchanged to
+  `public/images/profile-img.jpg`. Earlier WhatsApp and mask assets are retained.
+- Sidebar and startup decoration: locally authored CSS comet trails in
+  `src/FallingComets.tsx`.
+  Earlier static artwork assets are retained but no longer used.
+- Welcome doodle: a locally authored CLI terminal face in `src/WelcomeDoodle.tsx`,
+  using a wide rectangular CSS head outline and SVG antenna strokes sharing an origin at
+  the midpoint of its top edge. Tips pulse alternately; `>_` and `_<` are replaced
+  by a centered `^_^` during automatic vibration bursts. Welcome's background is
+  plain; the decorative atmosphere component is removed. Theme-aware colors
+  require no raster or remote image at runtime.
+- CV link: the latest source resume, Drive file
+  `15zYLtGfnbPVmW_ln6UfX26thDSh-IhxS`. The user authorized anyone-with-link
+  viewer access. The connected sharing tool supports user or company-domain
+  sharing only; its domain-sharing attempt failed with HTTP 400 (invalid domain).
+  Metadata remained owner-only. The verified Drive URL is retained here as provenance.
+  On October 10, 2026 the same verified PDF (250,622 bytes, modified January 25,
+  2026) was retrieved through the authenticated connector and copied unchanged
+  to `public/resume.pdf`. Its single-page preview was rendered directly with
+  PDFium at 1530 × 1980 into `public/images/resume-preview.png`; no CV content was
+  rewritten. These local assets display without Drive authentication. On October 12,
+  the visible Drive and PDF links were replaced with a single View Resume button
+  and a modal showing the unchanged original preview. Public Drive sharing is no
+  longer needed to view the resume in the portfolio.
+- SPCOM title, authors, DOI, and publication details: neighboring research repo
+  `publications/2026/bidirectional-convgru-gan/README.md`, recording verification
+  against IISc and IEEE's Crossref deposit.
+
+## Remaining inputs
+
+- ArxivLens RAG and EZPay public source links and detailed descriptions.
+- IEEE INDICON exact title, status, and publisher/source URL.
+- More precise current NatWest role details, if desired.
+
+## Editorial drafts retained for verification
+
+- ArxivLens RAG: research-paper retrieval and question answering; FastAPI,
+  FAISS, Streamlit, and LLMs. Supplied in `INSTRUCTIONS.md`; no public repository
+  or detailed project evidence found during the original verification.
+- EZPay: Spring Boot, Angular, and Oracle application. Supplied in
+  `INSTRUCTIONS.md`; description and public source link still needed.
+- IEEE INDICON: low-light image enhancement research. Supplied in
+  `INSTRUCTIONS.md`; exact paper title, publication status, and DOI still needed.
+
+These records can be added after verification. The public project catalog
+shows Engineering Atlas, CodeShift, Memex, and FrameSmith for now. The five other
+documented project records and captures are retained for later use. Publications
+contains the verified SPCOM paper.
+The Low-Light Image Enhancement project entry is temporarily removed at the
+user's request. Its verified publication remains visible.
+
+## Featured exploration update
+
+- Featured order selected by the user: The Engineering Atlas, Memex, CodeShift.
+  The remaining six projects stay in the catalog.
+- Case studies and clickable workflow explanations use the neighboring project
+  READMEs. Engineering Atlas's course registry and live site corroborate its
+  nine subjects and optional progress-sync architecture. The portfolio avoids
+  inconsistent historical chapter totals in its README.
+- Atlas preview: captured from its deployed GitHub Pages site on October 9, 2026.
+  Memex preview: unchanged `images/screenshot-chat.png` from its repository.
+  CodeShift preview: its actual Streamlit migration dashboard, captured locally
+  in the ready state on October 9, 2026.
+- CodeShift's 15/31 modules and 197 exercised callables are attributed to its
+  recorded August 19, 2026 run in `docs/scale-run-2026-08-19.md` and README.
+  They were not independently rerun. The case study states the single-run scope
+  and incomplete translations rather than implying guaranteed equivalence.
+- NatWest internship outcomes retain the resume-reported 28% processing-time
+  reduction and 16 datasets as plain bullet text. The metric panels, workflow,
+  and highlights are removed at the user's request. No new current-role
+  accomplishments were inferred.
+- Publication overview paraphrases the research repository's documented overview;
+  it is not labeled as the manuscript abstract. The diagram, repeated description,
+  and personal contribution block are removed at the user's request;
+  paper performance metrics are omitted because the manuscript has not been reviewed.
+- Citation and BibTeX use the existing verified title, author order, IEEE venue,
+  July 2026 publication month, pages, and DOI. The full manuscript remains absent
+  from the source collection; the publisher's record is linked for readers.
+
+Content is editable in `src/content.ts`, separately from UI rendering.
+
+## First-person copy update — October 13, 2026
+
+Portfolio descriptions, work and activity bullets, and retained project records
+now use a conversational first-person voice. The research overview credits the
+co-authors with “my co-authors and I.” Technical terms such as Code Migration,
+Machine Learning, Computer Vision, Natural Language Processing, and Deep Learning
+use consistent capitalization in the copy and page metadata. Formal publication
+titles, citations, contact details, links, dates, and reported metrics are preserved.
+The original resume PDF, its image preview, and project screenshots remain unchanged.
+
+## Editorial and local CV refresh — October 10, 2026
+
+The latest pass shortens and formats existing verified material without adding
+new accomplishments. Current NatWest responsibilities still use only the
+previously supplied backend/API/data-workflow description. Internship metrics,
+project evaluation figures, publication metadata, and activity outcomes retain
+their existing sources and qualifications. FrameSmith is explicitly a prototype
+in its introduction; CodeShift's visible figures describe one recorded run.
+
+The user explicitly requested the actual resume only. The Resume tab therefore
+uses the unchanged Drive-derived `public/resume.pdf` and the PNG preview rendered
+from that document. The generated replacement CV, preview, and generator were
+removed. Portfolio text and formatting edits are separate from resume contents.
+No remote document or sharing permission was changed.
+
+## Full project case-study update
+
+All nine displayed projects now use the same case-study and clickable workflow
+format. The six added studies use FrameSmith, SummaScribe, Tagify, WatchWise, and
+NetChat's neighboring READMEs plus MeLoVerse's current GitHub README, read through
+the GitHub API on October 9, 2026. MeLoVerse's description is corrected to
+lyrics-based TF-IDF recommendations rather than listening-history preferences.
+Its 10,000-song sample is corroborated by both the README and source resume.
+FrameSmith's scope explicitly distinguishes its working control loop from
+unvalidated quality, power, and settings-application measurements. No measured
+FPS improvement is claimed. All project previews now show actual app interfaces.
+
+## Actual interface captures — October 9, 2026
+
+Seven JPEG screenshots in `public/images/projects/` replace the remaining logo
+and workflow previews. Chromium captured the existing interfaces at 1440 pixels
+wide, with taller views for Tagify and SummaScribe to include their results;
+no generated interface or fabricated result was used. Sources were copied into
+ignored temporary staging folders; the neighboring project repositories were
+not edited.
+
+- CodeShift: `ui/app.py`, ready state without a migration run. The temporary
+  copy's stat-tile f-string was rewritten with equivalent output for Python 3.11.
+- FrameSmith: `dashboard/app.py`, actual idle GPU telemetry. Optimization was
+  not started, and these readings do not establish optimization performance.
+- MeLoVerse: public GitHub `Meloverse.py`, original styling and real `MusicSet.pkl`
+  catalogue. Its hosted Space was sleeping. The temporary copy defers loading
+  the 800 MB similarity matrix until recommendation; the capture shows only
+  song selection. Embedded Spotify credentials were replaced with inert values,
+  and no Spotify request was made.
+- SummaScribe: `Summascribe.py`, built-in sample with a real extractive summary.
+- Tagify: `Tagify.py`, real analysis of its built-in healthcare and energy sample.
+- WatchWise: `Watchwise.py`, starter-catalogue recommendations for Interstellar.
+  The app's own poster fallback appears because no TMDB credential was supplied.
+- NetChat: `app.py`, actual loading of `https://example.com`, source preview open.
+  Hosted inference was not connected; the capture contains no generated answer.
+
+Preview captions distinguish sample, selection, and idle states; full-size
+links point to the bundled screenshots. Atlas and Memex retain their existing
+authentic screenshots.
