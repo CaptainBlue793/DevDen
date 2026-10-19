@@ -1,6 +1,6 @@
 # DevDen
 
-[Live preview](https://captainblue793.github.io/devden-preview/) | [Source code](https://github.com/CaptainBlue793/DevDen)
+[Live site](https://captainblue793.github.io/DevDen/) | [Source code](https://github.com/CaptainBlue793/DevDen)
 
 DevDen is Palak Deb Patra's interactive terminal-style portfolio. This repository contains the complete React + TypeScript + Vite application, assets, documentation, dependency lockfile, and browser tests.
 
@@ -238,8 +238,7 @@ at the user's request.
 SVG brand icons are provided by Simple Icons and Font Awesome Free. Attribution
 and license links are included in `public/third-party-notices.txt`.
 
-The viewing link uses GitHub Pages from a separate public repository containing
-the built site only. The complete application source is maintained in this DevDen repository.
+This public DevDen repository contains the full source and publishes the live site through GitHub Pages. Every successful push to `main` runs lint, builds the application, and deploys it automatically.
 See [publishing notes](docs/deployment.md). No custom-domain or DNS changes were made.
 The planning draft below is retained
 for reference; `INSTRUCTIONS.md` supersedes its visual and routing proposals.
