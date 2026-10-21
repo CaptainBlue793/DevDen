@@ -178,6 +178,9 @@ h1 { font-size: var(--font-name); font-weight: 500; letter-spacing: -.7px; }
 .resume-about, .resume-document { min-width: 0; }
 .terminal-output.terminal-output--resume { padding-block: 12px 16px; scroll-padding-top: 12px; }
 .terminal-session--resume > .invocation { margin-bottom: 10px; }
+.resume-document-switch, .resume-document-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.resume-document-switch { margin-bottom: 12px; }
+.resume-document-switch .cli-action[aria-pressed="true"] { color: var(--accent); background: var(--hover); border-color: var(--accent); }
 .resume-document-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
 .resume-document-header h3 { display: flex; align-items: center; gap: 8px; font-size: var(--font-heading); font-weight: 600; color: var(--accent); }
 .resume-preview { display: flex; justify-content: center; min-height: 0; }
@@ -185,14 +188,17 @@ h1 { font-size: var(--font-name); font-weight: 500; letter-spacing: -.7px; }
 .resume-dialog { width: min(1100px, calc(100% - 32px)); height: calc(100dvh - 32px); max-width: none; max-height: none; padding: 0; margin: auto; overflow: hidden; color: var(--text); background: var(--terminal); border: 1px solid var(--border); border-radius: 10px; font: inherit; }
 .resume-dialog[open] { display: flex; flex-direction: column; animation: reveal var(--motion) ease-out; }
 .resume-dialog::backdrop { background: rgb(0 0 0 / .72); }
-.resume-dialog-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-shrink: 0; padding: 12px 16px; background: var(--tab-surface); border-bottom: 1px solid var(--border); }
-.resume-dialog-header h2 { display: flex; align-items: center; gap: 8px; font-size: var(--font-heading); font-weight: 600; color: var(--accent); }
-.resume-dialog-actions { display: flex; gap: 8px; }
+.resume-dialog-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; flex-shrink: 0; padding: 12px 16px; background: var(--tab-surface); border-bottom: 1px solid var(--border); }
+.resume-dialog-header h2 { display: flex; align-items: center; flex-shrink: 0; gap: 8px; font-size: var(--font-heading); font-weight: 600; color: var(--accent); white-space: nowrap; }
+.resume-dialog-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.resume-dialog-actions .cli-action { flex-shrink: 0; white-space: nowrap; }
 .resume-dialog-body { flex: 1; min-height: 0; display: flex; justify-content: center; align-items: flex-start; padding: 16px; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--scrollbar) var(--terminal); }
 .resume-dialog-body:focus-visible { outline-offset: -4px; }
-.resume-dialog-body img { display: block; flex: none; width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; }
+.resume-dialog-pages { display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; }
+.resume-dialog-pages img { display: block; flex: none; width: auto; height: auto; max-width: 100%; max-height: calc(100dvh - 180px); object-fit: contain; }
 .resume-dialog-body--enlarged { display: block; }
-.resume-dialog-body--enlarged img { width: max(100%, 900px); max-width: none; max-height: none; margin-inline: auto; }
+.resume-dialog-body--enlarged .resume-dialog-pages { width: max(100%, 900px); }
+.resume-dialog-body--enlarged img { width: 100%; max-width: none; max-height: none; margin-inline: auto; }
 @keyframes reveal { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
 .invocation { display: flex; align-items: baseline; color: var(--accent); font-size: var(--font-small); margin-bottom: 24px; white-space: pre; }
 .typed-command { display: inline-block; width: calc(var(--command-length) * 1ch); overflow: hidden; animation: type-command 420ms steps(var(--command-length), end); }
@@ -362,7 +368,7 @@ summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 @media (max-width: 600px), (max-width: 1050px) and (max-height: 500px) {
   :root {
     --phone-scale: .92;
-    font-size: clamp(calc(.8125rem * var(--phone-scale)), calc((.75rem + .15vw) * var(--phone-scale)), calc(.9375rem * var(--phone-scale)));
+    font-size: clamp(13px, calc((.75rem + .15vw) * var(--phone-scale)), calc(.9375rem * var(--phone-scale)));
   }
   .profile-header { padding: calc(6px * var(--phone-scale)) calc(12px * var(--phone-scale)) 0; }
   .profile-details { gap: calc(10px * var(--phone-scale)); padding: calc(8px * var(--phone-scale)) calc(12px * var(--phone-scale)) calc(12px * var(--phone-scale)); }

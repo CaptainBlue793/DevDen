@@ -68,8 +68,6 @@ export const profile = {
   photo: publicAsset('/images/profile-720.webp'),
   photoSrcSet: `${publicAsset('/images/profile-360.webp')} 360w, ${publicAsset('/images/profile-720.webp')} 720w`,
   photoSizes: '(max-width: 1050px) 112px, 220px',
-  resumePdf: publicAsset('/resume.pdf'),
-  resumePreview: publicAsset('/images/resume-preview.png'),
   contacts: [
     { label: 'Email', value: 'palakdevpatra@gmail.com', url: 'mailto:palakdevpatra@gmail.com' },
     { label: 'Phone', value: '+91 95562 10524', url: 'tel:+919556210524' },
@@ -78,6 +76,11 @@ export const profile = {
     { label: 'Hugging Face', value: 'Scarletta975', url: 'https://huggingface.co/Scarletta975' },
   ],
 };
+
+export const resumeDocuments = [
+  { id: 'resume', label: 'Resume', pdf: publicAsset('/resume.pdf'), previews: [publicAsset('/images/resume-preview.png')] },
+  { id: 'academic-cv', label: 'Academic CV', pdf: publicAsset('/academic-cv.pdf'), previews: [publicAsset('/images/academic-cv-preview.png'), publicAsset('/images/academic-cv-preview-2.png')] },
+] as const;
 
 const displayedProjects = ['The Engineering Atlas', 'CodeShift', 'Memex', 'FrameSmith'];
 
@@ -94,7 +97,7 @@ const sectionContent: Section[] = [
         title: 'About Me',
         column: 'left',
         highlights: ['Software Engineer', 'NatWest Group'],
-        description: 'I’m a Software Engineer at NatWest Group, where I work on Backend Systems, APIs, and Data Workflows.\n\nOutside work, I spend time on Machine Learning, Computer Vision, Natural Language Processing, and Agent Systems. My projects include document assistants, Code Migration tools, and interactive engineering courses. I also research how Deep Learning can improve Low-Light Image Enhancement.',
+        description: 'I’m a Software Engineer at NatWest Group, building AI tools for learning and developer workflows in Microsoft Teams. My work spans MCP integrations, observability, data pipelines, identity resolution, and deployment automation.\n\nOutside work, I build local AI assistants and code migration tools, and research Deep Learning for Low-Light Image Enhancement.',
       },
       {
         title: 'Education',
@@ -124,7 +127,7 @@ const sectionContent: Section[] = [
       },
       {
         title: 'Agent Systems',
-        description: 'LangGraph · LangChain · Ollama',
+        description: 'LangGraph · LangChain · Ollama · FastMCP · Hugging Face',
       },
       {
         title: 'Web Interfaces',
@@ -132,15 +135,15 @@ const sectionContent: Section[] = [
       },
       {
         title: 'APIs',
-        description: 'FastAPI · REST APIs · GraphQL',
+        description: 'FastAPI · Spring Boot · REST APIs · GraphQL',
       },
       {
         title: 'Cloud',
-        description: 'AWS (S3, EC2, RDS)',
+        description: 'AWS · Azure · Microsoft Copilot Studio · Power Platform',
       },
       {
         title: 'Development',
-        description: 'Git · GitHub · Jupyter',
+        description: 'Git · GitLab CI/CD · Ansible · Docker · Jupyter',
       },
     ],
   },
@@ -154,11 +157,17 @@ const sectionContent: Section[] = [
     ],
     records: [
       {
-        title: 'NatWest Group · Senior Analyst / Software Engineer',
+        title: 'NatWest Group · Software Engineer',
         column: 'left',
-        description: 'At NatWest Group, I work on Backend Systems, APIs, and Data Workflows for enterprise applications.',
-        meta: 'July 2025 – Present',
-        details: ['I build Backend Systems, APIs, and Data Workflows for enterprise applications.'],
+        description: 'I build AI learning and engineering tools in Microsoft Teams, connecting enterprise systems and making their behavior observable and testable.',
+        meta: 'July 2025 – Present · Bangalore, India',
+        details: [
+          'I developed components of a 10-tool MCP server connecting Workday, ECDF, GitLab, Outlook, Confluence, and Jira.',
+          'I added OpenTelemetry tracing and Azure Application Insights for tool calls, conversations, and eight failure categories, alongside 131 automated tests and monitoring dashboards.',
+          'I built a GitLab metrics pipeline with Azure Blob Storage and change-aware parsing, and connected Workday learning history for personalized insights.',
+          'I created three interactive Microsoft Teams dashboards and reduced their footprint by 35%. SAML/Entra ID claims and a three-stage fallback support secure employee identity resolution.',
+          'I created a 29-prompt regression suite, raising validation pass rates from 86% to 97%, and automated deployment across four environments with GitLab CI/CD and Ansible Automation Platform.',
+        ],
       },
       {
         title: 'NatWest Group · Software Engineering Intern',
@@ -172,7 +181,7 @@ const sectionContent: Section[] = [
         ],
       },
     ],
-    sourceNote: 'Internship outcomes are documented in my January 2026 resume.',
+    sourceNote: 'Role details and outcomes are reported in my October 2026 resume and academic CV.',
   },
   {
     id: 'projects', label: 'Projects', directory: 'Projects', command: 'Get-Projects',
@@ -201,7 +210,7 @@ const sectionContent: Section[] = [
         description: 'I built a local document assistant that answers questions about notes, papers, and code with source citations.',
         details: [
           'Hybrid Retrieval: I combine Semantic Search, Keyword Search, and reranking, with incremental indexing for changed files.',
-          'Cited Local Answers: I stream local model responses with numbered citations that open the source files.',
+          'Cited Local Answers: I stream local model responses with numbered citations that open the source files. My October 2026 resume reports indexing 3,050 files into 42,743 chunks in under 15 minutes.',
         ],
         stack: ['Python', 'LangGraph', 'ChromaDB', 'SQLite', 'Ollama', 'Streamlit'],
       },
@@ -230,7 +239,7 @@ const sectionContent: Section[] = [
         description: 'I translate Python modules into TypeScript and verify their behavior using local Language Models.',
         details: [
           'Behavioral Checks: I combine dependency-ordered translation and compiler feedback with comparisons of return values, exceptions, and object state.',
-          'Recorded Benchmark: my August 19, 2026 run verified 15 of 31 modules as equivalent and exercised 197 functions and methods.',
+          'Recorded Benchmark: my August 19, 2026 run verified 15 of 31 modules as equivalent and exercised 197 functions and methods. My October 2026 resume reports 190 passing tests for the project.',
         ],
         stack: ['Python', 'LangGraph', 'TypeScript', 'Ollama'],
         links: [{ label: 'Benchmark Report', url: 'https://github.com/CaptainBlue793/CodeShift/blob/main/docs/scale-run-2026-08-19.md' }],
@@ -426,7 +435,7 @@ const sectionContent: Section[] = [
       {
         title: 'Bidirectional Convolutional-GRU Integrated GAN for Unpaired Low-Light Image Enhancement',
         research: {
-          overview: 'In this work, my co-authors and I use a GAN with Bidirectional Convolutional GRU modules for Low-Light Image Enhancement. By learning from unpaired images, the model captures local textures and longer-range dependencies to improve detail and structure in low-light scenes.',
+          overview: 'In this work, my co-authors and I use a CycleGAN-based model with Bidirectional Convolutional GRU modules for unpaired Low-Light Image Enhancement. My academic CV reports evaluation against seven existing methods, with 21.01 dB PSNR and 0.72 SSIM.',
         },
         highlights: ['First author'],
         url: 'https://doi.org/10.1109/SPCOM71105.2026.11622932',
@@ -470,7 +479,7 @@ const sectionContent: Section[] = [
         highlights: ['20%'],
         description: 'I led a team of seven volunteers at NIT Rourkela’s cultural festival.',
         meta: 'August – September 2023',
-        details: ['I helped increase sponsorship by 20% and participant engagement by 11.26%.'],
+        details: ['I helped secure a 20% increase in sponsorship.'],
       },
       {
         title: 'AASRA · Senior Staff Member',
@@ -478,14 +487,7 @@ const sectionContent: Section[] = [
         highlights: ['₹2,11,000'],
         description: 'I coordinated outreach and fundraising for AASRA’s DIYA Project.',
         meta: 'June 2022 – January 2024',
-        details: ['I contributed to the team’s fundraising effort, which raised ₹2,11,000 and generated ₹1,32,000 in profit.'],
-      },
-      {
-        title: 'LLMs & Prompt Patterns',
-        column: 'left',
-        highlights: ['100%'],
-        meta: 'Vanderbilt University',
-        description: 'I completed the program with a score of 100%.',
+        details: ['I contributed to team efforts that raised ₹2,11,000.'],
       },
       {
         title: 'Interests',
@@ -493,7 +495,7 @@ const sectionContent: Section[] = [
         description: 'Away from the keyboard, I enjoy football, fitness, painting, and travel.',
       },
     ],
-    sourceNote: 'Competition results, course scores, and campus outcomes are documented in my January 2026 resume.',
+    sourceNote: 'Competition results are reported in my October 2026 resume; community work is reported in my academic CV.',
   },
 ];
 

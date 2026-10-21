@@ -52,9 +52,11 @@ test('NatWest roles use plain bullets and retain verified internship outcomes', 
   await page.getByRole('tab', { name: 'Experience', exact: true }).click();
   await expect(page.locator('.record-column > article')).toHaveCount(2);
   const roles = page.locator('.record-column > article');
-  await expect(roles.nth(0).locator('.record-details li')).toHaveCount(1);
+  await expect(roles.nth(0).locator('.record-details li')).toHaveCount(5);
   await expect(roles.nth(1).locator('.record-details li')).toHaveCount(3);
-  await expect(roles.nth(0).locator('.record-meta')).toHaveText('July 2025 – Present');
+  await expect(roles.nth(0).locator('.record-meta')).toHaveText('July 2025 – Present · Bangalore, India');
+  await expect(roles.nth(0).locator('.record-details')).toContainText('131 automated tests');
+  await expect(roles.nth(0).locator('.record-details')).toContainText('86% to 97%');
   await expect(roles.nth(1).locator('.record-meta')).toHaveText('May – July 2024 · Gurgaon, India');
   await expect(roles.nth(1).locator('.record-details')).toContainText('reducing processing time by 28%');
   await expect(roles.nth(1).locator('.record-details')).toContainText('16 CSV datasets');

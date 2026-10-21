@@ -204,19 +204,19 @@ Screenshots are saved in ignored `test-results/`.
 
 Edit `src/content.ts` to update sections, highlights, and profile links.
 The photo is served from `public/images/profile-360.webp` or `profile-720.webp`;
-`profile-img.jpg` retains the original photograph. Resume displays the actual
-Drive-sourced CV, unchanged, at `public/resume.pdf`. Its matching 1530 x 1980
-preview at `public/images/resume-preview.png` was rendered from that PDF.
-The preview works on phones without a PDF plugin or Google sign-in. The in-page
-document fills its column width and scrolls with the content pane. A single View Resume
-button opens the original document preview in a modal over the portfolio. It opens
+`profile-img.jpg` retains the original photograph. The Resume section offers the
+October 2026 resume and academic CV as unchanged local PDFs at `public/resume.pdf`
+and `public/academic-cv.pdf`. Their 1530 x 1980 page previews are in `public/images/`.
+The academic CV has two pages. Visitors can switch documents, view every page in
+the modal, and download either PDF without Google sign-in. The in-page preview
+fills its column width and scrolls with the content pane. The viewer opens
 fitted to the screen on compact windows up to 1050px wide. On desktop, it opens
 enlarged for closer reading, with scrolling. Fit page shows the entire page, and
 Enlarge restores the closer view. Each opening resets the view for the current
 screen size and returns to the top.
 Close, Escape, or clicking the backdrop
 dismisses it and restores focus. No Google Drive link is shown. Portfolio copy
-edits do not rewrite or regenerate the resume.
+edits do not rewrite or regenerate either document.
 See [content sources and remaining inputs](docs/content-sources.md).
 
 Content uses a shared heading hierarchy and spacing scale: quiet category labels,

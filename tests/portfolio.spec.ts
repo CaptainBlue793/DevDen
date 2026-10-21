@@ -14,7 +14,7 @@ test('six formatted tabs, narrower sidebar, and stationary desktop panes', async
   expect(sidebar!.width / (await page.locator('.terminal-window').boundingBox())!.width).toBeCloseTo(0.25, 2);
   await expect(page.locator('.profile-command')).toContainText('Get-Portfolio');
   await expect(page.getByRole('tabpanel')).toContainText('I’m a Software Engineer at NatWest Group');
-  await expect(page.getByRole('tabpanel')).toContainText('Computer Vision, Natural Language Processing');
+  await expect(page.getByRole('tabpanel')).toContainText('MCP integrations, observability, data pipelines');
   const portrait = (await page.locator('.portrait').boundingBox())!;
   expect(portrait.y + portrait.height / 2).toBeLessThan(sidebar!.y + sidebar!.height / 2);
   await page.getByRole('tab', { name: 'Projects', exact: true }).click();
@@ -108,7 +108,8 @@ test('important facts, skill icons, and project details', async ({ page }) => {
   await expect(page.getByRole('list', { name: 'APIs technologies', exact: true })).toContainText('FastAPI');
   const development = page.getByRole('list', { name: 'Development technologies', exact: true });
   await expect(development).toContainText('Jupyter');
-  for (const removed of ['Spring Boot', 'Hypothesis', 'pytest', 'tree-sitter', 'GitLab', 'Postman', 'SQLite', 'Vite', 'Embeddings', 'Transformers']) expect(technologies).not.toContain(removed);
+  for (const added of ['Spring Boot', 'FastMCP', 'Azure', 'Docker', 'Ansible', 'GitLab CI/CD']) expect(technologies).toContain(added);
+  for (const removed of ['Hypothesis', 'pytest', 'tree-sitter', 'Postman', 'SQLite', 'Vite', 'Embeddings', 'Transformers']) expect(technologies).not.toContain(removed);
   await expect(page.getByRole('list', { name: 'Databases technologies', exact: true })).toContainText('ChromaDB');
   await expect(page.getByRole('list', { name: 'Agent Systems technologies', exact: true })).not.toContainText('ChromaDB');
   await expect(page.getByRole('heading', { name: /Development/ })).not.toContainText('verification');
@@ -116,7 +117,7 @@ test('important facts, skill icons, and project details', async ({ page }) => {
   await expect(page.locator('.workflow, .cli-flow')).toHaveCount(0);
   await expect(page.locator('.records > .record')).toHaveCount(4);
   await page.getByRole('tab', { name: 'Experience', exact: true }).click();
-  await expect(page.locator('.record-details')).toContainText(['Backend Systems', 'reducing processing time by 28%']);
+  await expect(page.locator('.record-details')).toContainText(['10-tool MCP server', 'reducing processing time by 28%']);
   await expect(page.getByRole('tabpanel').locator('mark')).toHaveCount(0);
   await page.getByRole('tab', { name: 'Activities', exact: true }).click();
   await expect(page.locator('mark').filter({ hasText: '800+' })).toBeVisible();

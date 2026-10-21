@@ -2,8 +2,8 @@ import { expect, test } from '@playwright/test';
 
 const groups = [
   { tab: 'Resume', left: 'Summary', right: 'Education', leftRecords: ['About Me'], rightRecords: ['Education'] },
-  { tab: 'Experience', left: 'Full-time', right: 'Internship', leftRecords: ['NatWest Group · Senior Analyst / Software Engineer'], rightRecords: ['NatWest Group · Software Engineering Intern'] },
-  { tab: 'Activities', left: 'Technical', right: 'Non-technical', leftRecords: ['Competitive Programming', 'Amazon ML Summer School', 'LLMs & Prompt Patterns'], rightRecords: ['NITRUTSAV · Event Management Coordinator', 'AASRA · Senior Staff Member', 'Interests'] },
+  { tab: 'Experience', left: 'Full-time', right: 'Internship', leftRecords: ['NatWest Group · Software Engineer'], rightRecords: ['NatWest Group · Software Engineering Intern'] },
+  { tab: 'Activities', left: 'Technical', right: 'Non-technical', leftRecords: ['Competitive Programming', 'Amazon ML Summer School'], rightRecords: ['NITRUTSAV · Event Management Coordinator', 'AASRA · Senior Staff Member', 'Interests'] },
 ];
 
 for (const theme of ['light', 'dark'] as const) {
@@ -62,7 +62,7 @@ test('publication omits contribution while project summaries expose engineering 
   await expect(page.getByRole('tabpanel')).not.toContainText('My contribution');
   await expect(page.getByRole('heading', { name: 'Research Overview', exact: true })).toBeVisible();
   await expect(page.locator('.research-overview')).toHaveCount(1);
-  await expect(page.locator('.research-overview p')).toContainText('learning from unpaired images');
+  await expect(page.locator('.research-overview p')).toContainText('21.01 dB PSNR and 0.72 SSIM');
   await expect(page.getByRole('tabpanel').locator('.description-label, .research-figure, .workflow')).toHaveCount(0);
   await expect(page.getByRole('tabpanel')).not.toContainText('A GAN with bidirectional convolutional GRU modules for enhancing low-light images without paired training examples.');
   await expect(page.getByRole('button', { name: 'Copy citation', exact: true })).toBeVisible();
