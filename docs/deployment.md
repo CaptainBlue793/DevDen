@@ -34,6 +34,7 @@ The `/DevDen/` base matches the case-sensitive public URL. Images, icons, and PD
 URLs use Vite's `BASE_URL`. Local development remains available at `/` with
 `npm.cmd run dev`. Hash navigation needs no server rewrite.
 
-The CV uses the unchanged original `public/resume.pdf` and its matching
-`public/images/resume-preview.png`. Do not regenerate the resume from portfolio
-content. Custom domains and DNS are not required for this GitHub Pages URL.
+The resume and academic CV use the unchanged originals at `public/resume.pdf`
+and `public/academic-cv.pdf`, with matching previews in `public/images/`.
+Do not regenerate either document from portfolio content. Custom domains and
+DNS are not required for this GitHub Pages URL.

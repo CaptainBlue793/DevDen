@@ -55,7 +55,15 @@ test('phone chevrons browse hidden tabs without changing the active section', as
   await expect.poll(() => strip.evaluate(element => element.scrollLeft)).toBeGreaterThan(0);
   await expect(previous).toBeEnabled();
   await expect(page.getByRole('tab', { name: 'Skills', exact: true })).toHaveAttribute('aria-selected', 'true');
-  for (let attempt = 0; attempt < 12 && await next.isEnabled(); attempt++) await next.click();
+  for (let attempt = 0; attempt < 12; attempt++) {
+    if (await next.isDisabled()) break;
+    try { await next.click({ timeout: 1500 }); }
+    catch (error) {
+      // Scroll state can disable the control between the enabled check and click.
+      if (await next.isDisabled()) break;
+      throw error;
+    }
+  }
   await expect(next).toBeDisabled();
   const end = await strip.evaluate(element => element.scrollLeft);
   await previous.click();

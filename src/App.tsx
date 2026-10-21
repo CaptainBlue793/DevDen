@@ -1,7 +1,7 @@
 ﻿import { useCallback, useEffect, useRef, useState } from 'react';
 import type { CSSProperties, KeyboardEvent, ReactNode } from 'react';
 import { useLayoutEffect } from 'react';
-import { profile, sections } from './content';
+import { profile, resumeDocuments, sections } from './content';
 import type { RecordEntry, Section, SectionId } from './content';
 import { BrandIcon } from './BrandIcon';
 import StartupTerminal from './StartupTerminal';
@@ -101,26 +101,32 @@ function Resume({ section }: { section: Section }) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const documentRef = useRef<HTMLDivElement>(null);
   const [enlarged, setEnlarged] = useState(true);
+  const [documentIndex, setDocumentIndex] = useState(0);
+  const selectedDocument = resumeDocuments[documentIndex];
 
   return <div className="resume-layout">
     <div className="resume-about"><SectionRecords section={section} /></div>
     <section className="resume-document" aria-labelledby="resume-document-title">
+      <div className="resume-document-switch" role="group" aria-label="Choose document">
+        {resumeDocuments.map((document, index) => <button className="cli-action" type="button" key={document.id} aria-pressed={index === documentIndex} onClick={() => setDocumentIndex(index)}>{document.label}</button>)}
+      </div>
       <div className="resume-document-header">
-        <h3 id="resume-document-title"><BrandIcon name="Resume" /> Resume</h3>
+        <h3 id="resume-document-title"><BrandIcon name="Resume" /> {selectedDocument.label}</h3>
+        <div className="resume-document-actions"><a className="cli-action" href={selectedDocument.pdf} download={selectedDocument.id === 'resume' ? 'PalakDebPatra_Resume.pdf' : 'PalakDebPatra_Academic_CV.pdf'}>Download PDF</a>
         <button className="cli-action" type="button" onClick={() => {
           setEnlarged(!window.matchMedia('(max-width: 1050px)').matches);
           dialogRef.current?.showModal();
           documentRef.current?.scrollTo(0, 0);
           closeRef.current?.focus();
-        }}>View Resume</button>
+        }}>View {selectedDocument.label}</button></div>
       </div>
       <div className="resume-preview">
-        <img src={profile.resumePreview} alt="Palak Deb Patra’s original resume" width="1530" height="1980" loading="lazy" />
+        <img src={selectedDocument.previews[0]} alt={`${selectedDocument.label} by Palak Deb Patra, page 1`} width="1530" height="1980" loading="lazy" />
       </div>
     </section>
     <dialog className="resume-dialog" ref={dialogRef} aria-labelledby="resume-dialog-title" onKeyDown={event => {
       if (event.key !== 'Tab') return;
-      const controls = event.currentTarget.querySelectorAll<HTMLElement>('button, [tabindex="0"]');
+      const controls = event.currentTarget.querySelectorAll<HTMLElement>('button, a[href], [tabindex="0"]');
       const first = controls[0];
       const last = controls[controls.length - 1];
       if (event.shiftKey && document.activeElement === first) {
@@ -137,14 +143,15 @@ function Resume({ section }: { section: Section }) {
       if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) event.currentTarget.close();
     }}>
       <div className="resume-dialog-header">
-        <h2 id="resume-dialog-title"><BrandIcon name="Resume" /> Resume</h2>
+        <h2 id="resume-dialog-title"><BrandIcon name="Resume" /> {selectedDocument.label}</h2>
         <div className="resume-dialog-actions">
+          <a className="cli-action" href={selectedDocument.pdf} download={selectedDocument.id === 'resume' ? 'PalakDebPatra_Resume.pdf' : 'PalakDebPatra_Academic_CV.pdf'}>Download PDF</a>
           <button className="cli-action" type="button" aria-pressed={enlarged} onClick={() => setEnlarged(value => !value)}>{enlarged ? 'Fit page' : 'Enlarge'}</button>
           <button className="cli-action" type="button" ref={closeRef} onClick={() => dialogRef.current?.close()} aria-label="Close resume">Close <span aria-hidden="true">×</span></button>
         </div>
       </div>
-      <div className={`resume-dialog-body${enlarged ? ' resume-dialog-body--enlarged' : ''}`} ref={documentRef} tabIndex={0} aria-label="Resume document">
-        <img src={profile.resumePreview} alt="Palak Deb Patra’s original resume, full page" width="1530" height="1980" />
+      <div className={`resume-dialog-body${enlarged ? ' resume-dialog-body--enlarged' : ''}`} ref={documentRef} tabIndex={0} aria-label={`${selectedDocument.label} document`}>
+        <div className="resume-dialog-pages">{selectedDocument.previews.map((preview, index) => <img key={preview} src={preview} alt={`${selectedDocument.label} by Palak Deb Patra, page ${index + 1}`} width="1530" height="1980" />)}</div>
       </div>
     </dialog>
   </div>;

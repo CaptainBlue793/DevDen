@@ -1,11 +1,17 @@
 # Portfolio audit — October 13, 2026
 
+October 21 follow-up: the new resume and academic CV now include the current
+NatWest role and the SPCOM publication. The portfolio serves both original PDFs,
+offers a download action, and shows the user-supplied details for the current
+role. The related historical findings below were addressed locally; this dated
+audit still records the evidence and decisions from October 13.
+
 The audit covered the local application, the existing resume, source documentation,
 and selected public evidence. Confirmed implementation defects were fixed locally.
 Personal facts and the original resume were preserved. These audit fixes have not
 been published to DevDen preview.
 
-## Content and release findings that remain
+## Content and release findings at the time of the audit
 
 | Priority | Finding | Evidence and next step |
 | --- | --- | --- |

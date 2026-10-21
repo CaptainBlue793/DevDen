@@ -21,16 +21,32 @@ run, and FrameSmith remains a prototype with unvalidated performance improvement
 GitHub, the Atlas demo, benchmark evidence, and measurement status remain directly
 accessible. Detailed source notes are retained in the content data for provenance.
 
-Content checked October 9, 2026:
+Latest content update, October 21, 2026:
+
+- `PalakDebPatra_Resume.pdf` (Drive ID `1Ru3Rend8TEDl2MkhPSgCIE9-N_vcVKL8`)
+  now supplies the current NatWest role, internship figures, technical skills,
+  and resume-reported CodeShift and Memex results. Its original PDF is copied to
+  `public/resume.pdf`; page one is rendered to `public/images/resume-preview.png`.
+- `PalakDebPatra_Academic_CV.pdf` (Drive ID `1lHcLvdMaBX2N3TnXuj4vvwigbpyyE9lC`)
+  supplies the publication experiment figures and current community-service
+  descriptions. Its original two-page PDF is copied to `public/academic-cv.pdf`,
+  with previews in `public/images/academic-cv-preview*.png`. The resume section
+  now lets visitors view and download either document. The CV's first page starts
+  at Education in the user-supplied PDF; the site does not alter its contents.
+- Quantitative role, project, research, and activity outcomes are presented as
+  reported in these user-supplied documents. They were not independently audited.
+  The separate CodeShift August 19 benchmark keeps its existing repository link.
+
+Earlier content check, October 9, 2026:
 
 - Personal source: `PalakDebPatra_OffCampus_Resume.pdf`, modified January 25, 2026,
   found in the connected Google Drive Resumes folder. Education, internship,
   research, skills, achievements, NITRUTSAV, and AASRA come from this resume.
   Quantitative achievements are attributed as resume-reported.
-- Current NatWest role and July 2025 start date: `INSTRUCTIONS.md`. The resume
-  omits this role; no additional job details were inferred. Personal interests
-  also use the explicitly supplied starting data. ArxivLens, EZPay, and INDICON
-  remain editorial drafts below and are omitted from visitor-facing sections.
+- The initial NatWest role and July 2025 start date came from `INSTRUCTIONS.md`.
+  Personal interests still use the explicitly supplied starting data. ArxivLens,
+  EZPay, and INDICON remain editorial drafts below and are omitted from
+  visitor-facing sections.
 - Public repository URLs: GitHub user repositories API for `CaptainBlue793`.
   Descriptions use local READMEs and public metadata; no README benchmarks or
   test counts are presented as independently verified portfolio results.
@@ -47,7 +63,7 @@ Content checked October 9, 2026:
   by a centered `^_^` during automatic vibration bursts. Welcome's background is
   plain; the decorative atmosphere component is removed. Theme-aware colors
   require no raster or remote image at runtime.
-- CV link: the latest source resume, Drive file
+- Earlier resume source: Drive file
   `15zYLtGfnbPVmW_ln6UfX26thDSh-IhxS`. The user authorized anyone-with-link
   viewer access. The connected sharing tool supports user or company-domain
   sharing only; its domain-sharing attempt failed with HTTP 400 (invalid domain).
@@ -68,7 +84,6 @@ Content checked October 9, 2026:
 
 - ArxivLens RAG and EZPay public source links and detailed descriptions.
 - IEEE INDICON exact title, status, and publisher/source URL.
-- More precise current NatWest role details, if desired.
 
 ## Editorial drafts retained for verification
 
@@ -129,18 +144,12 @@ The original resume PDF, its image preview, and project screenshots remain uncha
 
 ## Editorial and local CV refresh — October 10, 2026
 
-The latest pass shortens and formats existing verified material without adding
-new accomplishments. Current NatWest responsibilities still use only the
-previously supplied backend/API/data-workflow description. Internship metrics,
-project evaluation figures, publication metadata, and activity outcomes retain
-their existing sources and qualifications. FrameSmith is explicitly a prototype
-in its introduction; CodeShift's visible figures describe one recorded run.
-
-The user explicitly requested the actual resume only. The Resume tab therefore
-uses the unchanged Drive-derived `public/resume.pdf` and the PNG preview rendered
-from that document. The generated replacement CV, preview, and generator were
-removed. Portfolio text and formatting edits are separate from resume contents.
-No remote document or sharing permission was changed.
+Before the October 21 update, NatWest responsibilities used only the supplied
+backend/API/data-workflow description, and the Resume tab held the January 2026
+PDF alone. The current PDFs and role details are documented at the top of this
+file. FrameSmith remains explicitly a prototype, and CodeShift's repository
+benchmark still describes one recorded run. Portfolio edits remain separate
+from the original PDF contents; no Drive sharing permission was changed.
 
 ## Full project case-study update
 

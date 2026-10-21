@@ -71,7 +71,9 @@ for (const theme of ['light', 'dark'] as const) {
       await preview.scrollIntoViewIfNeeded();
       await expect(preview).toBeVisible();
       await expect.poll(() => preview.evaluate(img => (img as HTMLImageElement).naturalWidth)).toBe(1530);
-      await expect(document.getByRole('button')).toHaveText('View Resume');
+      await expect(document.getByRole('button', { name: 'View Resume', exact: true })).toBeVisible();
+      await expect(document.getByRole('group', { name: 'Choose document' }).getByRole('button', { name: 'Resume', exact: true })).toHaveAttribute('aria-pressed', 'true');
+      await expect(document.getByRole('link', { name: 'Download PDF' })).toHaveAttribute('href', '/resume.pdf');
       await expect(page.locator('a[href*="drive.google.com"]')).toHaveCount(0);
       const pdf = await request.get('/resume.pdf');
       expect(pdf.status()).toBe(200);
@@ -96,6 +98,25 @@ for (const theme of ['light', 'dark'] as const) {
     });
   }
 }
+
+test('academic CV includes both original pages and a local PDF download', async ({ page, request }) => {
+  await page.goto('/#portfolio/resume');
+  const document = page.locator('.resume-document');
+  await document.getByRole('group', { name: 'Choose document' }).getByRole('button', { name: 'Academic CV' }).click();
+  await expect(document.getByRole('heading', { name: 'Academic CV' })).toBeVisible();
+  await expect(document.getByRole('link', { name: 'Download PDF' })).toHaveAttribute('href', '/academic-cv.pdf');
+  await expect(document.getByRole('img', { name: 'Academic CV by Palak Deb Patra, page 1' })).toHaveAttribute('src', '/images/academic-cv-preview.png');
+  const pdf = await request.get('/academic-cv.pdf');
+  expect(pdf.status()).toBe(200);
+  expect((await pdf.body()).subarray(0, 5).toString()).toBe('%PDF-');
+  await document.getByRole('button', { name: 'View Academic CV' }).click();
+  const dialog = page.getByRole('dialog', { name: 'Academic CV' });
+  await expect(dialog.getByRole('img')).toHaveCount(2);
+  await expect(dialog.getByRole('img').nth(1)).toHaveAttribute('src', '/images/academic-cv-preview-2.png');
+  await expect.poll(() => dialog.getByRole('img').nth(1).evaluate(img => (img as HTMLImageElement).naturalWidth)).toBe(1530);
+  await expect(dialog.getByRole('link', { name: 'Download PDF' })).toHaveAttribute('href', '/academic-cv.pdf');
+  await dialog.getByRole('button', { name: 'Close resume' }).click();
+});
 
 for (const size of [{ width: 1440, height: 900 }, { width: 1366, height: 600 }, { width: 320, height: 568 }, { width: 390, height: 844 }, { width: 844, height: 390 }]) {
   test(`resume popup uses the screen-appropriate default and supports zoom and keyboard close at ${size.width}x${size.height}`, async ({ page }) => {
