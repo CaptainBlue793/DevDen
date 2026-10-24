@@ -123,8 +123,10 @@ test('important facts, skill icons, and project details', async ({ page }) => {
   await expect(page.locator('.workflow, .cli-flow')).toHaveCount(0);
   await expect(page.locator('.records > .record')).toHaveCount(4);
   await page.getByRole('tab', { name: 'Experience', exact: true }).click();
-  await expect(page.locator('.record-details')).toContainText(['131 automated tests', 'reducing processing time by 28%']);
-  await expect(page.getByRole('tabpanel').locator('mark')).toHaveCount(0);
+  await expect(page.locator('.record-details li')).toHaveCount(12);
+  await expect(page.locator('.record-details')).toContainText(['131 automated tests', 'reduced manual processing time by 28%']);
+  await expect(page.getByRole('tabpanel').locator('mark.keyword-cyan').first()).toContainText('OpenTelemetry');
+  await expect(page.getByRole('tabpanel').locator('mark.keyword-green').first()).toContainText('131 automated tests');
   await page.getByRole('tab', { name: 'Activities', exact: true }).click();
   await expect(page.locator('mark').filter({ hasText: '800+' })).toBeVisible();
   await expect(page.getByRole('tabpanel').locator('[data-icon="LeetCode"]')).toHaveCount(0);

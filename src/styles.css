@@ -236,6 +236,13 @@ h1 { font-size: var(--font-name); font-weight: 500; letter-spacing: -.7px; }
 .record-details li { display: grid; grid-template-columns: var(--marker-width) minmax(0, 1fr); gap: var(--list-gap); margin-top: 6px; color: var(--secondary); font-size: var(--font-body); }
 .detail-marker { color: var(--muted); }
 mark { color: var(--accent); background: var(--accent-surface); font-weight: 600; padding: 1px 3px; border-radius: 2px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.keyword-blue { color: var(--blue); background: var(--blue-wash); }
+.keyword-green { color: var(--green); background: var(--green-wash); }
+.keyword-yellow { color: var(--yellow); background: var(--yellow-wash); }
+.keyword-red { color: var(--red); background: var(--red-wash); }
+.keyword-purple { color: var(--purple); background: var(--purple-wash); }
+.keyword-cyan { color: var(--cyan); background: var(--cyan-wash); }
+.keyword-pink { color: var(--pink); background: var(--pink-wash); }
 .record-stack { padding-inline-start: var(--record-indent); margin-top: var(--space-group); font-size: var(--font-small); color: var(--secondary); max-width: 76ch; }
 .technologies { display: flex; flex-direction: column; gap: 5px; margin: 8px 0 0; padding: 0 0 0 var(--nested-indent); list-style: none; }
 .technology { display: grid; grid-template-columns: var(--marker-width) 1em minmax(0, 1fr); align-items: baseline; gap: var(--list-gap); line-height: 1.7; min-width: 0; }

@@ -31,14 +31,16 @@ function ExternalLink({ url, children }: { url: string; children: ReactNode }) {
 }
 
 // Emphasis is plain React text, including when phrases contain punctuation.
-function EmphasizedText({ text, highlights = [] }: { text: string; highlights?: string[] }) {
+function EmphasizedText({ text, highlights = [] }: { text: string; highlights?: RecordEntry['highlights'] }) {
   const parts: ReactNode[] = [];
   let remaining = text;
   while (remaining) {
-    const match = highlights.filter(Boolean).map(phrase => ({ phrase, at: remaining.indexOf(phrase) }))
-      .filter(item => item.at >= 0).sort((a, b) => a.at - b.at || b.phrase.length - a.phrase.length)[0];
+    const match = highlights.filter(Boolean).map(highlight => {
+      const phrase = typeof highlight === 'string' ? highlight : highlight.text;
+      return { phrase, color: typeof highlight === 'string' ? undefined : highlight.color, at: remaining.indexOf(phrase) };
+    }).filter(item => item.at >= 0).sort((a, b) => a.at - b.at || b.phrase.length - a.phrase.length)[0];
     if (!match) { parts.push(remaining); break; }
-    parts.push(remaining.slice(0, match.at), <mark key={parts.length}>{match.phrase}</mark>);
+    parts.push(remaining.slice(0, match.at), <mark className={match.color ? `keyword-${match.color}` : undefined} key={parts.length}>{match.phrase}</mark>);
     remaining = remaining.slice(match.at + match.phrase.length);
   }
   return <>{parts}</>;
