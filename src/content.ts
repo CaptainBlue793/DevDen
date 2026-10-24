@@ -34,7 +34,7 @@ export interface RecordEntry {
   stack?: string[];
   url?: string;
   links?: { label: string; url: string }[];
-  highlights?: string[];
+  highlights?: (string | { text: string; color: 'blue' | 'green' | 'yellow' | 'red' | 'purple' | 'cyan' | 'pink' })[];
   flow?: string[];
   workflow?: WorkflowStep[];
   caseStudy?: CaseStudy;
@@ -159,29 +159,47 @@ const sectionContent: Section[] = [
       {
         title: 'NatWest Group · Software Engineer',
         column: 'left',
-        description: 'I work on the Colleague Learning Assistant and ChLoE, improving agent observability, learning recommendations, identity handling, and deployments.',
+        description: 'Colleague Learning Assistant (CLA) and ChLoE',
         meta: 'July 2025 – Present · Bangalore, India',
+        highlights: [
+          { text: 'OpenTelemetry', color: 'cyan' }, { text: 'Azure Application Insights', color: 'blue' },
+          { text: '131 automated tests', color: 'green' }, { text: '11 Kusto queries', color: 'purple' },
+          { text: 'PingFederate', color: 'yellow' }, { text: 'Microsoft Entra ID', color: 'blue' },
+          { text: 'Workday', color: 'cyan' }, { text: 'Azure Blob Storage', color: 'blue' },
+          { text: 'GitLab', color: 'purple' }, { text: 'Microsoft Teams', color: 'cyan' },
+          { text: 'Ansible Automation Platform', color: 'yellow' }, { text: '23 out of 26 test cases', color: 'green' },
+        ],
         details: [
-          'For the Colleague Learning Assistant, I built OpenTelemetry and Azure Application Insights tracing across requests, tool calls, and conversations, with eight failure categories and 11 environment-specific settings.',
-          'I developed 131 automated tests, 11 Kusto queries, and a five-tab dashboard to validate telemetry and investigate agent failures.',
-          'I configured PingFederate and Microsoft Entra ID single sign-on with a three-step fallback to identify employees, and integrated 12 months of Workday learning records for course recommendations.',
-          'I built an Azure Blob Storage pipeline for GitLab metrics with change detection and fallback to the last valid copy, and redesigned three Microsoft Teams widgets.',
-          'For ChLoE, I worked on migration to GitLab CI/CD and Ansible Automation Platform, improved FAQ knowledge sources with 23 of 26 SIT/UAT test cases passing, and fixed duplicate responses and the Teams “Start over” trigger.',
+          'Built end-to-end AI observability using OpenTelemetry and Azure Application Insights, which enables tracing of requests, tool calls and conversations through a unified tracking ID, with 8 failure categories and 11 environment-specific settings.',
+          'Developed 131 automated tests to validate agent behaviour and telemetry, along with 11 Kusto queries and a 5-tab Application Insights dashboard to investigate failures and monitor system activity.',
+          'Configured Single Sign-On (SSO) using PingFederate and Microsoft Entra ID, with a three-step fallback mechanism that reliably identifies employees, handles missing authentication details and prevents incorrect user identification.',
+          'Integrated Workday learning completion records from the last 12 months as an additional data source, which allows the agent to consider previously completed courses when generating personalised learning recommendations.',
+          'Built an Azure Blob Storage data pipeline to parse GitLab coding metrics from Excel workbooks, which detects changes to avoid redundant downloads and uses the last valid copy when downloads fail.',
+          'Redesigned the UI/UX of 3 Microsoft Teams widgets (Learning Courses, ECDF progress and GitLab metrics) to follow NatWest branding guidelines and resolve existing rendering issues.',
+          'Worked on migrating deployments from Power Platform pipelines to GitLab CI/CD and Ansible Automation Platform, while ensuring the workflows follow the bank’s security guardrails and release requirements.',
+          'Reduced agent hallucinations by improving Power Platform FAQ knowledge sources and testing revised responses in SIT and UAT, with 23 out of 26 test cases passing.',
+          'Fixed duplicate agent responses after SIT/UAT deployments and corrected the “Start over” trigger in Microsoft Teams, which clears chat history, closes active topics and starts a fresh conversation.',
         ],
       },
       {
         title: 'NatWest Group · Software Engineering Intern',
         column: 'right',
-        description: 'During my internship, I automated DevOps reporting, taking data from GitLab APIs into Snowflake and ThoughtSpot dashboards.',
+        description: 'OSPO Metrics',
         meta: 'May – July 2024 · Gurgaon, India',
+        highlights: [
+          { text: 'GitLab GraphQL and REST APIs', color: 'purple' },
+          { text: 'Python', color: 'blue' }, { text: '28%', color: 'green' },
+          { text: '16 datasets', color: 'green' }, { text: 'Snowflake', color: 'cyan' },
+          { text: 'ThoughtSpot', color: 'yellow' },
+        ],
         details: [
-          'I collected DevOps metrics across the organization using GitLab GraphQL and REST APIs.',
-          'I wrote Python scripts to fetch paginated data and export CSVs, reducing processing time by 28%.',
-          'I brought 16 CSV datasets together in Snowflake and connected them to ThoughtSpot dashboards.',
+          'Collected organisation-wide DevOps metrics through GitLab GraphQL and REST APIs to retrieve and consolidate data from GitLab.',
+          'Automated data extraction and CSV exports in Python, which reduced manual processing time by 28%.',
+          'Loaded 16 datasets into Snowflake and developed a unified data model that supports interactive ThoughtSpot dashboards.',
         ],
       },
     ],
-    sourceNote: 'Role details and outcomes are reported in my October 2026 professional and academic CVs.',
+    sourceNote: 'Experience points follow my October 2026 academic CV verbatim.',
   },
   {
     id: 'projects', label: 'Projects', directory: 'Projects', command: 'Get-Projects',

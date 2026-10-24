@@ -21,7 +21,18 @@ run, and FrameSmith remains a prototype with unvalidated performance improvement
 GitHub, the Atlas demo, benchmark evidence, and measurement status remain directly
 accessible. Detailed source notes are retained in the content data for provenance.
 
-Latest content update, October 23, 2026:
+Latest content update, October 24, 2026:
+
+- `PalakDebPatra_Professional_CV.pdf` (Drive ID `10deQPEw3ds-l3C19uXRBTeKvDigkYm-R`,
+  modified October 24) replaces `public/resume.pdf`. Its single page is rendered at
+  1530 × 1980 in `public/images/resume-preview.png`. The original PDF is used for
+  viewing and download.
+- The Experience section's nine Software Engineer points and three internship
+  points follow the October 23 Academic CV (Drive ID
+  `1T4GyhoVQ51jWaWDvYTiweAxR8sgcMiHu`) exactly. Named tools and results receive
+  distinct theme-aware keyword colors in the portfolio; the CV itself is unchanged.
+
+Previous content update, October 23, 2026:
 
 - `PalakDebPatra_Professional_CV.pdf` (Drive ID `19gq0LltBwGJitQfkLpQ-kYC4CrUDQBNW`)
   replaces the professional PDF at `public/resume.pdf`. The Resume section labels
