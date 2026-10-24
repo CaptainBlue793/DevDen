@@ -78,7 +78,7 @@ export const profile = {
 };
 
 export const resumeDocuments = [
-  { id: 'resume', label: 'Resume', pdf: publicAsset('/resume.pdf'), previews: [publicAsset('/images/resume-preview.png')] },
+  { id: 'resume', label: 'Professional CV', pdf: publicAsset('/resume.pdf'), previews: [publicAsset('/images/resume-preview.png')] },
   { id: 'academic-cv', label: 'Academic CV', pdf: publicAsset('/academic-cv.pdf'), previews: [publicAsset('/images/academic-cv-preview.png'), publicAsset('/images/academic-cv-preview-2.png')] },
 ] as const;
 
@@ -97,7 +97,7 @@ const sectionContent: Section[] = [
         title: 'About Me',
         column: 'left',
         highlights: ['Software Engineer', 'NatWest Group'],
-        description: 'I’m a Software Engineer at NatWest Group, building AI tools for learning and developer workflows in Microsoft Teams. My work spans MCP integrations, observability, data pipelines, identity resolution, and deployment automation.\n\nOutside work, I build local AI assistants and code migration tools, and research Deep Learning for Low-Light Image Enhancement.',
+        description: 'I’m a Software Engineer at NatWest Group, building AI learning tools in Microsoft Teams. My work spans agent observability, identity resolution, data pipelines, and deployment workflows.\n\nOutside work, I build local AI assistants and code migration tools, and research Deep Learning for Low-Light Image Enhancement.',
       },
       {
         title: 'Education',
@@ -135,7 +135,7 @@ const sectionContent: Section[] = [
       },
       {
         title: 'APIs',
-        description: 'FastAPI · Spring Boot · REST APIs · GraphQL',
+        description: 'FastAPI · REST APIs · GraphQL',
       },
       {
         title: 'Cloud',
@@ -143,7 +143,7 @@ const sectionContent: Section[] = [
       },
       {
         title: 'Development',
-        description: 'Git · GitLab CI/CD · Ansible · Docker · Jupyter',
+        description: 'Git · GitLab CI/CD · Ansible · Jupyter · Claude · Codex',
       },
     ],
   },
@@ -159,14 +159,14 @@ const sectionContent: Section[] = [
       {
         title: 'NatWest Group · Software Engineer',
         column: 'left',
-        description: 'I build AI learning and engineering tools in Microsoft Teams, connecting enterprise systems and making their behavior observable and testable.',
+        description: 'I work on the Colleague Learning Assistant and ChLoE, improving agent observability, learning recommendations, identity handling, and deployments.',
         meta: 'July 2025 – Present · Bangalore, India',
         details: [
-          'I developed components of a 10-tool MCP server connecting Workday, ECDF, GitLab, Outlook, Confluence, and Jira.',
-          'I added OpenTelemetry tracing and Azure Application Insights for tool calls, conversations, and eight failure categories, alongside 131 automated tests and monitoring dashboards.',
-          'I built a GitLab metrics pipeline with Azure Blob Storage and change-aware parsing, and connected Workday learning history for personalized insights.',
-          'I created three interactive Microsoft Teams dashboards and reduced their footprint by 35%. SAML/Entra ID claims and a three-stage fallback support secure employee identity resolution.',
-          'I created a 29-prompt regression suite, raising validation pass rates from 86% to 97%, and automated deployment across four environments with GitLab CI/CD and Ansible Automation Platform.',
+          'For the Colleague Learning Assistant, I built OpenTelemetry and Azure Application Insights tracing across requests, tool calls, and conversations, with eight failure categories and 11 environment-specific settings.',
+          'I developed 131 automated tests, 11 Kusto queries, and a five-tab dashboard to validate telemetry and investigate agent failures.',
+          'I configured PingFederate and Microsoft Entra ID single sign-on with a three-step fallback to identify employees, and integrated 12 months of Workday learning records for course recommendations.',
+          'I built an Azure Blob Storage pipeline for GitLab metrics with change detection and fallback to the last valid copy, and redesigned three Microsoft Teams widgets.',
+          'For ChLoE, I worked on migration to GitLab CI/CD and Ansible Automation Platform, improved FAQ knowledge sources with 23 of 26 SIT/UAT test cases passing, and fixed duplicate responses and the Teams “Start over” trigger.',
         ],
       },
       {
@@ -181,7 +181,7 @@ const sectionContent: Section[] = [
         ],
       },
     ],
-    sourceNote: 'Role details and outcomes are reported in my October 2026 resume and academic CV.',
+    sourceNote: 'Role details and outcomes are reported in my October 2026 professional and academic CVs.',
   },
   {
     id: 'projects', label: 'Projects', directory: 'Projects', command: 'Get-Projects',
@@ -210,7 +210,7 @@ const sectionContent: Section[] = [
         description: 'I built a local document assistant that answers questions about notes, papers, and code with source citations.',
         details: [
           'Hybrid Retrieval: I combine Semantic Search, Keyword Search, and reranking, with incremental indexing for changed files.',
-          'Cited Local Answers: I stream local model responses with numbered citations that open the source files. My October 2026 resume reports indexing 3,050 files into 42,743 chunks in under 15 minutes.',
+          'Cited Local Answers: I stream local model responses with numbered citations that open the source files. My professional CV reports indexing 3,050 files into 42,743 chunks in about 15 minutes on my local GPU, and 97.6% Hit@1, 0.988 MRR, and 100% Recall@5 on 42 questions from a separate 23-document corpus.',
         ],
         stack: ['Python', 'LangGraph', 'ChromaDB', 'SQLite', 'Ollama', 'Streamlit'],
       },
@@ -239,7 +239,7 @@ const sectionContent: Section[] = [
         description: 'I translate Python modules into TypeScript and verify their behavior using local Language Models.',
         details: [
           'Behavioral Checks: I combine dependency-ordered translation and compiler feedback with comparisons of return values, exceptions, and object state.',
-          'Recorded Benchmark: my August 19, 2026 run verified 15 of 31 modules as equivalent and exercised 197 functions and methods. My October 2026 resume reports 190 passing tests for the project.',
+          'Recorded Benchmark: my August 19, 2026 run verified 15 of 31 modules as equivalent and exercised 197 functions and methods.',
         ],
         stack: ['Python', 'LangGraph', 'TypeScript', 'Ollama'],
         links: [{ label: 'Benchmark Report', url: 'https://github.com/CaptainBlue793/CodeShift/blob/main/docs/scale-run-2026-08-19.md' }],
@@ -435,12 +435,12 @@ const sectionContent: Section[] = [
       {
         title: 'Bidirectional Convolutional-GRU Integrated GAN for Unpaired Low-Light Image Enhancement',
         research: {
-          overview: 'In this work, my co-authors and I use a CycleGAN-based model with Bidirectional Convolutional GRU modules for unpaired Low-Light Image Enhancement. My academic CV reports evaluation against seven existing methods, with 21.01 dB PSNR and 0.72 SSIM.',
+          overview: 'In this work, my co-authors and I use a CycleGAN-based model with Bidirectional Convolutional GRU modules for unpaired Low-Light Image Enhancement.',
         },
         highlights: ['First author'],
         url: 'https://doi.org/10.1109/SPCOM71105.2026.11622932',
         description: 'My co-authors and I use Bidirectional Convolutional GRU modules in a GAN to enhance low-light images without paired training examples.',
-        meta: 'First author · IEEE SPCOM 2026 · July 2026 · Pages 1–5',
+        meta: 'First author · IEEE SPCOM 2026 · Pages 1–5',
         metadata: [
           { label: 'Authors', value: 'Palak Deb Patra, Santosh Kumar Panda, Manoj Kumar Bishwal, and Pankaj Kumar Sa' },
           { label: 'DOI', value: '10.1109/SPCOM71105.2026.11622932', url: 'https://doi.org/10.1109/SPCOM71105.2026.11622932' },

@@ -205,7 +205,7 @@ Screenshots are saved in ignored `test-results/`.
 Edit `src/content.ts` to update sections, highlights, and profile links.
 The photo is served from `public/images/profile-360.webp` or `profile-720.webp`;
 `profile-img.jpg` retains the original photograph. The Resume section offers the
-October 2026 resume and academic CV as unchanged local PDFs at `public/resume.pdf`
+October 2026 professional and academic CVs as unchanged local PDFs at `public/resume.pdf`
 and `public/academic-cv.pdf`. Their 1530 x 1980 page previews are in `public/images/`.
 The academic CV has two pages. Visitors can switch documents, view every page in
 the modal, and download either PDF without Google sign-in. The in-page preview

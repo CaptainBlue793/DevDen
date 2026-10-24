@@ -56,7 +56,7 @@ test('NatWest roles use plain bullets and retain verified internship outcomes', 
   await expect(roles.nth(1).locator('.record-details li')).toHaveCount(3);
   await expect(roles.nth(0).locator('.record-meta')).toHaveText('July 2025 – Present · Bangalore, India');
   await expect(roles.nth(0).locator('.record-details')).toContainText('131 automated tests');
-  await expect(roles.nth(0).locator('.record-details')).toContainText('86% to 97%');
+  await expect(roles.nth(0).locator('.record-details')).toContainText('23 of 26 SIT/UAT test cases passing');
   await expect(roles.nth(1).locator('.record-meta')).toHaveText('May – July 2024 · Gurgaon, India');
   await expect(roles.nth(1).locator('.record-details')).toContainText('reducing processing time by 28%');
   await expect(roles.nth(1).locator('.record-details')).toContainText('16 CSV datasets');

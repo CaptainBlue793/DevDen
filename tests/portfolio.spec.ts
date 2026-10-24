@@ -14,7 +14,7 @@ test('six formatted tabs, narrower sidebar, and stationary desktop panes', async
   expect(sidebar!.width / (await page.locator('.terminal-window').boundingBox())!.width).toBeCloseTo(0.25, 2);
   await expect(page.locator('.profile-command')).toContainText('Get-Portfolio');
   await expect(page.getByRole('tabpanel')).toContainText('I’m a Software Engineer at NatWest Group');
-  await expect(page.getByRole('tabpanel')).toContainText('MCP integrations, observability, data pipelines');
+  await expect(page.getByRole('tabpanel')).toContainText('agent observability, identity resolution, data pipelines');
   const portrait = (await page.locator('.portrait').boundingBox())!;
   expect(portrait.y + portrait.height / 2).toBeLessThan(sidebar!.y + sidebar!.height / 2);
   await page.getByRole('tab', { name: 'Projects', exact: true }).click();
@@ -59,7 +59,7 @@ test('supplied image, accessible brand links, and resume viewer entry', async ({
   expect((await request.get('/images/profile-720.webp')).status()).toBe(200);
   await expect(page.locator('.profile-pane').getByRole('link', { name: /Google Drive/ })).toHaveCount(0);
   await page.getByRole('tab', { name: 'Resume', exact: true }).click();
-  await expect(page.getByRole('button', { name: 'View Resume', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'View Professional CV', exact: true })).toBeVisible();
   await expect(page.locator('a[href*="drive.google.com"]')).toHaveCount(0);
   await expect(page.locator('.contacts [data-icon="LinkedIn"]')).toHaveCount(1);
   await expect(page.locator('.contacts [data-icon="GitHub"]')).toHaveCount(1);
@@ -108,8 +108,14 @@ test('important facts, skill icons, and project details', async ({ page }) => {
   await expect(page.getByRole('list', { name: 'APIs technologies', exact: true })).toContainText('FastAPI');
   const development = page.getByRole('list', { name: 'Development technologies', exact: true });
   await expect(development).toContainText('Jupyter');
-  for (const added of ['Spring Boot', 'FastMCP', 'Azure', 'Docker', 'Ansible', 'GitLab CI/CD']) expect(technologies).toContain(added);
-  for (const removed of ['Hypothesis', 'pytest', 'tree-sitter', 'Postman', 'SQLite', 'Vite', 'Embeddings', 'Transformers']) expect(technologies).not.toContain(removed);
+  for (const added of ['FastMCP', 'Azure', 'Ansible', 'GitLab CI/CD', 'Claude', 'Codex']) expect(technologies).toContain(added);
+  for (const removed of ['Spring Boot', 'Docker', 'Hypothesis', 'pytest', 'tree-sitter', 'Postman', 'SQLite', 'Vite', 'Embeddings', 'Transformers']) expect(technologies).not.toContain(removed);
+  for (const [name, file] of [
+    ['FastMCP', 'fastmcp-light.svg'], ['Azure', 'azure.svg'],
+    ['Microsoft Copilot Studio', 'copilot-studio.svg'], ['Power Platform', 'power-platform.svg'],
+  ]) await expect(page.locator(`.skill-tree [data-icon="${name}"] img`).first()).toHaveAttribute('src', `/images/brands/${file}`);
+  for (const name of ['GitLab CI/CD', 'Ansible']) await expect(page.locator(`.skill-tree svg[data-icon="${name}"][fill="currentColor"] path`)).toHaveCount(1);
+  await expect(page.locator('.skill-tree svg[data-icon="REST APIs"] rect')).toHaveCount(1);
   await expect(page.getByRole('list', { name: 'Databases technologies', exact: true })).toContainText('ChromaDB');
   await expect(page.getByRole('list', { name: 'Agent Systems technologies', exact: true })).not.toContainText('ChromaDB');
   await expect(page.getByRole('heading', { name: /Development/ })).not.toContainText('verification');
@@ -117,7 +123,7 @@ test('important facts, skill icons, and project details', async ({ page }) => {
   await expect(page.locator('.workflow, .cli-flow')).toHaveCount(0);
   await expect(page.locator('.records > .record')).toHaveCount(4);
   await page.getByRole('tab', { name: 'Experience', exact: true }).click();
-  await expect(page.locator('.record-details')).toContainText(['10-tool MCP server', 'reducing processing time by 28%']);
+  await expect(page.locator('.record-details')).toContainText(['131 automated tests', 'reducing processing time by 28%']);
   await expect(page.getByRole('tabpanel').locator('mark')).toHaveCount(0);
   await page.getByRole('tab', { name: 'Activities', exact: true }).click();
   await expect(page.locator('mark').filter({ hasText: '800+' })).toBeVisible();

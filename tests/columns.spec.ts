@@ -62,7 +62,7 @@ test('publication omits contribution while project summaries expose engineering 
   await expect(page.getByRole('tabpanel')).not.toContainText('My contribution');
   await expect(page.getByRole('heading', { name: 'Research Overview', exact: true })).toBeVisible();
   await expect(page.locator('.research-overview')).toHaveCount(1);
-  await expect(page.locator('.research-overview p')).toContainText('21.01 dB PSNR and 0.72 SSIM');
+  await expect(page.locator('.research-overview p')).toContainText('Bidirectional Convolutional GRU modules');
   await expect(page.getByRole('tabpanel').locator('.description-label, .research-figure, .workflow')).toHaveCount(0);
   await expect(page.getByRole('tabpanel')).not.toContainText('A GAN with bidirectional convolutional GRU modules for enhancing low-light images without paired training examples.');
   await expect(page.getByRole('button', { name: 'Copy citation', exact: true })).toBeVisible();

@@ -66,13 +66,13 @@ for (const theme of ['light', 'dark'] as const) {
       await expect(page.locator('.resume-about')).toContainText('NIT Rourkela');
       await expect(page.locator('.profile-pane .resume-link')).toHaveCount(0);
       await expect(page.locator('.contacts .contact')).toHaveCount(5);
-      const document = page.getByRole('region', { name: 'Resume', exact: true });
+      const document = page.getByRole('region', { name: 'Professional CV', exact: true });
       const preview = document.getByRole('img');
       await preview.scrollIntoViewIfNeeded();
       await expect(preview).toBeVisible();
       await expect.poll(() => preview.evaluate(img => (img as HTMLImageElement).naturalWidth)).toBe(1530);
-      await expect(document.getByRole('button', { name: 'View Resume', exact: true })).toBeVisible();
-      await expect(document.getByRole('group', { name: 'Choose document' }).getByRole('button', { name: 'Resume', exact: true })).toHaveAttribute('aria-pressed', 'true');
+      await expect(document.getByRole('button', { name: 'View Professional CV', exact: true })).toBeVisible();
+      await expect(document.getByRole('group', { name: 'Choose document' }).getByRole('button', { name: 'Professional CV', exact: true })).toHaveAttribute('aria-pressed', 'true');
       await expect(document.getByRole('link', { name: 'Download PDF' })).toHaveAttribute('href', '/resume.pdf');
       await expect(page.locator('a[href*="drive.google.com"]')).toHaveCount(0);
       const pdf = await request.get('/resume.pdf');
@@ -115,7 +115,7 @@ test('academic CV includes both original pages and a local PDF download', async 
   await expect(dialog.getByRole('img').nth(1)).toHaveAttribute('src', '/images/academic-cv-preview-2.png');
   await expect.poll(() => dialog.getByRole('img').nth(1).evaluate(img => (img as HTMLImageElement).naturalWidth)).toBe(1530);
   await expect(dialog.getByRole('link', { name: 'Download PDF' })).toHaveAttribute('href', '/academic-cv.pdf');
-  await dialog.getByRole('button', { name: 'Close resume' }).click();
+  await dialog.getByRole('button', { name: 'Close document' }).click();
 });
 
 for (const size of [{ width: 1440, height: 900 }, { width: 1366, height: 600 }, { width: 320, height: 568 }, { width: 390, height: 844 }, { width: 844, height: 390 }]) {
@@ -123,7 +123,7 @@ for (const size of [{ width: 1440, height: 900 }, { width: 1366, height: 600 }, 
     await page.setViewportSize(size);
     await page.emulateMedia({ colorScheme: size.width === 390 ? 'light' : 'dark', reducedMotion: 'reduce' });
     await page.goto('/#portfolio/resume');
-    const open = page.getByRole('button', { name: 'View Resume', exact: true });
+    const open = page.getByRole('button', { name: 'View Professional CV', exact: true });
     const output = page.locator('.terminal-output');
     if (size.width > 1050) {
       const preview = (await page.locator('.resume-preview img').boundingBox())!;
@@ -133,9 +133,9 @@ for (const size of [{ width: 1440, height: 900 }, { width: 1366, height: 600 }, 
       if (size.height === 600) expect(await output.evaluate(el => el.scrollHeight > el.clientHeight)).toBe(true);
     }
     await open.click();
-    const dialog = page.getByRole('dialog', { name: 'Resume', exact: true });
+    const dialog = page.getByRole('dialog', { name: 'Professional CV', exact: true });
     await expect(dialog).toBeVisible();
-    const close = dialog.getByRole('button', { name: 'Close resume' });
+    const close = dialog.getByRole('button', { name: 'Close document' });
     await expect(close).toBeFocused();
     const image = dialog.getByRole('img');
     await expect.poll(() => image.evaluate(el => (el as HTMLImageElement).naturalWidth)).toBe(1530);

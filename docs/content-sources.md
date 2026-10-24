@@ -21,7 +21,25 @@ run, and FrameSmith remains a prototype with unvalidated performance improvement
 GitHub, the Atlas demo, benchmark evidence, and measurement status remain directly
 accessible. Detailed source notes are retained in the content data for provenance.
 
-Latest content update, October 21, 2026:
+Latest content update, October 23, 2026:
+
+- `PalakDebPatra_Professional_CV.pdf` (Drive ID `19gq0LltBwGJitQfkLpQ-kYC4CrUDQBNW`)
+  replaces the professional PDF at `public/resume.pdf`. The Resume section labels
+  it Professional CV and downloads it under its original filename. Current-role
+  copy now follows the CLA and ChLoE descriptions, including tracing, tests,
+  identity fallback, learning records, GitLab metrics, Teams widgets, deployment
+  migration, FAQ evaluation, and conversation fixes. CodeShift's 190-test claim
+  and older current-role metrics absent from the revised CV were removed.
+- `PalakDebPatra_Academic_CV.pdf` (Drive ID `1T4GyhoVQ51jWaWDvYTiweAxR8sgcMiHu`)
+  replaces `public/academic-cv.pdf`. It provides the SPCOM DOI and current
+  two-page academic content. The previous CV's experiment figures are no longer
+  attributed to the current CV, so they were removed from the site overview.
+- Both originals are copied without editing and their page images are rendered
+  at 1530 × 1980. Project and activity figures are presented as CV-reported,
+  without independent audit. The separate CodeShift benchmark retains its
+  repository link.
+
+Earlier content update, October 21, 2026:
 
 - `PalakDebPatra_Resume.pdf` (Drive ID `1Ru3Rend8TEDl2MkhPSgCIE9-N_vcVKL8`)
   now supplies the current NatWest role, internship figures, technical skills,

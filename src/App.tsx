@@ -112,7 +112,7 @@ function Resume({ section }: { section: Section }) {
       </div>
       <div className="resume-document-header">
         <h3 id="resume-document-title"><BrandIcon name="Resume" /> {selectedDocument.label}</h3>
-        <div className="resume-document-actions"><a className="cli-action" href={selectedDocument.pdf} download={selectedDocument.id === 'resume' ? 'PalakDebPatra_Resume.pdf' : 'PalakDebPatra_Academic_CV.pdf'}>Download PDF</a>
+        <div className="resume-document-actions"><a className="cli-action" href={selectedDocument.pdf} download={selectedDocument.id === 'resume' ? 'PalakDebPatra_Professional_CV.pdf' : 'PalakDebPatra_Academic_CV.pdf'}>Download PDF</a>
         <button className="cli-action" type="button" onClick={() => {
           setEnlarged(!window.matchMedia('(max-width: 1050px)').matches);
           dialogRef.current?.showModal();
@@ -145,9 +145,9 @@ function Resume({ section }: { section: Section }) {
       <div className="resume-dialog-header">
         <h2 id="resume-dialog-title"><BrandIcon name="Resume" /> {selectedDocument.label}</h2>
         <div className="resume-dialog-actions">
-          <a className="cli-action" href={selectedDocument.pdf} download={selectedDocument.id === 'resume' ? 'PalakDebPatra_Resume.pdf' : 'PalakDebPatra_Academic_CV.pdf'}>Download PDF</a>
+          <a className="cli-action" href={selectedDocument.pdf} download={selectedDocument.id === 'resume' ? 'PalakDebPatra_Professional_CV.pdf' : 'PalakDebPatra_Academic_CV.pdf'}>Download PDF</a>
           <button className="cli-action" type="button" aria-pressed={enlarged} onClick={() => setEnlarged(value => !value)}>{enlarged ? 'Fit page' : 'Enlarge'}</button>
-          <button className="cli-action" type="button" ref={closeRef} onClick={() => dialogRef.current?.close()} aria-label="Close resume">Close <span aria-hidden="true">×</span></button>
+          <button className="cli-action" type="button" ref={closeRef} onClick={() => dialogRef.current?.close()} aria-label="Close document">Close <span aria-hidden="true">×</span></button>
         </div>
       </div>
       <div className={`resume-dialog-body${enlarged ? ' resume-dialog-body--enlarged' : ''}`} ref={documentRef} tabIndex={0} aria-label={`${selectedDocument.label} document`}>

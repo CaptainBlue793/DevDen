@@ -33,7 +33,7 @@ https://mintcdn.com/langchain-5e9cc07a/nQm-sjd_MByLhgeW/images/brand/langgraph-i
 Both PNGs retain their original blue backgrounds and dark symbols without modification.
 
 Devicon contributors: https://github.com/devicons/devicon
-Angular, AWS, Java, Jupyter, MySQL, OpenCV, Python, and scikit-learn SVGs:
+Angular, AWS, Azure, Java, Jupyter, MySQL, OpenCV, Python, and scikit-learn SVGs:
 https://github.com/devicons/devicon/tree/master/icons
 Distributed under MIT; full license: images/brands/devicon-LICENSE.txt
 Original colors and paths retained. AWS's dark variant changes only the navy
@@ -44,3 +44,15 @@ Source: https://huggingface.co/front/assets/huggingface_logo-noborder.svg
 A viewBox is added for responsive sizing; paths and colors are unchanged.
 
 Brand names and marks belong to their respective owners.
+
+FastMCP favicon variants from the official PrefectHQ repository (Apache 2.0):
+https://github.com/PrefectHQ/fastmcp/tree/main/docs/assets/brand
+The dark and light SVG variants are copied without changes.
+
+Microsoft Copilot Studio and Power Platform SVGs from Microsoft's official icon pack:
+https://learn.microsoft.com/en-us/power-platform/guidance/icons
+https://download.microsoft.com/download/498606aa-6d27-4f13-aa5c-1401078c153b/Power-Platform-icons-scalable.zip
+Microsoft permits these icons in diagrams, training materials, or documentation;
+the Skills section identifies the products by name beside their unchanged icons.
+
+REST APIs has no single product logo. Its labeled API pictogram is original site artwork.

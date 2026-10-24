@@ -1,8 +1,8 @@
 ﻿import {
-  siAngular, siCss, siCplusplus, siFastapi, siGithub, siGitlab, siGoogledrive, siGraphql,
+  siAngular, siAnsible, siCss, siCplusplus, siFastapi, siGithub, siGitlab, siGoogledrive, siGraphql,
   siGit, siHtml5, siHuggingface, siIeee, siJavascript, siJupyter,
   siLeetcode, siMysql, siNvidia, siOllama, siOpencv, siPostman, siPytest, siPython, siPytorch,
-  siReact, siScikitlearn, siSnowflake, siSpacy, siSpotify, siSpringboot, siSqlite,
+  siReact, siScikitlearn, siSnowflake, siSpacy, siSpotify, siSqlite,
   siStreamlit, siTensorflow, siTypescript,
 } from 'simple-icons';
 import type { SimpleIcon } from 'simple-icons';
@@ -10,13 +10,14 @@ import { faAws, faJava, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
 const brands: Record<string, SimpleIcon | IconDefinition> = {
-  Angular: siAngular, CSS: siCss, 'C++': siCplusplus, GitHub: siGithub, GitLab: siGitlab,
+  Angular: siAngular, Ansible: siAnsible, CSS: siCss, 'C++': siCplusplus, GitHub: siGithub, GitLab: siGitlab,
+  'GitLab CI/CD': siGitlab,
   'Google Drive': siGoogledrive, GraphQL: siGraphql, Git: siGit, HTML: siHtml5,
   'Hugging Face': siHuggingface, IEEE: siIeee, JavaScript: siJavascript,
   LeetCode: siLeetcode, MySQL: siMysql,
   Ollama: siOllama, Postman: siPostman, pytest: siPytest, Python: siPython,
   PyTorch: siPytorch, 'scikit-learn': siScikitlearn, Snowflake: siSnowflake,
-  spaCy: siSpacy, Spotify: siSpotify, 'Spring Boot': siSpringboot, SQLite: siSqlite,
+  spaCy: siSpacy, Spotify: siSpotify, SQLite: siSqlite,
   Streamlit: siStreamlit, TensorFlow: siTensorflow, TypeScript: siTypescript,
   AWS: faAws, Java: faJava, LinkedIn: faLinkedinIn,
   React: siReact, Jupyter: siJupyter, FastAPI: siFastapi,
@@ -26,17 +27,21 @@ const brands: Record<string, SimpleIcon | IconDefinition> = {
 const logoAssets: Record<string, { file: string; monochrome?: boolean; color?: string; darkFile?: string; lightSurface?: boolean }> = {
   Angular: { file: 'angular.svg' },
   AWS: { file: 'aws.svg', darkFile: 'aws-dark.svg' },
+  Azure: { file: 'azure.svg' },
   ChromaDB: { file: 'chromadb.svg' },
+  FastMCP: { file: 'fastmcp-light.svg', darkFile: 'fastmcp-dark.svg' },
   'Hugging Face': { file: 'huggingface.svg' },
   Java: { file: 'java.svg' },
   Jupyter: { file: 'jupyter.svg' },
   LangChain: { file: 'langchain.png' },
   LangGraph: { file: 'langgraph.png' },
   MySQL: { file: 'mysql.svg' },
+  'Microsoft Copilot Studio': { file: 'copilot-studio.svg' },
   NLTK: { file: 'nltk.png', lightSurface: true },
   OpenCV: { file: 'opencv.svg' },
   Oracle: { file: 'oracle.svg', monochrome: true, color: '#C74634' },
   Python: { file: 'python.svg' },
+  'Power Platform': { file: 'power-platform.svg' },
   'scikit-learn': { file: 'scikitlearn.svg' },
 };
 
@@ -57,6 +62,10 @@ export function BrandIcon({ name, monochrome = false }: { name: string; monochro
           {logo.darkFile && <img className="brand-logo brand-logo--dark" src={`${import.meta.env.BASE_URL}images/brands/${logo.darkFile}`} width="24" height="24" alt="" decoding="async" />}
         </span>;
   }
+  if (key === 'REST APIs') return <svg className="brand-icon" data-icon={key} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="1" y="4" width="22" height="16" rx="3" />
+    <path d="m4.5 15.5 2-7h1l2 7m-4.3-2h3.6M11 15.5v-7h2a2 2 0 0 1 0 4h-2m6-4h3m-1.5 0v7m-1.5 0h3" />
+  </svg>;
   const brand = brands[key];
   const generic = name === 'Email' ? <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 6 9 7 9-7" /></>
     : name === 'Phone' ? <path d="m8 3 3 5-3 3a13 13 0 0 0 5 5l3-3 5 3-2 5C10 22 2 14 3 5Z" />
