@@ -1,16 +1,16 @@
 ﻿import {
-  siAngular, siAnsible, siCss, siCplusplus, siFastapi, siGithub, siGitlab, siGoogledrive, siGraphql,
+  siAngular, siAnsible, siClaude, siCss, siCplusplus, siFastapi, siGithub, siGitlab, siGoogledrive, siGraphql,
   siGit, siHtml5, siHuggingface, siIeee, siJavascript, siJupyter,
   siLeetcode, siMysql, siNvidia, siOllama, siOpencv, siPostman, siPytest, siPython, siPytorch,
   siReact, siScikitlearn, siSnowflake, siSpacy, siSpotify, siSqlite,
   siStreamlit, siTensorflow, siTypescript,
 } from 'simple-icons';
 import type { SimpleIcon } from 'simple-icons';
-import { faAws, faJava, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
+import { faAws, faJava, faLinkedinIn, faOpenai } from '@fortawesome/free-brands-svg-icons';
 import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
 const brands: Record<string, SimpleIcon | IconDefinition> = {
-  Angular: siAngular, Ansible: siAnsible, CSS: siCss, 'C++': siCplusplus, GitHub: siGithub, GitLab: siGitlab,
+  Angular: siAngular, Ansible: siAnsible, Claude: siClaude, CSS: siCss, 'C++': siCplusplus, GitHub: siGithub, GitLab: siGitlab,
   'GitLab CI/CD': siGitlab,
   'Google Drive': siGoogledrive, GraphQL: siGraphql, Git: siGit, HTML: siHtml5,
   'Hugging Face': siHuggingface, IEEE: siIeee, JavaScript: siJavascript,
@@ -19,7 +19,7 @@ const brands: Record<string, SimpleIcon | IconDefinition> = {
   PyTorch: siPytorch, 'scikit-learn': siScikitlearn, Snowflake: siSnowflake,
   spaCy: siSpacy, Spotify: siSpotify, SQLite: siSqlite,
   Streamlit: siStreamlit, TensorFlow: siTensorflow, TypeScript: siTypescript,
-  AWS: faAws, Java: faJava, LinkedIn: faLinkedinIn,
+  AWS: faAws, Codex: faOpenai, Java: faJava, LinkedIn: faLinkedinIn,
   React: siReact, Jupyter: siJupyter, FastAPI: siFastapi,
   OpenCV: siOpencv, 'NVIDIA CUDA': siNvidia,
 };
@@ -46,7 +46,7 @@ const logoAssets: Record<string, { file: string; monochrome?: boolean; color?: s
 };
 
 const fontAwesomeColors: Record<string, string> = {
-  AWS: '#FF9900', Java: '#007396', LinkedIn: '#0A66C2',
+  AWS: '#FF9900', Codex: 'var(--brand-ink)', Java: '#007396', LinkedIn: '#0A66C2',
 };
 
 export function BrandIcon({ name, monochrome = false }: { name: string; monochrome?: boolean }) {

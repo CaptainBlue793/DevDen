@@ -114,7 +114,7 @@ test('important facts, skill icons, and project details', async ({ page }) => {
     ['FastMCP', 'fastmcp-light.svg'], ['Azure', 'azure.svg'],
     ['Microsoft Copilot Studio', 'copilot-studio.svg'], ['Power Platform', 'power-platform.svg'],
   ]) await expect(page.locator(`.skill-tree [data-icon="${name}"] img`).first()).toHaveAttribute('src', `/images/brands/${file}`);
-  for (const name of ['GitLab CI/CD', 'Ansible']) await expect(page.locator(`.skill-tree svg[data-icon="${name}"][fill="currentColor"] path`)).toHaveCount(1);
+  for (const name of ['GitLab CI/CD', 'Ansible', 'Claude', 'Codex']) await expect(page.locator(`.skill-tree svg[data-icon="${name}"][fill="currentColor"] path`)).toHaveCount(1);
   await expect(page.locator('.skill-tree svg[data-icon="REST APIs"] rect')).toHaveCount(1);
   await expect(page.getByRole('list', { name: 'Databases technologies', exact: true })).toContainText('ChromaDB');
   await expect(page.getByRole('list', { name: 'Agent Systems technologies', exact: true })).not.toContainText('ChromaDB');

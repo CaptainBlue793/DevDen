@@ -5,7 +5,7 @@ SVG icons distributed under CC0 1.0 Universal:
 https://creativecommons.org/publicdomain/zero/1.0/
 
 Font Awesome Free by Fonticons, Inc.: https://fontawesome.com
-LinkedIn, Java, and AWS SVG icons used under CC BY 4.0:
+LinkedIn, Java, AWS, and OpenAI SVG icons used under CC BY 4.0:
 https://creativecommons.org/licenses/by/4.0/
 https://fontawesome.com/license/free
 Icon paths are unmodified. Display sizes and brand colors are styled by CSS.
@@ -56,3 +56,7 @@ Microsoft permits these icons in diagrams, training materials, or documentation;
 the Skills section identifies the products by name beside their unchanged icons.
 
 REST APIs has no single product logo. Its labeled API pictogram is original site artwork.
+
+Claude uses the Simple Icons Claude mark. Codex uses the OpenAI Blossom mark from
+Font Awesome, in black or white without recoloring, beside the Codex product name.
+OpenAI brand guidelines: https://openai.com/brand/
