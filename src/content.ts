@@ -78,7 +78,7 @@ export const profile = {
 };
 
 export const resumeDocuments = [
-  { id: 'resume', label: 'Professional CV', pdf: publicAsset('/resume.pdf'), previews: [publicAsset('/images/resume-preview.png')] },
+  { id: 'resume', label: 'Professional CV', pdf: publicAsset('/resume.pdf?v=045fc64f'), previews: [publicAsset('/images/resume-preview.png?v=4507ec54')] },
   { id: 'academic-cv', label: 'Academic CV', pdf: publicAsset('/academic-cv.pdf'), previews: [publicAsset('/images/academic-cv-preview.png'), publicAsset('/images/academic-cv-preview-2.png')] },
 ] as const;
 

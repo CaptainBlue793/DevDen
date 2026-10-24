@@ -31,6 +31,10 @@ Latest content update, October 24, 2026:
   points follow the October 23 Academic CV (Drive ID
   `1T4GyhoVQ51jWaWDvYTiweAxR8sgcMiHu`) exactly. Named tools and results receive
   distinct theme-aware keyword colors in the portfolio; the CV itself is unchanged.
+- The October 24 follow-up confirmed the Drive, repository and published PDF all
+  contain `FastMCP, Claude` with one comma. The published PDF and preview hashes
+  match the repository assets. Versioned asset URLs force browsers to refresh
+  previously cached copies after deployment.
 
 Previous content update, October 23, 2026:
 
