@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { createHash } from 'node:crypto';
 
 for (const theme of ['light', 'dark'] as const) {
   for (const width of [1440, 390]) {
@@ -73,7 +74,8 @@ for (const theme of ['light', 'dark'] as const) {
       await expect.poll(() => preview.evaluate(img => (img as HTMLImageElement).naturalWidth)).toBe(1530);
       await expect(document.getByRole('button', { name: 'View Professional CV', exact: true })).toBeVisible();
       await expect(document.getByRole('group', { name: 'Choose document' }).getByRole('button', { name: 'Professional CV', exact: true })).toHaveAttribute('aria-pressed', 'true');
-      await expect(document.getByRole('link', { name: 'Download PDF' })).toHaveAttribute('href', '/resume.pdf');
+      await expect(preview).toHaveAttribute('src', '/images/resume-preview.png?v=4507ec54');
+      await expect(document.getByRole('link', { name: 'Download PDF' })).toHaveAttribute('href', '/resume.pdf?v=045fc64f');
       await expect(page.locator('a[href*="drive.google.com"]')).toHaveCount(0);
       const pdf = await request.get('/resume.pdf');
       expect(pdf.status()).toBe(200);
@@ -98,6 +100,15 @@ for (const theme of ['light', 'dark'] as const) {
     });
   }
 }
+
+test('versioned professional CV assets match the verified Drive upload', async ({ request }) => {
+  const pdf = await request.get('/resume.pdf?v=045fc64f');
+  const preview = await request.get('/images/resume-preview.png?v=4507ec54');
+  expect(pdf.status()).toBe(200);
+  expect(preview.status()).toBe(200);
+  expect(createHash('sha256').update(await pdf.body()).digest('hex')).toBe('045fc64fe6f2217d3efed8a0c9cba83861e582d9554414f0c8f850361acbb3b3');
+  expect(createHash('sha256').update(await preview.body()).digest('hex')).toBe('4507ec54af8aee5a2b9ea9576b6a48f595f790ff6fb83f9a87d384eb4fd1abe8');
+});
 
 test('academic CV includes both original pages and a local PDF download', async ({ page, request }) => {
   await page.goto('/#portfolio/resume');
