@@ -455,7 +455,7 @@ const sectionContent: Section[] = [
       {
         title: 'Bidirectional Convolutional-GRU Integrated GAN for Unpaired Low-Light Image Enhancement',
         research: {
-          overview: 'I led this first-author study on a question that sounds simple until you try it: how do you brighten a low-light image without a matching bright training photo? My co-authors and I used a CycleGAN-based model with Bidirectional Convolutional GRU modules for unpaired Low-Light Image Enhancement. The aim was to bring out detail without pretending the night never happened.',
+          overview: 'I led this first-author study on a question that sounds simple until you try it ? How do you brighten a low-light image without a matching bright training photo? My co-authors and I used a CycleGAN-based model with Bidirectional Convolutional GRU modules for unpaired Low-Light Image Enhancement. .',
         },
         highlights: ['First author'],
         url: 'https://doi.org/10.1109/SPCOM71105.2026.11622932',

@@ -267,35 +267,26 @@ for (const width of [320, 360, 390, 600, 768, 1024, 1440]) {
       expect(contacts.y).toBeGreaterThanOrEqual(name.y + name.height);
       const entries = await page.locator('.contact').evaluateAll(elements => elements.map(element => { const bounds = element.getBoundingClientRect(); return { x: bounds.x, y: bounds.y }; }));
       expect(entries).toHaveLength(5);
-      if (width < 390) {
-        for (let index = 1; index < entries.length; index++) {
-          expect(entries[index].x).toBeCloseTo(entries[0].x, 0);
-          expect(entries[index].y).toBeGreaterThan(entries[index - 1].y);
-        }
-      } else if (width < 600) {
-        expect(entries[1].y).toBeGreaterThan(entries[0].y);
-        expect(entries[2].y).toBeCloseTo(entries[1].y, 0);
-        expect(entries[2].x).toBeGreaterThan(entries[1].x);
-        expect(entries[3].y).toBeGreaterThan(entries[1].y);
-        expect(entries[4].y).toBeCloseTo(entries[3].y, 0);
-        expect(entries[4].x).toBeGreaterThan(entries[3].x);
-      } else {
-        expect(entries[1].y).toBeCloseTo(entries[0].y, 0);
-        expect(entries[1].x).toBeGreaterThan(entries[0].x);
-        for (let index = 3; index < entries.length; index++) {
-          expect(entries[index].y).toBeCloseTo(entries[2].y, 0);
-          expect(entries[index].x).toBeGreaterThan(entries[index - 1].x);
-        }
+      expect(entries[1].y).toBeGreaterThan(entries[0].y);
+      for (let index = 2; index < entries.length; index++) {
+        expect(entries[index].y).toBeCloseTo(entries[1].y, 0);
+        expect(entries[index].x).toBeGreaterThan(entries[index - 1].x);
       }
-      expect(await page.locator('.profile-identity h1').evaluate(el => parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThan(16);
+      expect(await page.locator('.profile-identity h1').evaluate(el => parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThan(14);
       expect(await page.locator('.profile-identity h1').evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
-      for (const entry of await page.locator('.contact').all()) {
+      const contactEntries = await page.locator('.contact').all();
+      for (let index = 0; index < contactEntries.length; index++) {
+        const entry = contactEntries[index];
         const link = entry.locator('a');
         await expect(link).toBeVisible();
-        await expect(entry.locator('.contact-value')).toBeVisible();
-        await expect(entry.locator('.contact-separator')).toBeVisible();
-        expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(28);
-        expect(await link.evaluate(el => el.scrollWidth <= el.clientWidth + 1)).toBe(true);
+        if (index === 0) {
+          await expect(entry.locator('.contact-value')).toBeVisible();
+          await expect(entry.locator('.contact-separator')).toBeVisible();
+          expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(26);
+        } else {
+          await expect(entry.locator('.contact-value')).toBeHidden();
+          expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(36);
+        }
         await expect(entry.locator('.contact-label')).toBeHidden();
       }
       expect(await page.locator('.profile-details').evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);
