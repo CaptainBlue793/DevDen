@@ -8,13 +8,14 @@ test('six formatted tabs, narrower sidebar, and stationary desktop panes', async
   for (const [index, label] of labels.entries()) await expect(page.getByRole('tab').nth(index)).toHaveAccessibleName(label);
   await expect(page.locator('.welcome-page')).toHaveCount(0);
   await page.getByRole('tab', { name: 'Resume', exact: true }).click();
-  await expect(page.getByRole('heading', { name: '>> Education', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: '>> About Me', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: '>> Education', exact: true })).toHaveCount(0);
   const sidebar = await page.locator('.profile-pane').boundingBox();
   const toolbar = await page.locator('.terminal-toolbar').boundingBox();
   expect(sidebar!.width / (await page.locator('.terminal-window').boundingBox())!.width).toBeCloseTo(0.25, 2);
   await expect(page.locator('.profile-command')).toContainText('Get-Portfolio');
   await expect(page.getByRole('tabpanel')).toContainText('I’m a Software Engineer at NatWest Group');
-  await expect(page.getByRole('tabpanel')).toContainText('agent observability, identity resolution, data pipelines');
+  await expect(page.getByRole('tabpanel')).toContainText('MCP integrations, AI observability, data parsing');
   const portrait = (await page.locator('.portrait').boundingBox())!;
   expect(portrait.y + portrait.height / 2).toBeLessThan(sidebar!.y + sidebar!.height / 2);
   await page.getByRole('tab', { name: 'Projects', exact: true }).click();
@@ -85,7 +86,7 @@ test('supplied image, accessible brand links, and resume viewer entry', async ({
 test('important facts, skill icons, and project details', async ({ page }) => {
   await page.goto('/#portfolio');
   await page.getByRole('tab', { name: 'Resume', exact: true }).click();
-  await expect(page.locator('mark').filter({ hasText: '8.52 / 10' })).toBeVisible();
+  await expect(page.locator('mark').filter({ hasText: 'Software Engineer' })).toBeVisible();
   await page.getByRole('tab', { name: 'Skills', exact: true }).click();
   await expect(page.locator('.skill-tree')).toBeVisible();
   await expect(page.locator('.skill-branch .description-label')).toHaveCount(0);
@@ -239,7 +240,7 @@ test('theme switching works when browser storage is unavailable', async ({ page 
   await page.getByRole('button', { name: 'Switch to light theme', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await page.getByRole('tab', { name: 'Resume', exact: true }).click();
-  await expect(page.getByRole('tabpanel')).toContainText('NIT Rourkela');
+  await expect(page.getByRole('tabpanel')).toContainText('low-code AI agents for Microsoft 365');
 });
 
 for (const width of [360, 390, 768, 1024, 1440]) {

@@ -88,24 +88,16 @@ const sectionContent: Section[] = [
   {
     id: 'resume', label: 'Resume', directory: 'Resume', command: 'Get-Resume',
     layout: 'single',
-    columns: [
-      { label: 'Summary', hideHeading: true },
-      { label: 'Education', hideHeading: true },
-    ],
     records: [
       {
         title: 'About Me',
-        column: 'left',
-        highlights: ['Software Engineer', 'NatWest Group'],
-        description: 'I’m a Software Engineer at NatWest Group, building AI learning tools in Microsoft Teams. My work spans agent observability, identity resolution, data pipelines, and deployment workflows.\n\nOutside work, I build local AI assistants and code migration tools, and research Deep Learning for Low-Light Image Enhancement.',
+        highlights: ['Software Engineer', 'NatWest Group', 'MCP integrations', 'AI observability'],
+        description: 'I’m a Software Engineer at NatWest Group, working on agent systems and low-code AI agents for Microsoft 365. My work spans MCP integrations, AI observability, data parsing, and the agent features that help colleagues get useful answers.\n\nA lot of the job is making the clever bits dependable: tracing what happened, untangling messy inputs, and persuading agents to behave. That last part is a surprisingly human job.',
       },
       {
-        title: 'Education',
-        column: 'right',
-        highlights: ['8.52 / 10'],
-        description: 'I studied Computer Science & Engineering at NIT Rourkela.',
-        meta: 'December 2021 – June 2025',
-        metadata: [{ label: 'CGPA', value: '8.52 / 10' }],
+        title: 'Research Interests',
+        highlights: ['Computer Vision', 'Low-Light Image Enhancement', 'Natural Language Processing'],
+        description: 'I also pursue research independently—unofficial title, very official curiosity. I’m especially interested in Computer Vision, image processing and Low-Light Image Enhancement, with Natural Language Processing and local and cloud-hosted LLMs close behind.\n\nMy first-author IEEE SPCOM 2026 paper explores unpaired Low-Light Image Enhancement. I like the part where a neat idea meets a messy experiment; the results usually have the last word.',
       },
     ],
   },

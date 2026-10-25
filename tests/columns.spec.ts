@@ -1,7 +1,6 @@
 import { expect, test } from '@playwright/test';
 
 const groups = [
-  { tab: 'Resume', left: 'Summary', right: 'Education', leftRecords: ['About Me'], rightRecords: ['Education'] },
   { tab: 'Experience', left: 'Full-time', right: 'Internship', leftRecords: ['NatWest Group · Software Engineer'], rightRecords: ['NatWest Group · Software Engineering Intern'] },
   { tab: 'Activities', left: 'Technical', right: 'Non-technical', leftRecords: ['Competitive Programming', 'Amazon ML Summer School'], rightRecords: ['NITRUTSAV · Event Management Coordinator', 'AASRA · Senior Staff Member', 'Interests'] },
 ];
@@ -32,23 +31,12 @@ for (const theme of ['light', 'dark'] as const) {
           expect(Math.abs(rightBox.width - recordsBox.width)).toBeLessThan(2);
         }
         if (group.tab !== 'Activities') await expect(page.locator('.records')).toHaveClass(/single-column/);
-        if (group.tab === 'Resume') {
-          await expect(page.locator('.main-record')).toHaveCount(0);
-          await expect(page.getByRole('heading', { name: '>> Summary', exact: true })).toHaveCount(0);
-          await expect(page.getByRole('heading', { name: '>> About Me', exact: true })).toHaveCount(1);
-          await expect(left.locator('.description')).toHaveCount(2);
-          await expect(page.getByRole('tabpanel')).not.toContainText('What I build and the engineering areas I explore.');
-          await expect(page.getByRole('tabpanel')).not.toContainText('Degree & university');
-          await expect(page.getByRole('tabpanel')).not.toContainText('My academic background and foundations.');
-          await expect(page.getByRole('tabpanel')).not.toContainText('Coursework:');
-          await expect(page.getByRole('tabpanel').locator('.description-label')).toHaveCount(0);
-        }
         expect(await page.locator('.terminal-output').evaluate(element => element.scrollWidth <= element.clientWidth + 1)).toBe(true);
       }
       await page.getByRole('tab', { name: 'Publications', exact: true }).click();
       await expect(page.locator('.records')).toHaveClass(/single-column/);
       expect(await page.locator('.records').evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length)).toBe(1);
-      for (const tab of ['Resume', 'Experience', 'Publications']) {
+      for (const tab of ['Experience', 'Publications']) {
         await page.getByRole('tab', { name: tab, exact: true }).click();
         expect(await page.locator('.records').evaluate(element => getComputedStyle(element, '::before').content)).toBe('none');
       }

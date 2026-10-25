@@ -109,12 +109,13 @@ function Resume({ section }: { section: Section }) {
   const [documentIndex, setDocumentIndex] = useState(0);
   const selectedDocument = resumeDocuments[documentIndex];
 
-  return <div className="resume-layout">
-    <div className="resume-about"><SectionRecords section={section} /></div>
+  return <div className={`resume-view${documentIndex === 1 ? ' resume-view--academic' : ''}`}>
+    <div className="resume-document-switch" role="group" aria-label="Choose document">
+      {resumeDocuments.map((document, index) => <button className="cli-action" type="button" key={document.id} aria-pressed={index === documentIndex} aria-controls="resume-current" onClick={() => setDocumentIndex(index)}>{document.label}</button>)}
+    </div>
+    <div className={`resume-layout${documentIndex === 1 ? ' resume-layout--academic' : ''}`} id="resume-current">
+    <div className="resume-about"><TerminalRecord record={section.records[documentIndex]} index={documentIndex} section="resume" /></div>
     <section className="resume-document" aria-labelledby="resume-document-title">
-      <div className="resume-document-switch" role="group" aria-label="Choose document">
-        {resumeDocuments.map((document, index) => <button className="cli-action" type="button" key={document.id} aria-pressed={index === documentIndex} onClick={() => setDocumentIndex(index)}>{document.label}</button>)}
-      </div>
       <div className="resume-document-header">
         <h3 id="resume-document-title"><BrandIcon name="Resume" /> {selectedDocument.label}</h3>
         <div className="resume-document-actions"><a className="cli-action" href={selectedDocument.pdf} download={selectedDocument.id === 'resume' ? 'PalakDebPatra_Professional_CV.pdf' : 'PalakDebPatra_Academic_CV.pdf'}>Download PDF</a>
@@ -126,9 +127,10 @@ function Resume({ section }: { section: Section }) {
         }}>View {selectedDocument.label}</button></div>
       </div>
       <div className="resume-preview">
-        <img src={selectedDocument.previews[0]} alt={`${selectedDocument.label} by Palak Deb Patra, page 1`} width="1530" height="1980" loading="lazy" />
+        {selectedDocument.previews.map((preview, index) => <img key={preview} src={preview} alt={`${selectedDocument.label} by Palak Deb Patra, page ${index + 1}`} width="1530" height="1980" loading="lazy" />)}
       </div>
     </section>
+    </div>
     <dialog className="resume-dialog" ref={dialogRef} aria-labelledby="resume-dialog-title" onKeyDown={event => {
       if (event.key !== 'Tab') return;
       const controls = event.currentTarget.querySelectorAll<HTMLElement>('button, a[href], [tabindex="0"]');

@@ -64,7 +64,9 @@ for (const theme of ['light', 'dark'] as const) {
       await expect(page.locator('.welcome-atmosphere')).toHaveCount(0);
       await expect(page.getByRole('tab', { name: 'Resume', exact: true })).toBeFocused();
       await expect(page.locator('.resume-about')).toContainText('I’m a Software Engineer at NatWest Group');
-      await expect(page.locator('.resume-about')).toContainText('NIT Rourkela');
+      await expect(page.locator('.resume-about')).toContainText('low-code AI agents for Microsoft 365');
+      await expect(page.locator('.resume-about')).toContainText('MCP integrations, AI observability, data parsing');
+      await expect(page.getByRole('heading', { name: '>> Education', exact: true })).toHaveCount(0);
       await expect(page.locator('.profile-pane .resume-link')).toHaveCount(0);
       await expect(page.locator('.contacts .contact')).toHaveCount(5);
       const document = page.getByRole('region', { name: 'Professional CV', exact: true });
@@ -73,7 +75,7 @@ for (const theme of ['light', 'dark'] as const) {
       await expect(preview).toBeVisible();
       await expect.poll(() => preview.evaluate(img => (img as HTMLImageElement).naturalWidth)).toBe(1530);
       await expect(document.getByRole('button', { name: 'View Professional CV', exact: true })).toBeVisible();
-      await expect(document.getByRole('group', { name: 'Choose document' }).getByRole('button', { name: 'Professional CV', exact: true })).toHaveAttribute('aria-pressed', 'true');
+      await expect(page.getByRole('group', { name: 'Choose document' }).getByRole('button', { name: 'Professional CV', exact: true })).toHaveAttribute('aria-pressed', 'true');
       await expect(preview).toHaveAttribute('src', '/images/resume-preview.png?v=4999cf12');
       await expect(document.getByRole('link', { name: 'Download PDF' })).toHaveAttribute('href', '/resume.pdf?v=dd92308e');
       await expect(page.locator('a[href*="drive.google.com"]')).toHaveCount(0);
@@ -113,10 +115,16 @@ test('versioned professional CV assets match the verified Drive upload', async (
 test('academic CV includes both original pages and a local PDF download', async ({ page, request }) => {
   await page.goto('/#portfolio/resume');
   const document = page.locator('.resume-document');
-  await document.getByRole('group', { name: 'Choose document' }).getByRole('button', { name: 'Academic CV' }).click();
+  await page.getByRole('group', { name: 'Choose document' }).getByRole('button', { name: 'Academic CV' }).click();
+  await expect(page.locator('.resume-about')).toContainText('research independently');
+  await expect(page.locator('.resume-about')).toContainText('Computer Vision');
+  await expect(page.locator('.resume-about')).toContainText('local and cloud-hosted LLMs');
+  await expect(page.getByRole('heading', { name: '>> Education', exact: true })).toHaveCount(0);
   await expect(document.getByRole('heading', { name: 'Academic CV' })).toBeVisible();
   await expect(document.getByRole('link', { name: 'Download PDF' })).toHaveAttribute('href', '/academic-cv.pdf?v=d64c3f1e');
+  await expect(document.getByRole('img')).toHaveCount(2);
   await expect(document.getByRole('img', { name: 'Academic CV by Palak Deb Patra, page 1' })).toHaveAttribute('src', '/images/academic-cv-preview.png?v=d2e4fed8');
+  await expect(document.getByRole('img', { name: 'Academic CV by Palak Deb Patra, page 2' })).toHaveAttribute('src', '/images/academic-cv-preview-2.png?v=4152eedf');
   const pdf = await request.get('/academic-cv.pdf');
   expect(pdf.status()).toBe(200);
   expect((await pdf.body()).subarray(0, 5).toString()).toBe('%PDF-');
@@ -137,6 +145,39 @@ test('academic CV includes both original pages and a local PDF download', async 
   await expect(dialog.getByRole('link', { name: 'Download PDF' })).toHaveAttribute('href', '/academic-cv.pdf?v=d64c3f1e');
   await dialog.getByRole('button', { name: 'Close document' }).click();
 });
+
+for (const width of [1440, 390]) {
+  test(`CV summaries and page layout at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/#portfolio/resume');
+    const choices = page.getByRole('group', { name: 'Choose document' });
+    await expect(choices.getByRole('button')).toHaveText(['Professional CV', 'Academic CV']);
+    const professional = page.locator('.resume-layout');
+    const about = (await professional.locator('.resume-about').boundingBox())!;
+    const document = (await professional.locator('.resume-document').boundingBox())!;
+    if (width === 1440) expect(document.x).toBeGreaterThan(about.x + about.width);
+    else expect(document.y).toBeGreaterThan(about.y + about.height);
+    await page.screenshot({ path: `test-results/resume-professional-${width}.png`, animations: 'disabled' });
+
+    await choices.getByRole('button', { name: 'Academic CV' }).click();
+    await expect(choices.getByRole('button', { name: 'Academic CV' })).toHaveAttribute('aria-pressed', 'true');
+    await expect(choices.getByRole('button', { name: 'Professional CV' })).toHaveAttribute('aria-pressed', 'false');
+    const academic = page.locator('.resume-layout--academic');
+    const summary = (await academic.locator('.resume-about').boundingBox())!;
+    const cv = (await academic.locator('.resume-document').boundingBox())!;
+    expect(cv.y).toBeGreaterThan(summary.y + summary.height);
+    const pages = academic.locator('.resume-preview img');
+    await expect(pages).toHaveCount(2);
+    const first = (await pages.nth(0).boundingBox())!;
+    const second = (await pages.nth(1).boundingBox())!;
+    if (width === 1440) expect(second.x).toBeGreaterThan(first.x + first.width);
+    else expect(second.y).toBeGreaterThan(first.y + first.height);
+    await page.screenshot({ path: `test-results/resume-academic-${width}.png`, animations: 'disabled' });
+    await pages.nth(1).scrollIntoViewIfNeeded();
+    await expect(pages.nth(1)).toBeInViewport();
+  });
+}
 
 for (const size of [{ width: 1440, height: 900 }, { width: 1366, height: 600 }, { width: 320, height: 568 }, { width: 390, height: 844 }, { width: 844, height: 390 }]) {
   test(`resume popup uses the screen-appropriate default and supports zoom and keyboard close at ${size.width}x${size.height}`, async ({ page }) => {

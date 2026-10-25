@@ -21,6 +21,19 @@ run, and FrameSmith remains a prototype with unvalidated performance improvement
 GitHub, the Atlas demo, benchmark evidence, and measurement status remain directly
 accessible. Detailed source notes are retained in the content data for provenance.
 
+Resume presentation update, October 25, 2026:
+
+- The Resume section has two document choices. The Professional CV appears beside
+  a short work summary; the Academic CV follows a research summary with both
+  original pages visible below it. The PDF viewer still supports viewing and
+  downloading each unmodified document.
+- The work summary's agent systems, low-code AI agents, Microsoft 365 agents, MCP
+  integrations, observability, data parsing, and agent features follow the user's
+  requested wording. The academic summary describes independent research interests
+  in Computer Vision, Low-Light Image Enhancement, NLP, and local and hosted LLMs.
+  Its first-author SPCOM paper is verified in the academic CV. Education was
+  removed from the portfolio summaries; it remains in the original PDFs.
+
 Latest content update, October 25, 2026:
 
 - The current `PalakDebPatra_Professional_CV.pdf` (Drive ID
