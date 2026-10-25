@@ -72,7 +72,7 @@ test('supplied image, accessible brand links, and resume viewer entry', async ({
   const contactValues = await page.locator('.contacts a').evaluateAll(elements => elements.map(element => element.getBoundingClientRect().left));
   for (const left of contactValues) expect(left).toBeCloseTo(contactValues[0], 0);
   for (const contact of await page.locator('.contact').all()) {
-    const tops = await contact.evaluate(el => ['.contact-key', 'a'].map(selector => {
+    const tops = await contact.evaluate(el => ['.contact-key', '.contact-value'].map(selector => {
       const text = document.createTreeWalker(el.querySelector(selector)!, NodeFilter.SHOW_TEXT).nextNode()!;
       const range = document.createRange();
       range.setStart(text, 0);
@@ -247,7 +247,7 @@ test('theme switching works when browser storage is unavailable', async ({ page 
   await expect(page.getByRole('tabpanel')).toContainText('AI agents for Microsoft 365');
 });
 
-for (const width of [360, 390, 768, 1024, 1440]) {
+for (const width of [320, 360, 390, 768, 1024, 1440]) {
   test(`responsive layout at ${width}px`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.setViewportSize({ width, height: 900 });
@@ -267,10 +267,14 @@ for (const width of [360, 390, 768, 1024, 1440]) {
       expect(contacts.y).toBeGreaterThanOrEqual(name.y + name.height);
       const entries = await page.locator('.contact').evaluateAll(elements => elements.map(element => { const bounds = element.getBoundingClientRect(); return { x: bounds.x, y: bounds.y }; }));
       expect(entries).toHaveLength(5);
-      for (let row = 0; row < entries.length; row++) {
-        expect(entries[row].y).toBeCloseTo(entries[0].y, 0);
-        if (row) expect(entries[row].x).toBeGreaterThan(entries[row - 1].x);
+      expect(entries[1].y).toBeGreaterThan(entries[0].y);
+      for (let index = 2; index < entries.length; index++) {
+        expect(entries[index].y).toBeCloseTo(entries[1].y, 0);
+        expect(entries[index].x).toBeGreaterThan(entries[index - 1].x);
       }
+      await expect(page.locator('.contacts .contact').first().locator('.contact-value')).toBeVisible();
+      await expect(page.locator('.contacts .contact').first()).toContainText('palakdevpatra@gmail.com');
+      expect(await page.locator('.profile-identity h1').evaluate(el => parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThan(16);
       expect(await page.locator('.profile-identity h1').evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
       for (const entry of await page.locator('.contact').all()) {
         const link = entry.locator('a');
@@ -304,3 +308,13 @@ for (const width of [360, 390, 768, 1024, 1440]) {
     expect(errors).toEqual([]);
   });
 }
+
+test('compact profile keeps the falling comets unless reduced motion is requested', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/#portfolio/resume');
+  const rain = page.locator('.profile-pane .falling-comets');
+  await expect(rain).toBeVisible();
+  await expect(rain.locator('.comet-track').first()).toHaveCSS('animation-name', 'comet-fall');
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(rain).toBeHidden();
+});

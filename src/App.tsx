@@ -306,7 +306,7 @@ function Portfolio({ activeId, onSectionChange, onReplay, theme, onToggleTheme }
           </div>
           <div className="contacts">{profile.contacts.map(contact => <div className={`contact tone-${contactTones[contact.label]}`} key={contact.label}>
             <span className="contact-label"><BrandIcon name={contact.label} monochrome /><span className="contact-key">{contact.label}:</span></span>
-            <ExternalLink url={contact.url} ariaLabel={`${contact.label}: ${contact.value}`} title={`${contact.label}: ${contact.value}`}><BrandIcon name={contact.label} monochrome /><span className="contact-value">{contact.label === 'Email' ? <>{contact.value.split('@')[0]}@<wbr />{contact.value.split('@')[1]}</> : contact.value}</span>{contact.url.startsWith('https://') && <span aria-hidden="true" className="external-mark">↗</span>}</ExternalLink>
+            <ExternalLink url={contact.url} ariaLabel={`${contact.label}: ${contact.value}`} title={`${contact.label}: ${contact.value}`}><BrandIcon name={contact.label} monochrome /><span className="contact-separator" aria-hidden="true">:</span><span className="contact-value">{contact.label === 'Email' ? <>{contact.value.split('@')[0]}@<wbr />{contact.value.split('@')[1]}</> : contact.value}</span>{contact.url.startsWith('https://') && <span aria-hidden="true" className="external-mark">↗</span>}</ExternalLink>
           </div>)}
           </div>
         </div>
