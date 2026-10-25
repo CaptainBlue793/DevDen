@@ -52,16 +52,19 @@ test('NatWest roles use plain bullets and retain verified internship outcomes', 
   await page.getByRole('tab', { name: 'Experience', exact: true }).click();
   await expect(page.locator('.record-column > article')).toHaveCount(2);
   const roles = page.locator('.record-column > article');
-  await expect(roles.nth(0).locator('.record-details li')).toHaveCount(5);
+  await expect(roles.nth(0).locator('.record-details li')).toHaveCount(9);
   await expect(roles.nth(1).locator('.record-details li')).toHaveCount(3);
   await expect(roles.nth(0).locator('.record-meta')).toHaveText('July 2025 – Present · Bangalore, India');
   await expect(roles.nth(0).locator('.record-details')).toContainText('131 automated tests');
-  await expect(roles.nth(0).locator('.record-details')).toContainText('23 of 26 SIT/UAT test cases passing');
+  await expect(roles.nth(0).locator('.record-details')).toContainText('23 out of 26 test cases passing');
   await expect(roles.nth(1).locator('.record-meta')).toHaveText('May – July 2024 · Gurgaon, India');
-  await expect(roles.nth(1).locator('.record-details')).toContainText('reducing processing time by 28%');
-  await expect(roles.nth(1).locator('.record-details')).toContainText('16 CSV datasets');
+  await expect(roles.nth(1).locator('.record-details')).toContainText('reducing manual processing time by 28%');
+  await expect(roles.nth(1).locator('.record-details')).toContainText('16 datasets');
   await expect(roles.nth(1).locator('.record-details')).toContainText('ThoughtSpot');
   await expect(page.getByRole('tabpanel').locator('mark, .experience-outcomes, .career-progression, .workflow, .record-stack, .description-label')).toHaveCount(0);
+  const keyword = page.getByRole('tabpanel').locator('.work-keyword').first();
+  await expect(keyword).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+  await expect(keyword).not.toHaveCSS('color', 'rgb(0, 0, 0)');
   await expect(page.getByRole('tabpanel')).not.toContainText('Undergraduate Student Researcher');
 });
 

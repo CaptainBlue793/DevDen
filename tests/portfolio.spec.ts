@@ -98,13 +98,13 @@ test('important facts, skill icons, and project details', async ({ page }) => {
   const languages = page.getByRole('list', { name: 'Programming Languages technologies', exact: true });
   await expect(languages).not.toContainText('GraphQL');
   await expect(languages).toContainText('TypeScript');
-  await expect(languages).toContainText('JavaScript');
+  await expect(languages).not.toContainText('JavaScript');
   await expect(page.getByRole('list', { name: 'APIs technologies', exact: true })).toContainText('GraphQL');
   const ai = page.getByRole('list', { name: 'AI/ML technologies', exact: true });
   await expect(ai).toContainText('PyTorch');
   await expect(ai).toContainText('spaCy');
   for (const added of ['OpenCV', 'NVIDIA CUDA']) await expect(ai).toContainText(added);
-  await expect(page.getByRole('list', { name: 'Web Interfaces technologies', exact: true })).toContainText('React');
+  await expect(page.getByRole('list', { name: 'Web Interfaces technologies', exact: true })).not.toContainText('React');
   await expect(page.getByRole('list', { name: 'APIs technologies', exact: true })).toContainText('FastAPI');
   const development = page.getByRole('list', { name: 'Development technologies', exact: true });
   await expect(development).toContainText('Jupyter');
@@ -124,9 +124,9 @@ test('important facts, skill icons, and project details', async ({ page }) => {
   await expect(page.locator('.records > .record')).toHaveCount(4);
   await page.getByRole('tab', { name: 'Experience', exact: true }).click();
   await expect(page.locator('.record-details li')).toHaveCount(12);
-  await expect(page.locator('.record-details')).toContainText(['131 automated tests', 'reduced manual processing time by 28%']);
-  await expect(page.getByRole('tabpanel').locator('mark.keyword-cyan').first()).toContainText('OpenTelemetry');
-  await expect(page.getByRole('tabpanel').locator('mark.keyword-green').first()).toContainText('131 automated tests');
+  await expect(page.locator('.record-details')).toContainText(['131 automated tests', 'reducing manual processing time by 28%']);
+  await expect(page.getByRole('tabpanel').locator('.work-keyword.keyword-cyan').first()).toContainText('OpenTelemetry');
+  await expect(page.getByRole('tabpanel').locator('.work-keyword.keyword-green').first()).toContainText('131 automated tests');
   await page.getByRole('tab', { name: 'Activities', exact: true }).click();
   await expect(page.locator('mark').filter({ hasText: '800+' })).toBeVisible();
   await expect(page.getByRole('tabpanel').locator('[data-icon="LeetCode"]')).toHaveCount(0);

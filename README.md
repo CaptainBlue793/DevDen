@@ -89,8 +89,7 @@ Narrow screens put the category above its list, with technologies wrapping
 naturally while each icon stays with its name. Subtle horizontal dividers separate rows.
 Spring Boot, GitLab, pytest, Hypothesis, tree-sitter, Postman, SQLite, Vite,
 Embeddings, and Transformers are omitted from Skills.
-JavaScript belongs to Languages; OpenCV and NVIDIA CUDA to AI/ML;
-React to Web Interfaces; FastAPI to APIs; and Jupyter to Development.
+OpenCV and NVIDIA CUDA belong to AI/ML; FastAPI to APIs; and Jupyter to Development.
 The added tools use their brand icons.
 Each skill appears once: GraphQL belongs to APIs, ChromaDB to
 Databases, and TypeScript to Languages. Per-project stacks retain the tools

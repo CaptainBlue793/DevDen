@@ -74,8 +74,8 @@ for (const theme of ['light', 'dark'] as const) {
       await expect.poll(() => preview.evaluate(img => (img as HTMLImageElement).naturalWidth)).toBe(1530);
       await expect(document.getByRole('button', { name: 'View Professional CV', exact: true })).toBeVisible();
       await expect(document.getByRole('group', { name: 'Choose document' }).getByRole('button', { name: 'Professional CV', exact: true })).toHaveAttribute('aria-pressed', 'true');
-      await expect(preview).toHaveAttribute('src', '/images/resume-preview.png?v=4507ec54');
-      await expect(document.getByRole('link', { name: 'Download PDF' })).toHaveAttribute('href', '/resume.pdf?v=045fc64f');
+      await expect(preview).toHaveAttribute('src', '/images/resume-preview.png?v=4999cf12');
+      await expect(document.getByRole('link', { name: 'Download PDF' })).toHaveAttribute('href', '/resume.pdf?v=dd92308e');
       await expect(page.locator('a[href*="drive.google.com"]')).toHaveCount(0);
       const pdf = await request.get('/resume.pdf');
       expect(pdf.status()).toBe(200);
@@ -102,12 +102,12 @@ for (const theme of ['light', 'dark'] as const) {
 }
 
 test('versioned professional CV assets match the verified Drive upload', async ({ request }) => {
-  const pdf = await request.get('/resume.pdf?v=045fc64f');
-  const preview = await request.get('/images/resume-preview.png?v=4507ec54');
+  const pdf = await request.get('/resume.pdf?v=dd92308e');
+  const preview = await request.get('/images/resume-preview.png?v=4999cf12');
   expect(pdf.status()).toBe(200);
   expect(preview.status()).toBe(200);
-  expect(createHash('sha256').update(await pdf.body()).digest('hex')).toBe('045fc64fe6f2217d3efed8a0c9cba83861e582d9554414f0c8f850361acbb3b3');
-  expect(createHash('sha256').update(await preview.body()).digest('hex')).toBe('4507ec54af8aee5a2b9ea9576b6a48f595f790ff6fb83f9a87d384eb4fd1abe8');
+  expect(createHash('sha256').update(await pdf.body()).digest('hex')).toBe('dd92308e66defd081471d3033cb4c7aed26df3b705ea4688e182d68d2de86055');
+  expect(createHash('sha256').update(await preview.body()).digest('hex')).toBe('4999cf1225821c1aeb9ae26a1bc2e6d223315ea0cb5fc13277d9b92285acf557');
 });
 
 test('academic CV includes both original pages and a local PDF download', async ({ page, request }) => {
@@ -115,17 +115,26 @@ test('academic CV includes both original pages and a local PDF download', async 
   const document = page.locator('.resume-document');
   await document.getByRole('group', { name: 'Choose document' }).getByRole('button', { name: 'Academic CV' }).click();
   await expect(document.getByRole('heading', { name: 'Academic CV' })).toBeVisible();
-  await expect(document.getByRole('link', { name: 'Download PDF' })).toHaveAttribute('href', '/academic-cv.pdf');
-  await expect(document.getByRole('img', { name: 'Academic CV by Palak Deb Patra, page 1' })).toHaveAttribute('src', '/images/academic-cv-preview.png');
+  await expect(document.getByRole('link', { name: 'Download PDF' })).toHaveAttribute('href', '/academic-cv.pdf?v=d64c3f1e');
+  await expect(document.getByRole('img', { name: 'Academic CV by Palak Deb Patra, page 1' })).toHaveAttribute('src', '/images/academic-cv-preview.png?v=d2e4fed8');
   const pdf = await request.get('/academic-cv.pdf');
   expect(pdf.status()).toBe(200);
   expect((await pdf.body()).subarray(0, 5).toString()).toBe('%PDF-');
+  expect(createHash('sha256').update(await pdf.body()).digest('hex')).toBe('d64c3f1e144be8e8147a4bad9e44f993b75362f901b9f4cbe7d662f68b761618');
+  for (const [path, hash] of [
+    ['/images/academic-cv-preview.png', 'd2e4fed8498214f34f17cd40d45e324c5c99e2565bf39970b1e405bef4d95181'],
+    ['/images/academic-cv-preview-2.png', '4152eedf3f3a0070fec054a2397a934da650046629ee1c743ad8c627fe7b5a21'],
+  ]) {
+    const image = await request.get(path);
+    expect(image.status()).toBe(200);
+    expect(createHash('sha256').update(await image.body()).digest('hex')).toBe(hash);
+  }
   await document.getByRole('button', { name: 'View Academic CV' }).click();
   const dialog = page.getByRole('dialog', { name: 'Academic CV' });
   await expect(dialog.getByRole('img')).toHaveCount(2);
-  await expect(dialog.getByRole('img').nth(1)).toHaveAttribute('src', '/images/academic-cv-preview-2.png');
+  await expect(dialog.getByRole('img').nth(1)).toHaveAttribute('src', '/images/academic-cv-preview-2.png?v=4152eedf');
   await expect.poll(() => dialog.getByRole('img').nth(1).evaluate(img => (img as HTMLImageElement).naturalWidth)).toBe(1530);
-  await expect(dialog.getByRole('link', { name: 'Download PDF' })).toHaveAttribute('href', '/academic-cv.pdf');
+  await expect(dialog.getByRole('link', { name: 'Download PDF' })).toHaveAttribute('href', '/academic-cv.pdf?v=d64c3f1e');
   await dialog.getByRole('button', { name: 'Close document' }).click();
 });
 

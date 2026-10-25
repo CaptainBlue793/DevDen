@@ -21,7 +21,22 @@ run, and FrameSmith remains a prototype with unvalidated performance improvement
 GitHub, the Atlas demo, benchmark evidence, and measurement status remain directly
 accessible. Detailed source notes are retained in the content data for provenance.
 
-Latest content update, October 24, 2026:
+Latest content update, October 25, 2026:
+
+- The current `PalakDebPatra_Professional_CV.pdf` (Drive ID
+  `1eHy-rDbHDClCSTFVepHqlP7yUnJwqzIY`) and `PalakDebPatra_Academic_CV.pdf`
+  (Drive ID `1WLxn6f7Kd30NsR7wRts8yAtgCaeRufZO`) replace the two bundled PDFs.
+  Their pages were rendered unchanged at 1530 x 1980 for the Resume viewer.
+  Versioned PDF and image URLs refresh cached copies.
+- Experience bullets now follow the October 25 academic CV: the earlier unified
+  tracking ID, environment setting, Application Insights dashboard, and Ansible
+  deployment claims were removed; current CLA, ChLoE, and OSPO wording is used.
+  Work experience emphasizes terms with font color and no background fill.
+- JavaScript and React were removed from the visible Skills list, matching both
+  current CVs. Claude and Codex appear with the other agent tools. The Memex
+  summary now includes the CV's 41 of 42 first-ranked retrieval result.
+
+Previous content update, October 24, 2026:
 
 - `PalakDebPatra_Professional_CV.pdf` (Drive ID `10deQPEw3ds-l3C19uXRBTeKvDigkYm-R`,
   modified October 24) replaces `public/resume.pdf`. Its single page is rendered at

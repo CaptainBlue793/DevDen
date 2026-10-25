@@ -78,8 +78,8 @@ export const profile = {
 };
 
 export const resumeDocuments = [
-  { id: 'resume', label: 'Professional CV', pdf: publicAsset('/resume.pdf?v=045fc64f'), previews: [publicAsset('/images/resume-preview.png?v=4507ec54')] },
-  { id: 'academic-cv', label: 'Academic CV', pdf: publicAsset('/academic-cv.pdf'), previews: [publicAsset('/images/academic-cv-preview.png'), publicAsset('/images/academic-cv-preview-2.png')] },
+  { id: 'resume', label: 'Professional CV', pdf: publicAsset('/resume.pdf?v=dd92308e'), previews: [publicAsset('/images/resume-preview.png?v=4999cf12')] },
+  { id: 'academic-cv', label: 'Academic CV', pdf: publicAsset('/academic-cv.pdf?v=d64c3f1e'), previews: [publicAsset('/images/academic-cv-preview.png?v=d2e4fed8'), publicAsset('/images/academic-cv-preview-2.png?v=4152eedf')] },
 ] as const;
 
 const displayedProjects = ['The Engineering Atlas', 'CodeShift', 'Memex', 'FrameSmith'];
@@ -115,7 +115,7 @@ const sectionContent: Section[] = [
     records: [
       {
         title: 'Programming Languages',
-        description: 'Python · Java · C++ · JavaScript · TypeScript · SQL',
+        description: 'Python · Java · C++ · TypeScript · SQL',
       },
       {
         title: 'Databases',
@@ -127,11 +127,11 @@ const sectionContent: Section[] = [
       },
       {
         title: 'Agent Systems',
-        description: 'LangGraph · LangChain · Ollama · FastMCP · Hugging Face',
+        description: 'LangGraph · LangChain · Ollama · FastMCP · Hugging Face · Claude · Codex',
       },
       {
         title: 'Web Interfaces',
-        description: 'React · Angular · Streamlit',
+        description: 'Angular · Streamlit',
       },
       {
         title: 'APIs',
@@ -143,7 +143,7 @@ const sectionContent: Section[] = [
       },
       {
         title: 'Development',
-        description: 'Git · GitLab CI/CD · Ansible · Jupyter · Claude · Codex',
+        description: 'Git · GitLab CI/CD · Ansible · Jupyter',
       },
     ],
   },
@@ -166,19 +166,19 @@ const sectionContent: Section[] = [
           { text: '131 automated tests', color: 'green' }, { text: '11 Kusto queries', color: 'purple' },
           { text: 'PingFederate', color: 'yellow' }, { text: 'Microsoft Entra ID', color: 'blue' },
           { text: 'Workday', color: 'cyan' }, { text: 'Azure Blob Storage', color: 'blue' },
-          { text: 'GitLab', color: 'purple' }, { text: 'Microsoft Teams', color: 'cyan' },
-          { text: 'Ansible Automation Platform', color: 'yellow' }, { text: '23 out of 26 test cases', color: 'green' },
+          { text: 'GitLab CI/CD', color: 'purple' }, { text: 'GitLab', color: 'purple' }, { text: 'Microsoft Teams', color: 'cyan' },
+          { text: '23 out of 26 test cases', color: 'green' },
         ],
         details: [
-          'Built end-to-end AI observability using OpenTelemetry and Azure Application Insights, which enables tracing of requests, tool calls and conversations through a unified tracking ID, with 8 failure categories and 11 environment-specific settings.',
-          'Developed 131 automated tests to validate agent behaviour and telemetry, along with 11 Kusto queries and a 5-tab Application Insights dashboard to investigate failures and monitor system activity.',
-          'Configured Single Sign-On (SSO) using PingFederate and Microsoft Entra ID, with a three-step fallback mechanism that reliably identifies employees, handles missing authentication details and prevents incorrect user identification.',
+          'Built end-to-end AI observability using OpenTelemetry and Azure Application Insights, which enables tracing of requests, tool calls and conversations, with failures classified into 8 categories.',
+          'Developed 131 automated tests to validate agent behaviour and telemetry, along with 11 Kusto queries to investigate failures and monitor agent activity.',
+          'Configured Single Sign-On (SSO) using PingFederate and Microsoft Entra ID with a three-step fallback mechanism that reliably identifies employees, handles missing authentication details and prevents incorrect user identification.',
           'Integrated Workday learning completion records from the last 12 months as an additional data source, which allows the agent to consider previously completed courses when generating personalised learning recommendations.',
           'Built an Azure Blob Storage data pipeline to parse GitLab coding metrics from Excel workbooks, which detects changes to avoid redundant downloads and uses the last valid copy when downloads fail.',
           'Redesigned the UI/UX of 3 Microsoft Teams widgets (Learning Courses, ECDF progress and GitLab metrics) to follow NatWest branding guidelines and resolve existing rendering issues.',
-          'Worked on migrating deployments from Power Platform pipelines to GitLab CI/CD and Ansible Automation Platform, while ensuring the workflows follow the bank’s security guardrails and release requirements.',
-          'Reduced agent hallucinations by improving Power Platform FAQ knowledge sources and testing revised responses in SIT and UAT, with 23 out of 26 test cases passing.',
-          'Fixed duplicate agent responses after SIT/UAT deployments and corrected the “Start over” trigger in Microsoft Teams, which clears chat history, closes active topics and starts a fresh conversation.',
+          'Worked on migrating deployments from Power Platform pipelines to GitLab CI/CD, while ensuring the workflows follow the bank’s security guardrails and release requirements.',
+          'Reduced agent hallucinations by improving Power Platform FAQ knowledge sources and testing revised responses in SIT and UAT environments, with 23 out of 26 test cases passing.',
+          'Fixed duplicate agent responses after SIT/UAT deployments and corrected the “Start over” trigger functionality in Microsoft Teams, which clears chat history, closes active topics and starts a conversation with a new memory context.',
         ],
       },
       {
@@ -193,13 +193,13 @@ const sectionContent: Section[] = [
           { text: 'ThoughtSpot', color: 'yellow' },
         ],
         details: [
-          'Collected organisation-wide DevOps metrics through GitLab GraphQL and REST APIs to retrieve and consolidate data from GitLab.',
-          'Automated data extraction and CSV exports in Python, which reduced manual processing time by 28%.',
-          'Loaded 16 datasets into Snowflake and developed a unified data model that supports interactive ThoughtSpot dashboards.',
+          'Collected and consolidated engineering activity metrics for members of our business unit using GitLab GraphQL and REST APIs.',
+          'Automated data extraction and CSV exports, thereby reducing manual processing time by 28%.',
+          'Loaded 16 datasets into Snowflake and developed a unified data model that supports interactive dashboards in ThoughtSpot.',
         ],
       },
     ],
-    sourceNote: 'Experience points follow my October 2026 academic CV verbatim.',
+    sourceNote: 'Experience points follow my October 25, 2026 academic CV verbatim.',
   },
   {
     id: 'projects', label: 'Projects', directory: 'Projects', command: 'Get-Projects',
@@ -228,7 +228,7 @@ const sectionContent: Section[] = [
         description: 'I built a local document assistant that answers questions about notes, papers, and code with source citations.',
         details: [
           'Hybrid Retrieval: I combine Semantic Search, Keyword Search, and reranking, with incremental indexing for changed files.',
-          'Cited Local Answers: I stream local model responses with numbered citations that open the source files. My professional CV reports indexing 3,050 files into 42,743 chunks in about 15 minutes on my local GPU, and 97.6% Hit@1, 0.988 MRR, and 100% Recall@5 on 42 questions from a separate 23-document corpus.',
+          'Cited Local Answers: I stream local model responses with numbered citations that open the source files. My professional CV reports indexing 3,050 files into 42,743 chunks in approximately 15 minutes on a local GPU, and ranking a relevant result first for 41 of 42 questions from a separate 23-document corpus (97.6% Hit@1, 0.988 MRR, 100% Recall@5).',
         ],
         stack: ['Python', 'LangGraph', 'ChromaDB', 'SQLite', 'Ollama', 'Streamlit'],
       },

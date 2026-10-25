@@ -243,6 +243,7 @@ mark { color: var(--accent); background: var(--accent-surface); font-weight: 600
 .keyword-purple { color: var(--purple); background: var(--purple-wash); }
 .keyword-cyan { color: var(--cyan); background: var(--cyan-wash); }
 .keyword-pink { color: var(--pink); background: var(--pink-wash); }
+.work-keyword { background: transparent; padding: 0; border-radius: 0; font-weight: 600; }
 .record-stack { padding-inline-start: var(--record-indent); margin-top: var(--space-group); font-size: var(--font-small); color: var(--secondary); max-width: 76ch; }
 .technologies { display: flex; flex-direction: column; gap: 5px; margin: 8px 0 0; padding: 0 0 0 var(--nested-indent); list-style: none; }
 .technology { display: grid; grid-template-columns: var(--marker-width) 1em minmax(0, 1fr); align-items: baseline; gap: var(--list-gap); line-height: 1.7; min-width: 0; }
