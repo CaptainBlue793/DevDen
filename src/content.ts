@@ -95,15 +95,15 @@ const sectionContent: Section[] = [
         highlights: ['Software Engineer', 'NatWest Group', 'AI Engineering', 'Cloud Engineering', 'Data Engineering'],
         description: 'I’m a Software Engineer at NatWest Group. Most of my work sits in three areas:',
         details: [
-          'AI Engineering: I work on low-code AI agents for Microsoft 365, MCP integrations, AI observability and data parsing.',
-          'Cloud Engineering: I use Power Platform pipelines, GitLab CI/CD, Ansible and HashiCorp tools to move changes safely from build to release.',
-          'Data Engineering: I work with Workday learning records and GitLab metrics, and built a Snowflake data model for ThoughtSpot dashboards.',
+          'AI Engineering: I work on AI agents for Microsoft 365, MCP integrations, AI observability and data parsing.',
+          'Power Platform and Microsoft 365: I build low-code agents, power automate workflows and dataverse tables.',
+          'Cloud Engineering: I use Power Platform pipelines, GitLab CI/CD, Ansible and HashiCorp tools.',
         ],
       },
       {
         title: 'Research Interests',
-        highlights: ['Computer Vision', 'Low-Light Image Enhancement', 'Natural Language Processing'],
-        description: 'I also pursue research independently—unofficial title, very official curiosity. I’m especially interested in Computer Vision, image processing and Low-Light Image Enhancement, with Natural Language Processing and local and cloud-hosted LLMs close behind.\n\nMy first-author IEEE SPCOM 2026 paper explores unpaired Low-Light Image Enhancement. I like the part where a neat idea meets a messy experiment; the results usually have the last word.',
+        highlights: ['Computer Vision', 'Natural Language Processing'],
+        description: 'I also pursue research independently—unofficial title, very official curiosity. Huge interest in NLP and Computer Vision domain, especially areas such as image enhancement and image generation, with local and cloud-hosted LLMs close behind.\n\nMy first-author IEEE SPCOM 2026 paper explores unpaired Low-Light Image Enhancement, using a new architecture that combines Bidirectional Convolutional-GRU with GANs.',
       },
     ],
   },
@@ -136,8 +136,12 @@ const sectionContent: Section[] = [
         description: 'FastAPI · REST APIs · GraphQL',
       },
       {
+        title: 'Power Platform',
+        description: 'Microsoft Copilot Studio · Power Automate · Power Apps · Dataverse · Microsoft 365',
+      },
+      {
         title: 'Cloud',
-        description: 'AWS · Azure · Microsoft Copilot Studio · Power Platform',
+        description: 'AWS · Azure · Cloudflare Workers ',
       },
       {
         title: 'Development',
@@ -168,15 +172,15 @@ const sectionContent: Section[] = [
           { text: '23 out of 26 test cases', color: 'green' },
         ],
         details: [
-          'I wired up OpenTelemetry and Azure Application Insights so requests, tool calls and conversations leave a trail, with failures grouped into 8 categories. Agents are easier to fix when they stop being mysterious.',
-          'I developed 131 automated tests and 11 Kusto queries to check agent behaviour, investigate failures and monitor telemetry. My future debugging self appreciates the receipts.',
+          'I wired up OpenTelemetry and Azure Application Insights so requests, tool calls and conversations leave a trail, with failures grouped into 8 categories.',
+          'I developed 131 automated tests and 11 Kusto queries to check agent behaviour, investigate failures and monitor telemetry.',
           'I configured Single Sign-On (SSO) with PingFederate and Microsoft Entra ID, including a three-step fallback that handles missing authentication details without mistaking one employee for another.',
-          'I brought in the last 12 months of Workday learning completion records so recommendations can account for courses colleagues have already finished. Suggesting the same course again is not personalisation.',
+          'I brought in the last 12 months of Workday learning completion records so recommendations can account for courses colleagues have already finished.',
           'I built an Azure Blob Storage pipeline for GitLab coding metrics in Excel workbooks. It skips unchanged downloads and falls back to the last valid copy when a download fails.',
           'I redesigned 3 Microsoft Teams widgets—Learning Courses, ECDF progress and GitLab metrics—to fit NatWest branding and fix rendering issues.',
           'I helped move deployments from Power Platform pipelines to GitLab CI/CD while keeping the bank’s security guardrails and release requirements in view.',
-          'I improved Power Platform FAQ knowledge sources and tested revised agent replies in SIT and UAT; 23 out of 26 test cases passed. A confident wrong answer is still wrong.',
-          'I fixed duplicate agent responses after SIT/UAT deployments and corrected the Microsoft Teams “Start over” trigger so it clears chat history, closes active topics and starts with a new memory context. Start over should mean start over.',
+          'I improved Power Platform FAQ knowledge sources and tested revised agent replies in SIT and UAT; 23 out of 26 test cases passed.',
+          'I fixed duplicate agent responses after SIT/UAT deployments and corrected the Microsoft Teams “Start over” trigger so it clears chat history, closes active topics and starts with a new memory context.',
         ],
       },
       {
@@ -191,17 +195,16 @@ const sectionContent: Section[] = [
           { text: 'ThoughtSpot', color: 'yellow' },
         ],
         details: [
-          'I pulled together engineering activity metrics for our business unit through GitLab GraphQL and REST APIs, turning scattered data into something we could actually use.',
-          'I automated data extraction and CSV exports, reducing manual processing time by 28%. Fewer repetitive clicks were a welcome side effect.',
-          'I loaded 16 datasets into Snowflake and shaped a unified model for interactive ThoughtSpot dashboards.',
+          'I pulled together engineering activity metrics for our business unit through GitLab GraphQL and REST APIs.',
+          'I automated data extraction and CSV exports, reducing manual processing time by 28% .',
+          'I loaded 16 datasets into Snowflake and created a unified model for interactive ThoughtSpot dashboards.',
         ],
       },
     ],
-    sourceNote: 'Experience facts and figures follow my October 25, 2026 academic CV; the portfolio wording is conversational.',
   },
   {
     id: 'projects', label: 'Projects', directory: 'Projects', command: 'Get-Projects',
-    intro: 'Yes, I Claude-coded these projects. Claude wrote the code; I set the direction, gave detailed instructions, reviewed and tested the results, and made the final calls. My contribution included asking “what if it breaks?” more often than a very patient model might prefer.',
+    intro: 'Yes, I Claude-coded these projects. Claude wrote the code; I set the direction, gave detailed instructions, reviewed and tested the results, and made the final calls.',
     records: [
       {
         title: 'Memex',
