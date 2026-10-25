@@ -111,6 +111,7 @@ function Resume({ section }: { section: Section }) {
   function openDocument(pageIndex = 0, fromPreview = false) {
     setEnlarged(fromPreview || !window.matchMedia('(max-width: 1050px)').matches);
     dialogRef.current?.showModal();
+    documentRef.current?.scrollTo(0, 0);
     requestAnimationFrame(() => {
       if (pageIndex === 0) documentRef.current?.scrollTo(0, 0);
       else documentRef.current?.querySelectorAll('.resume-dialog-pages img')[pageIndex]?.scrollIntoView({ block: 'start' });

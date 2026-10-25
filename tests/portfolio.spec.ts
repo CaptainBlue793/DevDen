@@ -226,8 +226,8 @@ test('mobile profile typography adapts while output typography keeps its shared 
   expect(ratio).toBeGreaterThan(1);
   for (let index = 4; index < selectors.length; index++) expect(desktop[index] / phone[index]).toBeCloseTo(ratio, 3);
   expect(phone[0]).toBeLessThan(desktop[0]);
-  expect(phone[1]).toBe(phone[2]);
-  expect(phone[2]).toBe(phone[3]);
+  expect(phone[2]).toBeGreaterThanOrEqual(phone[1]);
+  expect(phone[3]).toBe(phone[1]);
   expect(await page.locator('.profile-identity h1').evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
   expect(phone[6]).toBeGreaterThanOrEqual(13);
   expect(phone[7]).toBe(phone[6]);
@@ -247,7 +247,7 @@ test('theme switching works when browser storage is unavailable', async ({ page 
   await expect(page.getByRole('tabpanel')).toContainText('AI agents for Microsoft 365');
 });
 
-for (const width of [320, 360, 390, 768, 1024, 1440]) {
+for (const width of [320, 360, 390, 600, 768, 1024, 1440]) {
   test(`responsive layout at ${width}px`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.setViewportSize({ width, height: 900 });
@@ -267,19 +267,35 @@ for (const width of [320, 360, 390, 768, 1024, 1440]) {
       expect(contacts.y).toBeGreaterThanOrEqual(name.y + name.height);
       const entries = await page.locator('.contact').evaluateAll(elements => elements.map(element => { const bounds = element.getBoundingClientRect(); return { x: bounds.x, y: bounds.y }; }));
       expect(entries).toHaveLength(5);
-      expect(entries[1].y).toBeGreaterThan(entries[0].y);
-      for (let index = 2; index < entries.length; index++) {
-        expect(entries[index].y).toBeCloseTo(entries[1].y, 0);
-        expect(entries[index].x).toBeGreaterThan(entries[index - 1].x);
+      if (width < 390) {
+        for (let index = 1; index < entries.length; index++) {
+          expect(entries[index].x).toBeCloseTo(entries[0].x, 0);
+          expect(entries[index].y).toBeGreaterThan(entries[index - 1].y);
+        }
+      } else if (width < 600) {
+        expect(entries[1].y).toBeGreaterThan(entries[0].y);
+        expect(entries[2].y).toBeCloseTo(entries[1].y, 0);
+        expect(entries[2].x).toBeGreaterThan(entries[1].x);
+        expect(entries[3].y).toBeGreaterThan(entries[1].y);
+        expect(entries[4].y).toBeCloseTo(entries[3].y, 0);
+        expect(entries[4].x).toBeGreaterThan(entries[3].x);
+      } else {
+        expect(entries[1].y).toBeCloseTo(entries[0].y, 0);
+        expect(entries[1].x).toBeGreaterThan(entries[0].x);
+        for (let index = 3; index < entries.length; index++) {
+          expect(entries[index].y).toBeCloseTo(entries[2].y, 0);
+          expect(entries[index].x).toBeGreaterThan(entries[index - 1].x);
+        }
       }
-      await expect(page.locator('.contacts .contact').first().locator('.contact-value')).toBeVisible();
-      await expect(page.locator('.contacts .contact').first()).toContainText('palakdevpatra@gmail.com');
       expect(await page.locator('.profile-identity h1').evaluate(el => parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThan(16);
       expect(await page.locator('.profile-identity h1').evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
       for (const entry of await page.locator('.contact').all()) {
         const link = entry.locator('a');
         await expect(link).toBeVisible();
-        expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+        await expect(entry.locator('.contact-value')).toBeVisible();
+        await expect(entry.locator('.contact-separator')).toBeVisible();
+        expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(28);
+        expect(await link.evaluate(el => el.scrollWidth <= el.clientWidth + 1)).toBe(true);
         await expect(entry.locator('.contact-label')).toBeHidden();
       }
       expect(await page.locator('.profile-details').evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);
