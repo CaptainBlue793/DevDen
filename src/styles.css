@@ -351,14 +351,14 @@ summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   .comet-track { top: -80px; height: calc(100% + 160px); }
   .profile-content { height: auto; padding: 0; overflow: hidden; }
   .profile-header { display: none; }
-  .profile-details { display: grid; grid-template-columns: 86px minmax(0, 1fr); align-items: center; gap: 8px; margin-top: 0; padding: 4px 8px; text-align: left; }
+  .profile-details { display: grid; grid-template-columns: 112px minmax(0, 1fr); align-items: center; gap: 8px; margin-top: 0; padding: 4px 8px; text-align: left; }
   .profile-identity { display: flex; flex-direction: column; align-items: center; min-width: 0; }
-  .profile-identity h1 { font-size: clamp(10px, 2.8vw, 12px); line-height: 1.2; letter-spacing: -.025em; text-align: center; overflow-wrap: anywhere; }
-  .portrait { width: 58px; height: 58px; margin: 0 0 4px; }
-  .contacts { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-rows: 26px; gap: 0; width: 100%; max-width: none; margin: 0; padding: 0; }
+  .profile-identity h1 { font-size: clamp(11px, 3vw, 13px); line-height: 1.2; letter-spacing: -.025em; text-align: center; white-space: nowrap; }
+  .portrait { width: 66px; height: 66px; margin: 0 0 4px; }
+  .contacts { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-rows: 26px; gap: 0; justify-self: end; width: max-content; max-width: 100%; margin: 0; padding: 0; }
   .contact { display: block; grid-column: auto; min-width: 0; line-height: 1; }
   .contact-label, .contacts .external-mark { display: none; }
-  .contact a { display: flex; align-items: center; justify-content: flex-start; gap: 3px; width: 100%; height: 26px; padding: 0; white-space: nowrap; font-size: clamp(10px, 2.9vw, 12px); }
+  .contact a { display: flex; align-items: center; justify-content: flex-end; gap: 3px; width: 100%; height: 26px; padding: 0; white-space: nowrap; font-size: clamp(10px, 2.9vw, 12px); }
   .contact a .brand-icon { display: block; width: 15px; height: 15px; color: var(--accent); }
   .contact-separator, .contact-value { display: inline; }
   .terminal-pane { flex: 1; }

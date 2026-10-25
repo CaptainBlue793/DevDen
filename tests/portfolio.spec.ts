@@ -262,8 +262,11 @@ for (const width of [320, 360, 390, 600, 768, 1024, 1440]) {
       const portrait = (await page.locator('.portrait').boundingBox())!;
       const name = (await page.locator('.profile-identity h1').boundingBox())!;
       const contacts = (await page.locator('.contacts').boundingBox())!;
+      const profile = (await page.locator('.profile-details').boundingBox())!;
+      expect(portrait.width).toBeGreaterThanOrEqual(66);
       expect(name.y).toBeGreaterThanOrEqual(portrait.y + portrait.height);
       expect(contacts.x).toBeGreaterThan(portrait.x + portrait.width);
+      expect(profile.x + profile.width - (contacts.x + contacts.width)).toBeLessThanOrEqual(9);
       const entries = await page.locator('.contact').evaluateAll(elements => elements.map(element => { const bounds = element.getBoundingClientRect(); return { x: bounds.x, y: bounds.y }; }));
       expect(entries).toHaveLength(5);
       for (let index = 1; index < entries.length; index++) {
