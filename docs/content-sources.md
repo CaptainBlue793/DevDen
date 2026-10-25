@@ -21,6 +21,18 @@ run, and FrameSmith remains a prototype with unvalidated performance improvement
 GitHub, the Atlas demo, benchmark evidence, and measurement status remain directly
 accessible. Detailed source notes are retained in the content data for provenance.
 
+Voice and authorship update, October 25, 2026:
+
+- Experience, Projects, Publications, and Activities use a warmer first-person
+  voice. Their dates, tools, results, links, and publication citation retain the
+  same verified sources; Experience is now a paraphrase of the academic CV.
+- The project authorship note follows the user's clarification: Claude wrote the
+  project code while Palak supplied direction and instructions, reviewed and
+  tested the work, and made the final decisions. Visible project descriptions
+  describe that role directly rather than implying hand-written code.
+- The publication overview credits Palak's first-author research and preserves
+  the named co-authors. It does not attribute research or writing to AI.
+
 Resume presentation update, October 25, 2026:
 
 - The Resume section has two document choices. The Professional CV appears beside

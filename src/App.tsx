@@ -77,7 +77,8 @@ function TerminalRecord({ record, index, section }: { record: RecordEntry; index
 }
 
 function SectionRecords({ section }: { section: Section }) {
-  return <div className={`records${section.id === 'skills' ? ' skill-tree' : ''}${section.layout === 'single' || section.id === 'projects' ? ' single-column' : ''}${section.id === 'projects' ? ' project-list' : ''}`}>
+  return <>{section.intro && <p className="section-intro"><span className="section-marker" aria-hidden="true">&gt;&gt;</span><span>{section.intro}</span></p>}
+  <div className={`records${section.id === 'skills' ? ' skill-tree' : ''}${section.layout === 'single' || section.id === 'projects' ? ' single-column' : ''}${section.id === 'projects' ? ' project-list' : ''}`}>
     {section.columns ? section.columns.map((column, columnIndex) => <section className="record-column" key={column.label} aria-label={column.hideHeading ? column.label : undefined} aria-labelledby={column.hideHeading ? undefined : `column-${section.id}-${columnIndex}`}>
       {!column.hideHeading && <div className="column-heading">
         <h2 id={`column-${section.id}-${columnIndex}`}>{column.label}</h2>
@@ -86,7 +87,7 @@ function SectionRecords({ section }: { section: Section }) {
         .filter(({ record }) => record.column === (column.column ?? (columnIndex === 0 ? 'left' : 'right')))
         .map(({ record, index }) => <TerminalRecord key={record.title} record={record} index={index} section={section.id} />)}
     </section>) : section.records.map((record, index) => <TerminalRecord key={record.title} record={record} index={index} section={section.id} />)}
-  </div>;
+  </div></>;
 }
 
 function Welcome({ onExplore }: { onExplore: (id: SectionId) => void }) {

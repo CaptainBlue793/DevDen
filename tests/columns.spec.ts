@@ -50,12 +50,14 @@ test('publication omits contribution while project summaries expose engineering 
   await expect(page.getByRole('tabpanel')).not.toContainText('My contribution');
   await expect(page.getByRole('heading', { name: 'Research Overview', exact: true })).toBeVisible();
   await expect(page.locator('.research-overview')).toHaveCount(1);
+  await expect(page.locator('.research-overview')).toContainText('I led this first-author study');
+  await expect(page.locator('.research-overview')).not.toContainText('Claude');
   await expect(page.locator('.research-overview p')).toContainText('Bidirectional Convolutional GRU modules');
   await expect(page.getByRole('tabpanel').locator('.description-label, .research-figure, .workflow')).toHaveCount(0);
   await expect(page.getByRole('tabpanel')).not.toContainText('A GAN with bidirectional convolutional GRU modules for enhancing low-light images without paired training examples.');
   await expect(page.getByRole('button', { name: 'Copy citation', exact: true })).toBeVisible();
   await page.getByRole('tab', { name: 'Projects', exact: true }).click();
-  await expect(page.locator('.project-information').first().locator('.record-details')).toContainText('built a shared course hub');
+  await expect(page.locator('.project-information').first().locator('.record-details')).toContainText('mapped out nine engineering subjects');
   await expect(page.locator('.project-list details')).toHaveCount(0);
 });
 
