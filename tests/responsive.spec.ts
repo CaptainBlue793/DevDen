@@ -128,3 +128,14 @@ test('enlarged text remains readable without horizontal overflow', async ({ page
   await expect(page.getByRole('link', { name: 'Scarletta975', exact: false })).toBeInViewport();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
+
+test('phone tabs and icon links reflow with enlarged text', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 568 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/#portfolio/resume');
+  await page.addStyleTag({ content: ':root { font-size: 26px; }' });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  expect(await page.locator('.terminal-output').evaluate(el => el.scrollWidth <= el.clientWidth + 1)).toBe(true);
+  for (const tab of await page.getByRole('tab').all()) await expect(tab).toBeInViewport();
+  for (const contact of await page.locator('.contacts a').all()) await expect(contact).toBeInViewport();
+});

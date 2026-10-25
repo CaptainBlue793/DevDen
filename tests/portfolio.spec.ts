@@ -62,10 +62,10 @@ test('supplied image, accessible brand links, and resume viewer entry', async ({
   await page.getByRole('tab', { name: 'Resume', exact: true }).click();
   await expect(page.getByRole('button', { name: 'View Professional CV', exact: true })).toBeVisible();
   await expect(page.locator('a[href*="drive.google.com"]')).toHaveCount(0);
-  await expect(page.locator('.contacts [data-icon="LinkedIn"]')).toHaveCount(1);
-  await expect(page.locator('.contacts [data-icon="GitHub"]')).toHaveCount(1);
-  await expect(page.locator('.contacts [data-icon="Hugging Face"]')).toHaveCount(1);
-  await expect(page.getByRole('link', { name: 'palakdevpatra@gmail.com', exact: true })).toHaveAttribute('href', 'mailto:palakdevpatra@gmail.com');
+  await expect(page.locator('.contact-label [data-icon="LinkedIn"]')).toBeVisible();
+  await expect(page.locator('.contact-label [data-icon="GitHub"]')).toBeVisible();
+  await expect(page.locator('.contact-label [data-icon="Hugging Face"]')).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Email: palakdevpatra@gmail.com', exact: true })).toHaveAttribute('href', 'mailto:palakdevpatra@gmail.com');
   const contactLabels = await page.locator('.contact-label').evaluateAll(elements => elements.map(element => element.getBoundingClientRect().left));
   expect(contactLabels).toHaveLength(5);
   for (const left of contactLabels) expect(left).toBeCloseTo(contactLabels[0], 0);
@@ -94,7 +94,7 @@ test('important facts, skill icons, and project details', async ({ page }) => {
   await expect(page.locator('.skill-branch .record-details')).toHaveCount(0);
   await expect(page.locator('.technology [data-icon="Python"]')).toHaveCount(1);
   await expect(page.locator('.technology [data-icon="Java"]')).toHaveCount(1);
-  await expect(page.locator('.skill-branch')).toHaveCount(8);
+  await expect(page.locator('.skill-branch')).toHaveCount(9);
   const technologies = await page.locator('.technology > span:last-child').allTextContents();
   expect(new Set(technologies).size).toBe(technologies.length);
   const languages = page.getByRole('list', { name: 'Programming Languages technologies', exact: true });
@@ -108,13 +108,15 @@ test('important facts, skill icons, and project details', async ({ page }) => {
   for (const added of ['OpenCV', 'NVIDIA CUDA']) await expect(ai).toContainText(added);
   await expect(page.getByRole('list', { name: 'Web Interfaces technologies', exact: true })).not.toContainText('React');
   await expect(page.getByRole('list', { name: 'APIs technologies', exact: true })).toContainText('FastAPI');
+  await expect(page.getByRole('list', { name: 'Power Platform technologies', exact: true })).toContainText('Power Automate');
+  await expect(page.getByRole('list', { name: 'Cloud technologies', exact: true })).toContainText('Cloudflare Workers');
   const development = page.getByRole('list', { name: 'Development technologies', exact: true });
   await expect(development).toContainText('Jupyter');
   for (const added of ['FastMCP', 'Azure', 'Ansible', 'GitLab CI/CD', 'Claude', 'Codex']) expect(technologies).toContain(added);
   for (const removed of ['Spring Boot', 'Docker', 'Hypothesis', 'pytest', 'tree-sitter', 'Postman', 'SQLite', 'Vite', 'Embeddings', 'Transformers']) expect(technologies).not.toContain(removed);
   for (const [name, file] of [
     ['FastMCP', 'fastmcp-light.svg'], ['Azure', 'azure.svg'],
-    ['Microsoft Copilot Studio', 'copilot-studio.svg'], ['Power Platform', 'power-platform.svg'],
+    ['Microsoft Copilot Studio', 'copilot-studio.svg'],
   ]) await expect(page.locator(`.skill-tree [data-icon="${name}"] img`).first()).toHaveAttribute('src', `/images/brands/${file}`);
   for (const name of ['GitLab CI/CD', 'Ansible', 'Claude', 'Codex']) await expect(page.locator(`.skill-tree svg[data-icon="${name}"][fill="currentColor"] path`)).toHaveCount(1);
   await expect(page.locator('.skill-tree svg[data-icon="REST APIs"] rect')).toHaveCount(1);
@@ -242,7 +244,7 @@ test('theme switching works when browser storage is unavailable', async ({ page 
   await page.getByRole('button', { name: 'Switch to light theme', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await page.getByRole('tab', { name: 'Resume', exact: true }).click();
-  await expect(page.getByRole('tabpanel')).toContainText('low-code AI agents for Microsoft 365');
+  await expect(page.getByRole('tabpanel')).toContainText('AI agents for Microsoft 365');
 });
 
 for (const width of [360, 390, 768, 1024, 1440]) {
@@ -257,22 +259,24 @@ for (const width of [360, 390, 768, 1024, 1440]) {
     if (width <= 1050) {
       await expect(page.locator('.profile-details')).toBeVisible();
       await expect(page.locator('.profile-toggle')).toHaveCount(0);
-      const identity = (await page.locator('.profile-identity').boundingBox())!;
+      const portrait = (await page.locator('.portrait').boundingBox())!;
+      const name = (await page.locator('.profile-identity h1').boundingBox())!;
       const contacts = (await page.locator('.contacts').boundingBox())!;
-      expect(contacts.x).toBeGreaterThanOrEqual(identity.x + identity.width);
+      expect(name.x).toBeGreaterThan(portrait.x + portrait.width);
+      expect(contacts.x).toBeCloseTo(name.x, 0);
+      expect(contacts.y).toBeGreaterThanOrEqual(name.y + name.height);
       const entries = await page.locator('.contact').evaluateAll(elements => elements.map(element => { const bounds = element.getBoundingClientRect(); return { x: bounds.x, y: bounds.y }; }));
       expect(entries).toHaveLength(5);
       for (let row = 0; row < entries.length; row++) {
-        expect(entries[row].x).toBeCloseTo(entries[0].x, 0);
-        if (row) expect(entries[row].y).toBeGreaterThan(entries[row - 1].y);
+        expect(entries[row].y).toBeCloseTo(entries[0].y, 0);
+        if (row) expect(entries[row].x).toBeGreaterThan(entries[row - 1].x);
       }
       expect(await page.locator('.profile-identity h1').evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
       for (const entry of await page.locator('.contact').all()) {
-        const label = (await entry.locator('.contact-label').boundingBox())!;
-        const value = (await entry.locator('a').boundingBox())!;
-        expect(value.x).toBeGreaterThan(label.x + label.width);
-        expect(value.x + value.width).toBeCloseTo(contacts.x + contacts.width, 0);
-        expect(Math.abs(value.y + value.height / 2 - label.y - label.height / 2)).toBeLessThan(2);
+        const link = entry.locator('a');
+        await expect(link).toBeVisible();
+        expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+        await expect(entry.locator('.contact-label')).toBeHidden();
       }
       expect(await page.locator('.profile-details').evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);
       await expect(page.getByRole('link', { name: 'palakdevpatra@gmail.com' })).toBeVisible();

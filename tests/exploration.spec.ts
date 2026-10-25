@@ -75,7 +75,7 @@ test('email stays a direct link and publication copy actions recover from clipbo
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   await page.goto('/#portfolio');
   await expect(page.getByRole('button', { name: /Copy email/ })).toHaveCount(0);
-  await expect(page.getByRole('link', { name: 'palakdevpatra@gmail.com', exact: true })).toHaveAttribute('href', 'mailto:palakdevpatra@gmail.com');
+  await expect(page.getByRole('link', { name: 'Email: palakdevpatra@gmail.com', exact: true })).toHaveAttribute('href', 'mailto:palakdevpatra@gmail.com');
   await page.getByRole('tab', { name: 'Publications', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Research Overview', exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'My contribution', exact: true })).toHaveCount(0);

@@ -26,8 +26,8 @@ function brandForUrl(url: string) {
   return 'Website';
 }
 
-function ExternalLink({ url, children }: { url: string; children: ReactNode }) {
-  return <a href={url} {...(url.startsWith('https:') || url.startsWith('/') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{children}</a>;
+function ExternalLink({ url, children, ariaLabel, title }: { url: string; children: ReactNode; ariaLabel?: string; title?: string }) {
+  return <a href={url} aria-label={ariaLabel} title={title} {...(url.startsWith('https:') || url.startsWith('/') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{children}</a>;
 }
 
 // Emphasis is plain React text, including when phrases contain punctuation.
@@ -108,6 +108,16 @@ function Resume({ section }: { section: Section }) {
   const [documentIndex, setDocumentIndex] = useState(0);
   const selectedDocument = resumeDocuments[documentIndex];
 
+  function openDocument(pageIndex = 0, fromPreview = false) {
+    setEnlarged(fromPreview || !window.matchMedia('(max-width: 1050px)').matches);
+    dialogRef.current?.showModal();
+    requestAnimationFrame(() => {
+      if (pageIndex === 0) documentRef.current?.scrollTo(0, 0);
+      else documentRef.current?.querySelectorAll('.resume-dialog-pages img')[pageIndex]?.scrollIntoView({ block: 'start' });
+      closeRef.current?.focus();
+    });
+  }
+
   return <div className={`resume-view${documentIndex === 1 ? ' resume-view--academic' : ''}`}>
     <div className="resume-document-switch" role="group" aria-label="Choose document">
       {resumeDocuments.map((document, index) => <button className="cli-action" type="button" key={document.id} aria-pressed={index === documentIndex} aria-controls="resume-current" onClick={() => setDocumentIndex(index)}>{document.label}</button>)}
@@ -118,15 +128,11 @@ function Resume({ section }: { section: Section }) {
       <div className="resume-document-header">
         <h3 id="resume-document-title"><BrandIcon name="Resume" /> {selectedDocument.label}</h3>
         <div className="resume-document-actions"><a className="cli-action" href={selectedDocument.pdf} download={selectedDocument.id === 'resume' ? 'PalakDebPatra_Professional_CV.pdf' : 'PalakDebPatra_Academic_CV.pdf'}>Download PDF</a>
-        <button className="cli-action" type="button" onClick={() => {
-          setEnlarged(!window.matchMedia('(max-width: 1050px)').matches);
-          dialogRef.current?.showModal();
-          documentRef.current?.scrollTo(0, 0);
-          closeRef.current?.focus();
-        }}>View {selectedDocument.label}</button></div>
+        <button className="cli-action" type="button" onClick={() => openDocument()}>View {selectedDocument.label}</button></div>
       </div>
+      <p className="resume-preview-hint">Tap a page to enlarge it.</p>
       <div className="resume-preview">
-        {selectedDocument.previews.map((preview, index) => <img key={preview} src={preview} alt={`${selectedDocument.label} by Palak Deb Patra, page ${index + 1}`} width="1530" height="1980" loading="lazy" />)}
+        {selectedDocument.previews.map((preview, index) => <button className="resume-preview-page" type="button" key={preview} aria-label={`Enlarge ${selectedDocument.label} page ${index + 1}`} onClick={() => openDocument(index, true)}><img src={preview} alt={`${selectedDocument.label} by Palak Deb Patra, page ${index + 1}`} width="1530" height="1980" loading="lazy" /></button>)}
       </div>
     </section>
     </div>
@@ -271,9 +277,11 @@ function Portfolio({ activeId, onSectionChange, onReplay, theme, onToggleTheme }
   }
 
   function tabKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
-    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+    const grid = window.matchMedia('(max-width: 768px)').matches;
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End', ...(grid ? ['ArrowUp', 'ArrowDown'] : [])].includes(event.key)) return;
     event.preventDefault();
-    const next = event.key === 'Home' ? 0 : event.key === 'End' ? sections.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + sections.length) % sections.length;
+    const delta = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : event.key === 'ArrowDown' ? 3 : -3;
+    const next = event.key === 'Home' ? 0 : event.key === 'End' ? sections.length - 1 : (index + delta + sections.length) % sections.length;
     switchTab(sections[next].id, true);
   }
 
@@ -298,13 +306,13 @@ function Portfolio({ activeId, onSectionChange, onReplay, theme, onToggleTheme }
           </div>
           <div className="contacts">{profile.contacts.map(contact => <div className={`contact tone-${contactTones[contact.label]}`} key={contact.label}>
             <span className="contact-label"><BrandIcon name={contact.label} monochrome /><span className="contact-key">{contact.label}:</span></span>
-            <ExternalLink url={contact.url}>{contact.label === 'Email' ? <>{contact.value.split('@')[0]}@<wbr />{contact.value.split('@')[1]}</> : contact.value}{contact.url.startsWith('https://') && <span aria-hidden="true" className="external-mark">↗</span>}</ExternalLink>
+            <ExternalLink url={contact.url} ariaLabel={`${contact.label}: ${contact.value}`} title={`${contact.label}: ${contact.value}`}><BrandIcon name={contact.label} monochrome /><span className="contact-value">{contact.label === 'Email' ? <>{contact.value.split('@')[0]}@<wbr />{contact.value.split('@')[1]}</> : contact.value}</span>{contact.url.startsWith('https://') && <span aria-hidden="true" className="external-mark">↗</span>}</ExternalLink>
           </div>)}
           </div>
         </div>
         </div>
       </aside>
-      <section className="terminal-pane" aria-label="Portfolio terminal">
+      <section className={`terminal-pane${activeId ? ' terminal-pane--sections' : ''}`} aria-label="Portfolio terminal">
         <div className="terminal-toolbar">
           {activeId ? <div className="tab-navigation" ref={tabNavigationRef}>
             <button type="button" className="tab-scroll" hidden={!tabScroll.controls} disabled={!tabScroll.previous} aria-label="Scroll tabs left" onClick={() => scrollTabs(-1)}><span aria-hidden="true">‹</span></button>

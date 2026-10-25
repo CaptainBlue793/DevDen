@@ -40,34 +40,29 @@ test('reading progress recalculates when the content wraps after resizing', asyn
   await page.screenshot({ path: 'test-results/cli-progress-phone.png', animations: 'disabled' });
 });
 
-test('phone chevrons browse hidden tabs without changing the active section', async ({ page }) => {
-  await page.setViewportSize({ width: 320, height: 568 });
+for (const width of [320, 768]) {
+test(`${width}px view shows all six tabs in two rows and supports grid keyboard navigation`, async ({ page }) => {
+  await page.setViewportSize({ width, height: width === 320 ? 568 : 1024 });
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/#portfolio/skills');
-  const previous = page.getByRole('button', { name: 'Scroll tabs left' });
-  const next = page.getByRole('button', { name: 'Scroll tabs right' });
   const strip = page.getByRole('tablist');
-  await expect(previous).toBeVisible();
-  await expect(previous).toBeDisabled();
-  await expect(next).toBeEnabled();
-  await expect(page.locator('.navigation-hint--compact')).toHaveText('Swipe tabs');
-  await next.click();
-  await expect.poll(() => strip.evaluate(element => element.scrollLeft)).toBeGreaterThan(0);
-  await expect(previous).toBeEnabled();
-  await expect(page.getByRole('tab', { name: 'Skills', exact: true })).toHaveAttribute('aria-selected', 'true');
-  for (let attempt = 0; attempt < 12; attempt++) {
-    if (await next.isDisabled()) break;
-    try { await next.click({ timeout: 1500 }); }
-    catch (error) {
-      // Scroll state can disable the control between the enabled check and click.
-      if (await next.isDisabled()) break;
-      throw error;
-    }
+  const tabs = strip.getByRole('tab');
+  await expect(tabs).toHaveCount(6);
+  await expect(page.getByRole('button', { name: /Scroll tabs/ })).toHaveCount(0);
+  await expect(page.locator('.navigation-hint--compact')).toHaveText('Select a tab');
+  const boxes = await Promise.all((await tabs.all()).map(tab => tab.boundingBox()));
+  for (let index = 0; index < 3; index++) {
+    expect(boxes[index]!.y).toBeCloseTo(boxes[0]!.y, 0);
+    expect(boxes[index + 3]!.y).toBeCloseTo(boxes[3]!.y, 0);
+    expect(boxes[index + 3]!.x).toBeCloseTo(boxes[index]!.x, 0);
   }
-  await expect(next).toBeDisabled();
-  const end = await strip.evaluate(element => element.scrollLeft);
-  await previous.click();
-  await expect.poll(() => strip.evaluate(element => element.scrollLeft)).toBeLessThan(end);
+  expect(boxes[3]!.y).toBeGreaterThan(boxes[0]!.y);
+  for (const tab of await tabs.all()) await expect(tab).toBeInViewport();
+  await page.getByRole('tab', { name: 'Skills', exact: true }).focus();
+  await page.keyboard.press('ArrowDown');
+  await expect(page.getByRole('tab', { name: 'Projects', exact: true })).toBeFocused();
+  await page.keyboard.press('ArrowUp');
+  await expect(page.getByRole('tab', { name: 'Skills', exact: true })).toBeFocused();
   await page.getByRole('tab', { name: 'Publications', exact: true }).click();
   const selected = (await page.getByRole('tab', { selected: true }).boundingBox())!;
   const rail = (await strip.boundingBox())!;
@@ -76,3 +71,4 @@ test('phone chevrons browse hidden tabs without changing the active section', as
   await page.goto('/#welcome');
   await expect(page.locator('.terminal-reading, .tab-scroll')).toHaveCount(0);
 });
+}

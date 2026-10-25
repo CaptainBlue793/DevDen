@@ -64,15 +64,14 @@ for (const theme of ['light', 'dark'] as const) {
       await expect(page.locator('.welcome-atmosphere')).toHaveCount(0);
       await expect(page.getByRole('tab', { name: 'Resume', exact: true })).toBeFocused();
       await expect(page.locator('.resume-about')).toContainText('I’m a Software Engineer at NatWest Group');
-      await expect(page.locator('.resume-about')).toContainText('low-code AI agents for Microsoft 365');
+      await expect(page.locator('.resume-about')).toContainText('AI agents for Microsoft 365');
       await expect(page.locator('.resume-about .record-details li')).toHaveCount(3);
       await expect(page.locator('.resume-about .record-details li').first()).toContainText('AI Engineering:');
       await expect(page.locator('.resume-about .record-details li').first()).toContainText('MCP integrations, AI observability and data parsing');
-      await expect(page.locator('.resume-about .record-details li').nth(1)).toContainText('Cloud Engineering:');
-      await expect(page.locator('.resume-about .record-details li').nth(1)).toContainText('Power Platform pipelines, GitLab CI/CD, Ansible and HashiCorp tools');
-      await expect(page.locator('.resume-about .record-details li').last()).toContainText('Data Engineering:');
-      await expect(page.locator('.resume-about .record-details li').last()).toContainText('Workday learning records and GitLab metrics');
-      await expect(page.locator('.resume-about .record-details li').last()).toContainText('Snowflake data model for ThoughtSpot dashboards');
+      await expect(page.locator('.resume-about .record-details li').nth(1)).toContainText('Power Platform and Microsoft 365:');
+      await expect(page.locator('.resume-about .record-details li').nth(1)).toContainText('power automate workflows and dataverse tables');
+      await expect(page.locator('.resume-about .record-details li').last()).toContainText('Cloud Engineering:');
+      await expect(page.locator('.resume-about .record-details li').last()).toContainText('Power Platform pipelines, GitLab CI/CD, Ansible and HashiCorp tools');
       await expect(page.getByRole('heading', { name: '>> Education', exact: true })).toHaveCount(0);
       await expect(page.locator('.profile-pane .resume-link')).toHaveCount(0);
       await expect(page.locator('.contacts .contact')).toHaveCount(5);
@@ -187,6 +186,27 @@ for (const width of [1440, 390]) {
     await expect(pages.nth(1)).toBeInViewport();
   });
 }
+
+test('phone CV previews open the selected page enlarged', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/#portfolio/resume');
+  await page.getByRole('group', { name: 'Choose document' }).getByRole('button', { name: 'Academic CV' }).click();
+  const pages = page.locator('.resume-preview-page');
+  await expect(pages).toHaveCount(2);
+  await expect(page.locator('.resume-preview-hint')).toBeVisible();
+  await pages.nth(1).click();
+  const dialog = page.getByRole('dialog', { name: 'Academic CV', exact: true });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole('button', { name: 'Fit page' })).toHaveAttribute('aria-pressed', 'true');
+  await expect.poll(() => dialog.locator('.resume-dialog-body').evaluate(el => el.scrollTop)).toBeGreaterThan(0);
+  await expect(dialog.getByRole('button', { name: 'Close document' })).toBeFocused();
+  await dialog.getByRole('button', { name: 'Close document' }).click();
+  await expect(dialog).not.toBeVisible();
+  await pages.first().click();
+  await expect(dialog).toBeVisible();
+  expect(await dialog.locator('.resume-dialog-body').evaluate(el => el.scrollTop)).toBe(0);
+});
 
 for (const size of [{ width: 1440, height: 900 }, { width: 1366, height: 600 }, { width: 320, height: 568 }, { width: 390, height: 844 }, { width: 844, height: 390 }]) {
   test(`resume popup uses the screen-appropriate default and supports zoom and keyboard close at ${size.width}x${size.height}`, async ({ page }) => {
