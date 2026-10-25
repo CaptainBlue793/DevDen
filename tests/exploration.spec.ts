@@ -4,6 +4,8 @@ test('four selected projects expose summaries, engineering bullets, and previews
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/#portfolio');
   await page.getByRole('tab', { name: 'Projects', exact: true }).click();
+  await expect(page.locator('.section-intro')).toContainText('Claude wrote the code');
+  await expect(page.locator('.section-intro')).toContainText('I set the direction');
   const records = page.locator('.records > .record');
   await expect(records).toHaveCount(4);
   await expect(records.locator('h3').filter({ hasText: /The Engineering Atlas|Memex|CodeShift/ })).toHaveCount(3);
@@ -56,7 +58,7 @@ test('NatWest roles use plain bullets and retain verified internship outcomes', 
   await expect(roles.nth(1).locator('.record-details li')).toHaveCount(3);
   await expect(roles.nth(0).locator('.record-meta')).toHaveText('July 2025 – Present · Bangalore, India');
   await expect(roles.nth(0).locator('.record-details')).toContainText('131 automated tests');
-  await expect(roles.nth(0).locator('.record-details')).toContainText('23 out of 26 test cases passing');
+  await expect(roles.nth(0).locator('.record-details')).toContainText('23 out of 26 test cases passed');
   await expect(roles.nth(1).locator('.record-meta')).toHaveText('May – July 2024 · Gurgaon, India');
   await expect(roles.nth(1).locator('.record-details')).toContainText('reducing manual processing time by 28%');
   await expect(roles.nth(1).locator('.record-details')).toContainText('16 datasets');

@@ -210,6 +210,7 @@ h1 { font-size: var(--font-name); font-weight: 500; letter-spacing: -.7px; }
 .cursor { color: var(--text); animation: blink 1.15s step-end 3; margin-left: 3px; }
 @keyframes blink { 50% { opacity: 0; } }
 .record { margin-bottom: var(--space-entry); }
+.section-intro { display: grid; grid-template-columns: var(--record-indent) minmax(0, 1fr); max-width: 80ch; margin: 0 0 2rem; color: var(--secondary); line-height: 1.7; }
 .records { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-entry) 2.5rem; align-items: start; }
 .records > .record { min-width: 0; margin-bottom: 0; }
 .project-list { row-gap: 3.5rem; }
