@@ -35,6 +35,13 @@ Voice and authorship update, October 25, 2026:
 
 Resume presentation update, October 25, 2026:
 
+- Descriptions, lists, research summaries, and section intros now use their available
+  column width. Inline emphasis uses font color without a marked background or
+  heavier font weight throughout the portfolio.
+- The Professional CV summary now uses three concise bullets for AI Engineering,
+  Cloud Engineering, and Data Engineering. Its named areas and tools, including
+  HashiCorp without a specific product claim, follow the user's requested wording.
+  The data bullet draws on the current NatWest role and OSPO Metrics internship.
 - The Resume section has two document choices. The Professional CV appears beside
   a short work summary; the Academic CV follows a research summary with both
   original pages visible below it. The PDF viewer still supports viewing and

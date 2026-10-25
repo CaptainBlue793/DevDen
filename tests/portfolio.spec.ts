@@ -15,7 +15,7 @@ test('six formatted tabs, narrower sidebar, and stationary desktop panes', async
   expect(sidebar!.width / (await page.locator('.terminal-window').boundingBox())!.width).toBeCloseTo(0.25, 2);
   await expect(page.locator('.profile-command')).toContainText('Get-Portfolio');
   await expect(page.getByRole('tabpanel')).toContainText('I’m a Software Engineer at NatWest Group');
-  await expect(page.getByRole('tabpanel')).toContainText('MCP integrations, AI observability, data parsing');
+  await expect(page.getByRole('tabpanel')).toContainText('MCP integrations, AI observability and data parsing');
   const portrait = (await page.locator('.portrait').boundingBox())!;
   expect(portrait.y + portrait.height / 2).toBeLessThan(sidebar!.y + sidebar!.height / 2);
   await page.getByRole('tab', { name: 'Projects', exact: true }).click();
@@ -86,7 +86,8 @@ test('supplied image, accessible brand links, and resume viewer entry', async ({
 test('important facts, skill icons, and project details', async ({ page }) => {
   await page.goto('/#portfolio');
   await page.getByRole('tab', { name: 'Resume', exact: true }).click();
-  await expect(page.locator('mark').filter({ hasText: 'Software Engineer' })).toBeVisible();
+  await expect(page.locator('.keyword-default').filter({ hasText: 'Software Engineer' })).toBeVisible();
+  await expect(page.locator('mark')).toHaveCount(0);
   await page.getByRole('tab', { name: 'Skills', exact: true }).click();
   await expect(page.locator('.skill-tree')).toBeVisible();
   await expect(page.locator('.skill-branch .description-label')).toHaveCount(0);
@@ -126,10 +127,11 @@ test('important facts, skill icons, and project details', async ({ page }) => {
   await page.getByRole('tab', { name: 'Experience', exact: true }).click();
   await expect(page.locator('.record-details li')).toHaveCount(12);
   await expect(page.locator('.record-details')).toContainText(['131 automated tests', 'reducing manual processing time by 28%']);
-  await expect(page.getByRole('tabpanel').locator('.work-keyword.keyword-cyan').first()).toContainText('OpenTelemetry');
-  await expect(page.getByRole('tabpanel').locator('.work-keyword.keyword-green').first()).toContainText('131 automated tests');
+  await expect(page.getByRole('tabpanel').locator('.keyword-cyan').first()).toContainText('OpenTelemetry');
+  await expect(page.getByRole('tabpanel').locator('.keyword-green').first()).toContainText('131 automated tests');
   await page.getByRole('tab', { name: 'Activities', exact: true }).click();
-  await expect(page.locator('mark').filter({ hasText: '800+' })).toBeVisible();
+  await expect(page.locator('.keyword-default').filter({ hasText: '800+' })).toBeVisible();
+  await expect(page.locator('mark')).toHaveCount(0);
   await expect(page.getByRole('tabpanel').locator('[data-icon="LeetCode"]')).toHaveCount(0);
   await expect(page.getByRole('link', { name: 'Competitive programming', exact: false })).toHaveAttribute('href', 'https://leetcode.com/BlueMask6/');
 });
@@ -176,7 +178,7 @@ for (const preference of ['light', 'dark'] as const) {
 }
 
 for (const theme of ['light', 'dark'] as const) {
-  test(`coordinated title and highlight colors remain readable in ${theme} mode`, async ({ page }) => {
+  test(`coordinated title and keyword font colors remain readable in ${theme} mode`, async ({ page }) => {
     await page.emulateMedia({ colorScheme: theme, reducedMotion: 'reduce' });
     await page.goto('/#portfolio');
     await page.getByRole('tab', { name: 'Projects', exact: true }).click();
@@ -193,9 +195,9 @@ for (const theme of ['light', 'dark'] as const) {
       const output = getComputedStyle(document.querySelector('.terminal-pane')!).backgroundColor;
       const sidebar = getComputedStyle(document.querySelector('.profile-pane')!).backgroundColor;
       const headings = [...document.querySelectorAll('.records h3')].map(element => getComputedStyle(element).color);
-      const checks = [...document.querySelectorAll('.records h3, .record a, mark, .contacts a')].map(element => {
+      const checks = [...document.querySelectorAll('.records h3, .record a, [class^="keyword-"], .contacts a')].map(element => {
         const style = getComputedStyle(element);
-        const background = element.tagName === 'MARK' ? style.backgroundColor : element.closest('.profile-pane') ? sidebar : output;
+        const background = element.closest('.profile-pane') ? sidebar : output;
         return contrast(style.color, background);
       });
       return { headingColors: [...new Set(headings)], minimum: Math.min(...checks) };

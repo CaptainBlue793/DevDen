@@ -23,7 +23,7 @@ test('four selected projects expose summaries, engineering bullets, and previews
     await expect(project.locator('.record-details li')).toHaveCount(2);
     for (const bullet of await project.locator('.record-details li').all()) {
       await expect(bullet).toBeVisible();
-      await expect(bullet.locator('mark')).toHaveCount(1);
+      await expect(bullet.locator('[class^="keyword-"]')).toHaveCount(1);
     }
     await expect(project.getByRole('link', { name: /^GitHub/ })).toHaveAttribute('href', /^https:\/\/github.com\/CaptainBlue793\//);
     await expect(project.getByRole('list', { name: `${title} tech stack`, exact: true })).toBeVisible();
@@ -64,8 +64,9 @@ test('NatWest roles use plain bullets and retain verified internship outcomes', 
   await expect(roles.nth(1).locator('.record-details')).toContainText('16 datasets');
   await expect(roles.nth(1).locator('.record-details')).toContainText('ThoughtSpot');
   await expect(page.getByRole('tabpanel').locator('mark, .experience-outcomes, .career-progression, .workflow, .record-stack, .description-label')).toHaveCount(0);
-  const keyword = page.getByRole('tabpanel').locator('.work-keyword').first();
+  const keyword = page.getByRole('tabpanel').locator('[class^="keyword-"]').first();
   await expect(keyword).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+  await expect(keyword).toHaveCSS('font-weight', '400');
   await expect(keyword).not.toHaveCSS('color', 'rgb(0, 0, 0)');
   await expect(page.getByRole('tabpanel')).not.toContainText('Undergraduate Student Researcher');
 });

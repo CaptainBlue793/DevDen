@@ -92,8 +92,13 @@ const sectionContent: Section[] = [
     records: [
       {
         title: 'About Me',
-        highlights: ['Software Engineer', 'NatWest Group', 'MCP integrations', 'AI observability'],
-        description: 'I’m a Software Engineer at NatWest Group, working on agent systems and low-code AI agents for Microsoft 365. My work spans MCP integrations, AI observability, data parsing, and the agent features that help colleagues get useful answers.\n\nA lot of the job is making the clever bits dependable: tracing what happened, untangling messy inputs, and persuading agents to behave. That last part is a surprisingly human job.',
+        highlights: ['Software Engineer', 'NatWest Group', 'AI Engineering', 'Cloud Engineering', 'Data Engineering'],
+        description: 'I’m a Software Engineer at NatWest Group. Most of my work sits in three areas:',
+        details: [
+          'AI Engineering: I work on low-code AI agents for Microsoft 365, MCP integrations, AI observability and data parsing.',
+          'Cloud Engineering: I use Power Platform pipelines, GitLab CI/CD, Ansible and HashiCorp tools to move changes safely from build to release.',
+          'Data Engineering: I work with Workday learning records and GitLab metrics, and built a Snowflake data model for ThoughtSpot dashboards.',
+        ],
       },
       {
         title: 'Research Interests',

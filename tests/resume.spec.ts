@@ -65,7 +65,14 @@ for (const theme of ['light', 'dark'] as const) {
       await expect(page.getByRole('tab', { name: 'Resume', exact: true })).toBeFocused();
       await expect(page.locator('.resume-about')).toContainText('I’m a Software Engineer at NatWest Group');
       await expect(page.locator('.resume-about')).toContainText('low-code AI agents for Microsoft 365');
-      await expect(page.locator('.resume-about')).toContainText('MCP integrations, AI observability, data parsing');
+      await expect(page.locator('.resume-about .record-details li')).toHaveCount(3);
+      await expect(page.locator('.resume-about .record-details li').first()).toContainText('AI Engineering:');
+      await expect(page.locator('.resume-about .record-details li').first()).toContainText('MCP integrations, AI observability and data parsing');
+      await expect(page.locator('.resume-about .record-details li').nth(1)).toContainText('Cloud Engineering:');
+      await expect(page.locator('.resume-about .record-details li').nth(1)).toContainText('Power Platform pipelines, GitLab CI/CD, Ansible and HashiCorp tools');
+      await expect(page.locator('.resume-about .record-details li').last()).toContainText('Data Engineering:');
+      await expect(page.locator('.resume-about .record-details li').last()).toContainText('Workday learning records and GitLab metrics');
+      await expect(page.locator('.resume-about .record-details li').last()).toContainText('Snowflake data model for ThoughtSpot dashboards');
       await expect(page.getByRole('heading', { name: '>> Education', exact: true })).toHaveCount(0);
       await expect(page.locator('.profile-pane .resume-link')).toHaveCount(0);
       await expect(page.locator('.contacts .contact')).toHaveCount(5);
@@ -165,8 +172,10 @@ for (const width of [1440, 390]) {
     await expect(choices.getByRole('button', { name: 'Professional CV' })).toHaveAttribute('aria-pressed', 'false');
     const academic = page.locator('.resume-layout--academic');
     const summary = (await academic.locator('.resume-about').boundingBox())!;
+    const researchDescription = (await academic.locator('.resume-about .description').first().boundingBox())!;
     const cv = (await academic.locator('.resume-document').boundingBox())!;
     expect(cv.y).toBeGreaterThan(summary.y + summary.height);
+    expect(summary.x + summary.width - (researchDescription.x + researchDescription.width)).toBeLessThan(2);
     const pages = academic.locator('.resume-preview img');
     await expect(pages).toHaveCount(2);
     const first = (await pages.nth(0).boundingBox())!;

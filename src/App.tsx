@@ -31,7 +31,7 @@ function ExternalLink({ url, children }: { url: string; children: ReactNode }) {
 }
 
 // Emphasis is plain React text, including when phrases contain punctuation.
-function EmphasizedText({ text, highlights = [], colorOnly = false }: { text: string; highlights?: RecordEntry['highlights']; colorOnly?: boolean }) {
+function EmphasizedText({ text, highlights = [] }: { text: string; highlights?: RecordEntry['highlights'] }) {
   const parts: ReactNode[] = [];
   let remaining = text;
   while (remaining) {
@@ -40,10 +40,8 @@ function EmphasizedText({ text, highlights = [], colorOnly = false }: { text: st
       return { phrase, color: typeof highlight === 'string' ? undefined : highlight.color, at: remaining.indexOf(phrase) };
     }).filter(item => item.at >= 0).sort((a, b) => a.at - b.at || b.phrase.length - a.phrase.length)[0];
     if (!match) { parts.push(remaining); break; }
-    const className = `${match.color ? `keyword-${match.color}` : ''}${colorOnly ? ' work-keyword' : ''}`.trim() || undefined;
-    parts.push(remaining.slice(0, match.at), colorOnly
-      ? <span className={className} key={parts.length}>{match.phrase}</span>
-      : <mark className={className} key={parts.length}>{match.phrase}</mark>);
+    const className = match.color ? `keyword-${match.color}` : 'keyword-default';
+    parts.push(remaining.slice(0, match.at), <span className={className} key={parts.length}>{match.phrase}</span>);
     remaining = remaining.slice(match.at + match.phrase.length);
   }
   return <>{parts}</>;
@@ -59,12 +57,12 @@ function TerminalRecord({ record, index, section }: { record: RecordEntry; index
     <div className={record.caseStudy ? 'project-information' : undefined}>
     {record.caseStudy && <p className="record-kicker">{record.caseStudy.category}</p>}
     <h3><span className="section-marker">&gt;&gt;</span> {record.url && !record.caseStudy ? <ExternalLink url={record.url}>{!(section === 'activities' && brandForUrl(record.url) === 'LeetCode') && <BrandIcon name={brandForUrl(record.url)} />}{record.title}<span className="external-mark" aria-hidden="true">↗</span></ExternalLink> : record.title}</h3>
-    {record.meta && <p className="record-meta"><EmphasizedText text={record.meta} highlights={record.highlights} colorOnly={section === 'work'} /></p>}
+    {record.meta && <p className="record-meta"><EmphasizedText text={record.meta} highlights={record.highlights} /></p>}
     {skills ? <div className="description"><Technologies items={record.description.split(' · ')} label={`${record.title} technologies`} /></div>
       : record.research ? <section className="detail-block research-overview"><h4>Research Overview</h4><p className="description">{record.research.overview}</p></section>
       : section !== 'work' && record.description.split('\n\n').map((paragraph, paragraphIndex) => <p className="description" key={paragraphIndex}><EmphasizedText text={paragraph} highlights={record.highlights} /></p>)}
     {record.metadata && <dl className="record-facts">{record.metadata.map(field => <div key={field.label}><dt>{field.label}:</dt><dd>{field.url ? <ExternalLink url={field.url}>{field.value}</ExternalLink> : <EmphasizedText text={field.value} highlights={record.highlights} />}</dd></div>)}</dl>}
-    {record.details && <ul className="record-details" role="list">{record.details.map(detail => <li key={detail}><span className="detail-marker" aria-hidden="true">-</span><span><EmphasizedText text={detail} highlights={record.highlights} colorOnly={section === 'work'} /></span></li>)}</ul>}
+    {record.details && <ul className="record-details" role="list">{record.details.map(detail => <li key={detail}><span className="detail-marker" aria-hidden="true">-</span><span><EmphasizedText text={detail} highlights={record.highlights} /></span></li>)}</ul>}
     {record.stack && <div className="record-stack"><span className="stack-label">Stack:</span><Technologies items={record.stack} label={`${record.title} tech stack`} /></div>}
     {(record.links || (record.caseStudy && record.url)) && <div className="record-links">
       {record.caseStudy && record.url && <ExternalLink url={record.url}><BrandIcon name="GitHub" />GitHub<span className="external-mark" aria-hidden="true">↗</span></ExternalLink>}
