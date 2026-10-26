@@ -455,7 +455,7 @@ const sectionContent: Section[] = [
       {
         title: 'Bidirectional Convolutional-GRU Integrated GAN for Unpaired Low-Light Image Enhancement',
         research: {
-          overview: 'I led this first-author study on a question that sounds simple until you try it ? How do you brighten a low-light image without a matching bright training photo? My co-authors and I used a CycleGAN-based model with Bidirectional Convolutional GRU modules for unpaired Low-Light Image Enhancement. .',
+          overview: 'I led this first-author study on how to brighten a low-light image without a matching bright training photo? My co-authors and I used a CycleGAN-based model with Bidirectional Convolutional GRU modules for unpaired Low-Light Image Enhancement.',
         },
         highlights: ['First author'],
         url: 'https://doi.org/10.1109/SPCOM71105.2026.11622932',
@@ -476,29 +476,32 @@ const sectionContent: Section[] = [
     id: 'activities', label: 'Activities', directory: 'Activities', command: 'Get-Activities',
     columns: [
       { label: 'Technical' },
-      { label: 'Non-technical' },
+      { label: 'Non-Technical' },
     ],
     records: [
       {
         title: 'Competitive Programming',
         column: 'left',
         highlights: ['800+', '1795'],
-        description: 'I’ve solved 800+ LeetCode problems and reached a peak rating of 1795, placing me in the top 8% globally.',
+        meta: '2022 – Ongoing',
+        description: 'I’ve solved 800+ LeetCode problems and reached a peak rating of 1795, placing me in the top 8% globally. Although nowadays everyone is cheating in LEETCODE, so left the race. I am still proud of my achievements and in touch with DSA learning, without the CP portion',
         details: ['I ranked 277 globally in Weekly Contest 438 and 1839 in Weekly Contest 437.'],
         url: 'https://leetcode.com/BlueMask6/',
       },
       {
         title: 'Amazon ML Summer School',
         column: 'left',
+        highlights: ['Amazon ML Summer School','2023'],
         meta: '2023',
-        description: 'I was selected for Amazon ML Summer School in 2023, where I studied ML fundamentals and advanced topics.',
+        description: 'I was selected for Amazon ML Summer School in 2023, where I brushed up my fundamentals and studied advanced topics in ML.',
       },
       {
         title: 'NITRUTSAV · Event Management Coordinator',
         column: 'right',
-        highlights: ['20%'],
-        description: 'I led a team of seven volunteers at NIT Rourkela’s cultural festival, to manage sponsorship outreach and event logistics. We secured a 20% increase in sponsorship compared to the previous year.',
+        highlights: ['seven','20%'],
+        description: 'I led a team of seven volunteers at NIT Rourkela’s cultural festival, to manage sponsorship outreach and event logistics.',
         meta: 'August – September 2023',
+        details: ['We secured a 20% increase in sponsorship compared to the previous year, and I coordinated event logistics for a smooth experience.'],
       },
       {
         title: 'AASRA · Senior Staff Member',
@@ -509,12 +512,14 @@ const sectionContent: Section[] = [
         details: ['Our team raised ₹2,11,000 through collective effort.'],
       },
       {
-        title: 'Interests',
+        title: 'Supe Interests',
         column: 'right',
-        description: 'Away from the keyboard and screen, I am a HardCore AAA Gamer 🎮, football fanatic especially BONKERS for Messi 🐐 and love the GYM 💪.',
+        highlights: ['MAN', 'Gamer', 'Messi', 'Gym'],
+        description: 'Away from the keyboard and screen, I am the MAN ',
+        meta: ' Oct 2011 - END OF MY LIFE ',
+        details: ['I am a hardcore AAA Gamer 🎮','Football fanatic and BONKERS for Messi 🐐','I love the Gym 💪 too'],
       },
     ],
-    sourceNote: 'Competition results are reported in my October 2026 resume; community work is reported in my academic CV.',
   },
 ];
 
