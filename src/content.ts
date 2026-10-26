@@ -484,7 +484,7 @@ const sectionContent: Section[] = [
         column: 'left',
         highlights: ['800+', '1795'],
         meta: '2022 – Ongoing',
-        description: 'I’ve solved 800+ LeetCode problems and reached a peak rating of 1795, placing me in the top 8% globally. Although nowadays everyone is cheating in LEETCODE, so left the race. I am still proud of my achievements and in touch with DSA learning, without the CP portion',
+        description: 'I’ve solved 800+ LeetCode problems and reached a peak rating of 1795, placing me in the top 8% globally. Although nowadays everyone is cheating in LEETCODE, so left the race. I am still proud of my achievements and in touch with DSA learning, without the CP portion.',
         details: ['I ranked 277 globally in Weekly Contest 438 and 1839 in Weekly Contest 437.'],
         url: 'https://leetcode.com/BlueMask6/',
       },
@@ -512,7 +512,7 @@ const sectionContent: Section[] = [
         details: ['Our team raised ₹2,11,000 through collective effort.'],
       },
       {
-        title: 'Supe Interests',
+        title: 'Super Interests',
         column: 'right',
         highlights: ['MAN', 'Gamer', 'Messi', 'Gym'],
         description: 'Away from the keyboard and screen, I am the MAN ',

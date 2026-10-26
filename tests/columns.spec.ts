@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 const groups = [
   { tab: 'Experience', left: 'Full-time', right: 'Internship', leftRecords: ['NatWest Group · Software Engineer'], rightRecords: ['NatWest Group · Software Engineering Intern'] },
-  { tab: 'Activities', left: 'Technical', right: 'Non-technical', leftRecords: ['Competitive Programming', 'Amazon ML Summer School'], rightRecords: ['NITRUTSAV · Event Management Coordinator', 'AASRA · Senior Staff Member', 'Interests'] },
+  { tab: 'Activities', left: 'Technical', right: 'Non-Technical', leftRecords: ['Competitive Programming', 'Amazon ML Summer School'], rightRecords: ['NITRUTSAV · Event Management Coordinator', 'AASRA · Senior Staff Member', 'Super Interests'] },
 ];
 
 for (const theme of ['light', 'dark'] as const) {

@@ -210,7 +210,7 @@ for (const theme of ['light', 'dark'] as const) {
   });
 }
 
-test('mobile profile typography adapts while output typography keeps its shared scale', async ({ page }) => {
+test('mobile profile typography adapts while content stays readable', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/#portfolio');
@@ -222,15 +222,16 @@ test('mobile profile typography adapts while output typography keeps its shared 
   const desktop = await sizes();
   await page.setViewportSize({ width: 390, height: 900 });
   const phone = await sizes();
-  const ratio = desktop[4] / phone[4];
-  expect(ratio).toBeGreaterThan(1);
-  for (let index = 4; index < selectors.length; index++) expect(desktop[index] / phone[index]).toBeCloseTo(ratio, 3);
   expect(phone[0]).toBeLessThan(desktop[0]);
-  expect(phone[2]).toBeGreaterThanOrEqual(phone[1]);
+  expect(phone[2]).toBeGreaterThanOrEqual(10);
   expect(phone[3]).toBe(phone[1]);
   expect(await page.locator('.profile-identity h1').evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
-  expect(phone[6]).toBeGreaterThanOrEqual(13);
+  expect(phone[4]).toBeGreaterThanOrEqual(12);
+  expect(phone[5]).toBeGreaterThanOrEqual(16);
+  expect(phone[6]).toBeGreaterThanOrEqual(15);
+  expect(phone[6]).toBeGreaterThan(desktop[6]);
   expect(phone[7]).toBe(phone[6]);
+  expect(phone[8]).toBeGreaterThanOrEqual(13.5);
 });
 
 test('theme switching works when browser storage is unavailable', async ({ page }) => {

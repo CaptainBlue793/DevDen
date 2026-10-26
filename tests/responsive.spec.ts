@@ -7,6 +7,33 @@ const sizes = [
   { width: 1920, height: 1080 }, { width: 2560, height: 1440 },
 ];
 
+for (const width of [320, 390]) {
+  test(`phone headings and tabs stay readable at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 844 });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/#portfolio/skills');
+    expect(await page.locator('.terminal-output').evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(15);
+
+    for (const label of ['Skills', 'Resume', 'Experience', 'Projects', 'Publications', 'Activities']) {
+      await page.getByRole('tab', { name: label, exact: true }).click();
+      const gaps = await page.locator('.record h3').evaluateAll(headings => headings.map(heading => {
+        const marker = heading.querySelector('.section-marker')!;
+        const title = Array.from(heading.childNodes).find(node => node !== marker && node.textContent?.trim());
+        if (!title) return -1;
+        const range = document.createRange();
+        range.selectNodeContents(title);
+        return range.getBoundingClientRect().left - marker.getBoundingClientRect().right;
+      }));
+      expect(gaps.length).toBeGreaterThan(0);
+      expect(gaps.every(gap => gap >= 4)).toBe(true);
+      expect(await page.locator('.terminal-output').evaluate(element => element.scrollWidth <= element.clientWidth + 1)).toBe(true);
+    }
+
+    expect(await page.locator('.terminal-tab > span:last-child').evaluateAll(labels => labels.every(label => label.getClientRects().length === 1))).toBe(true);
+    expect(await page.locator('.terminal-reading').evaluate(element => element.scrollHeight <= element.clientHeight + 1)).toBe(true);
+  });
+}
+
 for (const theme of ['light', 'dark'] as const) {
   for (const size of sizes) {
     test(`all sections fit ${size.width} × ${size.height} in ${theme}`, async ({ page }) => {
