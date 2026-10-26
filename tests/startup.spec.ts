@@ -107,6 +107,8 @@ for (const theme of ['light', 'dark'] as const) {
     await startWithControlledTime(page);
     await page.clock.runFor(4500);
     await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
+    const loadingFont = await page.locator('.startup-output').evaluate(element => parseFloat(getComputedStyle(element).fontSize));
+    expect(loadingFont).toBeGreaterThanOrEqual(15);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     const button = (await page.getByRole('button', { name: 'Skip intro', exact: true }).boundingBox())!;
     expect(button.y).toBeGreaterThanOrEqual(0);
@@ -114,6 +116,7 @@ for (const theme of ['light', 'dark'] as const) {
     await page.screenshot({ path: `test-results/startup-mobile-${theme}.png`, animations: 'disabled' });
     await page.clock.runFor(9000);
     await expect(page).toHaveURL(/#welcome$/);
+    expect(await page.locator('.welcome h2').evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThan(loadingFont);
   });
 }
 
