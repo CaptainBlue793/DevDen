@@ -391,7 +391,7 @@ summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
     --record-indent: 1.7rem;
     --space-entry: 1.75rem;
     --space-group: .9rem;
-    font-size: clamp(15px, 3.8vw, 16px);
+    font-size: clamp(14px, 3.5vw, 15px);
   }
   .terminal-output { --font-small: .93rem; --font-heading: 1.1rem; padding: calc(16px * var(--phone-scale)) calc(12px * var(--phone-scale)) calc(20px * var(--phone-scale)); scroll-padding-top: calc(16px * var(--phone-scale)); line-height: 1.6; }
   .terminal-tab { min-width: calc(120px * var(--phone-scale)); padding-inline: calc(16px * var(--phone-scale)); gap: calc(8px * var(--phone-scale)); }
