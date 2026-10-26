@@ -322,7 +322,7 @@ function Portfolio({ activeId, onSectionChange, onReplay, theme, onToggleTheme }
             aria-controls={activeId === section.id ? `panel-${section.id}` : undefined} tabIndex={activeId === section.id ? 0 : -1}
             className={`terminal-tab tone-${sectionTones[section.id]} ${activeId === section.id ? 'active' : ''}`}
             onClick={() => switchTab(section.id)} onKeyDown={event => tabKeyDown(event, index)}
-          ><span className="tab-icon" aria-hidden="true">❯_</span><span>{section.label}</span></button>)}
+          ><span className="tab-icon" aria-hidden="true">&gt;_</span><span>{section.label}</span></button>)}
             <span className={`tab-selection-marker tone-${sectionTones[activeId]}`} aria-hidden="true" style={{ width: tabMarker.width, transform: `translateX(${tabMarker.left}px)` }} />
             </div>
             <button type="button" className="tab-scroll" hidden={!tabScroll.controls} disabled={!tabScroll.next} aria-label="Scroll tabs right" onClick={() => scrollTabs(1)}><span aria-hidden="true">›</span></button>
