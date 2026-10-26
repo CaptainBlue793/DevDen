@@ -12,10 +12,14 @@ for (const width of [320, 390]) {
     await page.setViewportSize({ width, height: 844 });
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/#portfolio/skills');
-    expect(await page.locator('.terminal-output').evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(12);
+    const contactSize = await page.locator('.contact a').first().evaluate(element => parseFloat(getComputedStyle(element).fontSize));
+    expect(await page.locator('.terminal-output').evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeCloseTo(contactSize, 2);
+    expect(contactSize).toBeGreaterThanOrEqual(11);
 
     for (const label of ['Skills', 'Resume', 'Experience', 'Projects', 'Publications', 'Activities']) {
-      await page.getByRole('tab', { name: label, exact: true }).click();
+      const tab = page.getByRole('tab', { name: label, exact: true });
+      await tab.click();
+      expect(await tab.evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeCloseTo(contactSize, 2);
       const gaps = await page.locator('.record h3').evaluateAll(headings => headings.map(heading => {
         const marker = heading.querySelector('.section-marker')!;
         const title = Array.from(heading.childNodes).find(node => node !== marker && node.textContent?.trim());
@@ -31,6 +35,10 @@ for (const width of [320, 390]) {
 
     expect(await page.locator('.terminal-tab > span:last-child').evaluateAll(labels => labels.every(label => label.getClientRects().length === 1))).toBe(true);
     expect(await page.locator('.terminal-reading').evaluate(element => element.scrollHeight <= element.clientHeight + 1)).toBe(true);
+    await page.goto('/#welcome');
+    for (const selector of ['.welcome h2', '.welcome-actions .cli-action']) {
+      expect(await page.locator(selector).first().evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeCloseTo(contactSize, 2);
+    }
   });
 }
 

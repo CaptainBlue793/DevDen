@@ -223,14 +223,11 @@ test('mobile profile typography adapts while content stays readable', async ({ p
   await page.setViewportSize({ width: 390, height: 900 });
   const phone = await sizes();
   expect(phone[0]).toBeLessThan(desktop[0]);
-  expect(phone[2]).toBeGreaterThanOrEqual(10);
+  expect(phone[2]).toBeGreaterThanOrEqual(11);
   expect(phone[3]).toBe(phone[1]);
   expect(await page.locator('.profile-identity h1').evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
-  expect(phone[4]).toBeGreaterThanOrEqual(12);
-  expect(phone[5]).toBeGreaterThanOrEqual(14);
-  expect(phone[6]).toBeGreaterThanOrEqual(12);
-  expect(phone[7]).toBe(phone[6]);
-  expect(phone[8]).toBeGreaterThanOrEqual(11);
+  for (let index = 4; index < phone.length; index++) expect(phone[index]).toBeCloseTo(phone[2], 2);
+  expect(phone[6]).toBeLessThan(desktop[6]);
 });
 
 test('theme switching works when browser storage is unavailable', async ({ page }) => {
