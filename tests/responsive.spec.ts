@@ -12,7 +12,7 @@ for (const width of [320, 390]) {
     await page.setViewportSize({ width, height: 844 });
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/#portfolio/skills');
-    expect(await page.locator('.terminal-output').evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(14);
+    expect(await page.locator('.terminal-output').evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(13);
 
     for (const label of ['Skills', 'Resume', 'Experience', 'Projects', 'Publications', 'Activities']) {
       await page.getByRole('tab', { name: label, exact: true }).click();

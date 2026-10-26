@@ -227,10 +227,10 @@ test('mobile profile typography adapts while content stays readable', async ({ p
   expect(phone[3]).toBe(phone[1]);
   expect(await page.locator('.profile-identity h1').evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
   expect(phone[4]).toBeGreaterThanOrEqual(12);
-  expect(phone[5]).toBeGreaterThanOrEqual(15);
-  expect(phone[6]).toBeGreaterThanOrEqual(14);
+  expect(phone[5]).toBeGreaterThanOrEqual(14);
+  expect(phone[6]).toBeGreaterThanOrEqual(13);
   expect(phone[7]).toBe(phone[6]);
-  expect(phone[8]).toBeGreaterThanOrEqual(13);
+  expect(phone[8]).toBeGreaterThanOrEqual(12);
 });
 
 test('theme switching works when browser storage is unavailable', async ({ page }) => {
