@@ -412,8 +412,8 @@ summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   .terminal-output--welcome .welcome-actions .cli-action { font-size: var(--phone-ui-font); }
   .welcome-toolbar { font-size: var(--phone-ui-font); }
   .welcome-actions { gap: calc(12px * var(--phone-scale)); margin-top: calc(20px * var(--phone-scale)); max-width: calc(360px * var(--phone-scale)); }
-  .startup-output { min-height: calc(250px * var(--phone-scale)); padding: clamp(calc(20px * var(--phone-scale)), calc(4vw * var(--phone-scale)), calc(44px * var(--phone-scale))); font-size: clamp(15px, 3.8vw, 16px); }
-  .startup-toolbar, .startup-footer { font-size: clamp(13px, 3.3vw, 14px); }
+  .startup-output { min-height: calc(250px * var(--phone-scale)); padding: clamp(calc(20px * var(--phone-scale)), calc(4vw * var(--phone-scale)), calc(44px * var(--phone-scale))); font-size: var(--phone-ui-font); }
+  .startup-toolbar, .startup-footer { font-size: var(--phone-ui-font); }
   .startup-line:not(:last-child) { margin-bottom: calc(16px * var(--phone-scale)); }
 }
 @media (max-width: 400px) {

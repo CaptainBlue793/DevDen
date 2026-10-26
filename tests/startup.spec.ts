@@ -108,7 +108,11 @@ for (const theme of ['light', 'dark'] as const) {
     await page.clock.runFor(4500);
     await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
     const loadingFont = await page.locator('.startup-output').evaluate(element => parseFloat(getComputedStyle(element).fontSize));
-    expect(loadingFont).toBeGreaterThanOrEqual(15);
+    expect(loadingFont).toBeGreaterThanOrEqual(11);
+    expect(loadingFont).toBeLessThanOrEqual(12);
+    for (const selector of ['.startup-toolbar', '.startup-footer']) {
+      expect(await page.locator(selector).evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBe(loadingFont);
+    }
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     const button = (await page.getByRole('button', { name: 'Skip intro', exact: true }).boundingBox())!;
     expect(button.y).toBeGreaterThanOrEqual(0);
