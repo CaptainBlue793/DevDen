@@ -108,7 +108,9 @@ test('important facts, skill icons, and project details', async ({ page }) => {
   for (const added of ['OpenCV', 'NVIDIA CUDA']) await expect(ai).toContainText(added);
   await expect(page.getByRole('list', { name: 'Web Interfaces technologies', exact: true })).not.toContainText('React');
   await expect(page.getByRole('list', { name: 'APIs technologies', exact: true })).toContainText('FastAPI');
-  await expect(page.getByRole('list', { name: 'Power Platform technologies', exact: true })).toContainText('Power Automate');
+  const powerPlatform = page.getByRole('list', { name: 'Power Platform technologies', exact: true });
+  await expect(powerPlatform).toContainText('Power Automate');
+  await expect(powerPlatform).not.toContainText('Microsoft 365');
   await expect(page.getByRole('list', { name: 'Cloud technologies', exact: true })).toContainText('Cloudflare Workers');
   const development = page.getByRole('list', { name: 'Development technologies', exact: true });
   await expect(development).toContainText('Jupyter');
@@ -117,8 +119,13 @@ test('important facts, skill icons, and project details', async ({ page }) => {
   for (const [name, file] of [
     ['FastMCP', 'fastmcp-light.svg'], ['Azure', 'azure.svg'],
     ['Microsoft Copilot Studio', 'copilot-studio.svg'],
-  ]) await expect(page.locator(`.skill-tree [data-icon="${name}"] img`).first()).toHaveAttribute('src', `/images/brands/${file}`);
-  for (const name of ['GitLab CI/CD', 'Ansible', 'Claude', 'Codex']) await expect(page.locator(`.skill-tree svg[data-icon="${name}"][fill="currentColor"] path`)).toHaveCount(1);
+    ['Power Automate', 'power-automate.svg'], ['Power Apps', 'power-apps.svg'], ['Dataverse', 'dataverse.svg'],
+  ]) {
+    const logo = page.locator(`.skill-tree [data-icon="${name}"] img`).first();
+    await expect(logo).toHaveAttribute('src', `/images/brands/${file}`);
+    await expect.poll(() => logo.evaluate(element => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+  }
+  for (const name of ['GitLab CI/CD', 'Ansible', 'Claude', 'Codex', 'Cloudflare Workers']) await expect(page.locator(`.skill-tree svg[data-icon="${name}"][fill="currentColor"] path`)).toHaveCount(1);
   await expect(page.locator('.skill-tree svg[data-icon="REST APIs"] rect')).toHaveCount(1);
   await expect(page.getByRole('list', { name: 'Databases technologies', exact: true })).toContainText('ChromaDB');
   await expect(page.getByRole('list', { name: 'Agent Systems technologies', exact: true })).not.toContainText('ChromaDB');

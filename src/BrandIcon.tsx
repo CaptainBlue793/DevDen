@@ -1,5 +1,5 @@
 ﻿import {
-  siAngular, siAnsible, siClaude, siCss, siCplusplus, siFastapi, siGithub, siGitlab, siGoogledrive, siGraphql,
+  siAngular, siAnsible, siClaude, siCloudflareworkers, siCss, siCplusplus, siFastapi, siGithub, siGitlab, siGoogledrive, siGraphql,
   siGit, siHtml5, siHuggingface, siIeee, siJavascript, siJupyter,
   siLeetcode, siMysql, siNvidia, siOllama, siOpencv, siPostman, siPytest, siPython, siPytorch,
   siReact, siScikitlearn, siSnowflake, siSpacy, siSpotify, siSqlite,
@@ -22,6 +22,7 @@ const brands: Record<string, SimpleIcon | IconDefinition> = {
   AWS: faAws, Codex: faOpenai, Java: faJava, LinkedIn: faLinkedinIn,
   React: siReact, Jupyter: siJupyter, FastAPI: siFastapi,
   OpenCV: siOpencv, 'NVIDIA CUDA': siNvidia,
+  'Cloudflare Workers': siCloudflareworkers,
 };
 
 const logoAssets: Record<string, { file: string; monochrome?: boolean; color?: string; darkFile?: string; lightSurface?: boolean }> = {
@@ -29,6 +30,7 @@ const logoAssets: Record<string, { file: string; monochrome?: boolean; color?: s
   AWS: { file: 'aws.svg', darkFile: 'aws-dark.svg' },
   Azure: { file: 'azure.svg' },
   ChromaDB: { file: 'chromadb.svg' },
+  Dataverse: { file: 'dataverse.svg' },
   FastMCP: { file: 'fastmcp-light.svg', darkFile: 'fastmcp-dark.svg' },
   'Hugging Face': { file: 'huggingface.svg' },
   Java: { file: 'java.svg' },
@@ -42,6 +44,8 @@ const logoAssets: Record<string, { file: string; monochrome?: boolean; color?: s
   Oracle: { file: 'oracle.svg', monochrome: true, color: '#C74634' },
   Python: { file: 'python.svg' },
   'Power Platform': { file: 'power-platform.svg' },
+  'Power Apps': { file: 'power-apps.svg' },
+  'Power Automate': { file: 'power-automate.svg' },
   'scikit-learn': { file: 'scikitlearn.svg' },
 };
 

@@ -137,11 +137,11 @@ const sectionContent: Section[] = [
       },
       {
         title: 'Power Platform',
-        description: 'Microsoft Copilot Studio · Power Automate · Power Apps · Dataverse · Microsoft 365',
+        description: 'Microsoft Copilot Studio · Power Automate · Power Apps · Dataverse',
       },
       {
         title: 'Cloud',
-        description: 'AWS · Azure · Cloudflare Workers ',
+        description: 'AWS · Azure · Cloudflare Workers',
       },
       {
         title: 'Development',
