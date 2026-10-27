@@ -2,7 +2,7 @@
 
 Palak Deb Patra's interactive portfolio for software engineering, AI, and machine learning, presented as a terminal workspace.
 
-**[Visit the live site](https://captainblue793.github.io/DevDen/)**
+**[Visit the live site](https://palakdebpatra.com/)**
 
 ## Explore
 
