@@ -1,0 +1,17 @@
+name: Publish portfolio at palakdebpatra.com
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger main-site deployment
+        env:
+          GH_TOKEN: ${{ secrets.MAIN_SITE_DISPATCH_TOKEN }}
+        run: gh workflow run deploy.yml --repo CaptainBlue793/captainblue793.github.io --ref main
