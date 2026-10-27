@@ -310,7 +310,7 @@ const sectionContent: Section[] = [
           result: 'The live Atlas covers nine engineering subjects, with interactive study tools and courses that can be downloaded for offline use.',
           scope: 'Progress stays on the device by default. Optional account sync uses a separate API, and the downloadable courses work offline.',
           image: { src: publicAsset('/images/projects/engineering-atlas.png'), alt: 'The Engineering Atlas live course hub with learning paths and engineering courses', caption: 'Live course hub with learning paths and progress tracking' },
-          evidence: { label: 'Explore the live Atlas', url: 'https://captainblue793.github.io/palak-engineering-atlas/' },
+          evidence: { label: 'Explore the live Atlas', url: 'https://palakdebpatra.com/palak-engineering-atlas/' },
         },
         highlights: ['Interactive Learning', 'Connected Courses'],
         url: 'https://github.com/CaptainBlue793/palak-engineering-atlas',
@@ -320,7 +320,7 @@ const sectionContent: Section[] = [
           'Connected Courses: I guided the learning paths, course search, progress tracking and offline downloads. Losing your place should not be part of studying.',
         ],
         stack: ['HTML', 'CSS', 'JavaScript'],
-        links: [{ label: 'Explore the courses', url: 'https://captainblue793.github.io/palak-engineering-atlas/' }],
+        links: [{ label: 'Explore the courses', url: 'https://palakdebpatra.com/palak-engineering-atlas/' }],
       },
       {
         title: 'MeLoVerse',
