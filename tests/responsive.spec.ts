@@ -36,9 +36,13 @@ for (const width of [320, 390]) {
     expect(await page.locator('.terminal-tab > span:last-child').evaluateAll(labels => labels.every(label => label.getClientRects().length === 1))).toBe(true);
     expect(await page.locator('.terminal-reading').evaluate(element => element.scrollHeight <= element.clientHeight + 1)).toBe(true);
     await page.goto('/#welcome');
-    for (const selector of ['.welcome h2', '.welcome-actions .cli-action']) {
-      expect(await page.locator(selector).first().evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeCloseTo(contactSize, 2);
+    const welcomeFont = await page.locator('.terminal-output--welcome').evaluate(element => parseFloat(getComputedStyle(element).fontSize));
+    for (const button of await page.locator('.welcome-actions .cli-action').all()) {
+      expect(await button.evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeCloseTo(welcomeFont, 2);
     }
+    const headingSize = await page.locator('.welcome h2').evaluate(element => parseFloat(getComputedStyle(element).fontSize));
+    expect(headingSize).toBeGreaterThan(welcomeFont);
+    expect(headingSize).toBeLessThanOrEqual(21);
   });
 }
 

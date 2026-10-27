@@ -408,8 +408,8 @@ summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   .skill-tree .technology > span:last-child, .project-information .technology > span:last-child { overflow-wrap: anywhere; }
   .welcome-content { padding: calc(24px * var(--phone-scale)) calc(12px * var(--phone-scale)); }
   .welcome-doodle { font-size: calc(14px * var(--phone-scale)); line-height: 1; margin-bottom: calc(12px * var(--phone-scale)); }
-  .welcome h2 { font-size: clamp(20px, 6vw, 28px); }
-  .terminal-output--welcome .welcome-actions .cli-action { font-size: var(--phone-ui-font); }
+  .welcome h2 { font-size: clamp(18px, 5.3vw, 24px); }
+  .terminal-output--welcome .welcome-actions .cli-action { font-size: var(--font-body); }
   .welcome-toolbar { font-size: var(--phone-ui-font); }
   .welcome-actions { gap: calc(12px * var(--phone-scale)); margin-top: calc(20px * var(--phone-scale)); max-width: calc(360px * var(--phone-scale)); }
   .startup-output { min-height: calc(250px * var(--phone-scale)); padding: clamp(calc(20px * var(--phone-scale)), calc(4vw * var(--phone-scale)), calc(44px * var(--phone-scale))); font-size: var(--phone-ui-font); }
@@ -444,7 +444,7 @@ summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   .terminal-output { padding-block: calc(14px * var(--phone-scale)); scroll-padding-top: calc(14px * var(--phone-scale)); }
   .welcome-content { padding-block: calc(12px * var(--phone-scale)); }
   .welcome-doodle { font-size: calc(9px * var(--phone-scale)); margin-bottom: calc(6px * var(--phone-scale)); }
-  .welcome h2 { font-size: clamp(20px, 6vw, 28px); }
+  .welcome h2 { font-size: clamp(18px, 5.3vw, 24px); }
   .welcome-actions { margin-top: calc(12px * var(--phone-scale)); gap: calc(8px * var(--phone-scale)); max-width: calc(900px * var(--phone-scale)); }
 }
 @media (pointer: coarse) {
