@@ -13,6 +13,14 @@ Palak Deb Patra's interactive portfolio for software engineering, AI, and machin
 
 Built with **React, TypeScript, and Vite**. The site is published through GitHub Pages.
 
+## Live deployment
+
+This repository contains the portfolio source. Pushing to `main` runs the checks here and triggers the deployment workflow in [`CaptainBlue793/captainblue793.github.io`](https://github.com/CaptainBlue793/captainblue793.github.io). That repository builds DevDen and publishes it at [palakdebpatra.com](https://palakdebpatra.com/). The workflow uses the `MAIN_SITE_DISPATCH_TOKEN` repository secret; its value is never stored in the source.
+
+Other projects can publish under the same domain using their repository paths. [Engineering Atlas](https://palakdebpatra.com/palak-engineering-atlas/) is live at `/palak-engineering-atlas/`. Its sign-in emails are sent by a separate Cloudflare Worker through Resend from `login@palakdebpatra.com`. The portfolio's contact link uses `palakdevpatra@gmail.com`; the `login@` sender is not a receiving inbox.
+
+See [deployment notes](docs/deployment.md) for the complete workflow and setup for future project sites.
+
 ## Run locally
 
 Requires Node.js 22.12 or newer. In PowerShell:
@@ -46,4 +54,4 @@ npm.cmd test
 | CV PDFs and page previews | [`public/`](public/) |
 | Browser tests | [`tests/`](tests/) |
 
-The CVs are bundled as local PDFs so visitors can open them without Google Drive access. See [content sources](docs/content-sources.md) for provenance and [deployment notes](docs/deployment.md) for the GitHub Pages workflow. Third-party icon credits are in [`public/third-party-notices.txt`](public/third-party-notices.txt).
+The CVs are bundled as local PDFs so visitors can open them without Google Drive access. See [content sources](docs/content-sources.md) for provenance. Third-party icon credits are in [`public/third-party-notices.txt`](public/third-party-notices.txt).
