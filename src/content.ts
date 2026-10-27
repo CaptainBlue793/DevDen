@@ -65,7 +65,7 @@ const publicAsset = (path: string) => `${import.meta.env.BASE_URL}${path.replace
 
 export const profile = {
   name: 'Palak Deb Patra',
-  role: 'Software Engineer · AI / ML',
+  role: 'Software Engineer · AI Engineer · ML Engineer ',
   photo: publicAsset('/images/profile-720.webp'),
   photoSrcSet: `${publicAsset('/images/profile-360.webp')} 360w, ${publicAsset('/images/profile-720.webp')} 720w`,
   photoSizes: '(max-width: 1050px) 112px, 220px',
@@ -92,17 +92,17 @@ const sectionContent: Section[] = [
     records: [
       {
         title: 'About Me',
-        highlights: ['Software Engineer', 'NatWest Group', 'AI Engineering', 'Cloud Engineering', 'Data Engineering'],
+        highlights: ['Software Engineer', 'NatWest Group', 'AI Engineering', 'Cloud Engineering', 'Power Platform'],
         description: 'I’m a Software Engineer at NatWest Group. Most of my work sits in three areas:',
         details: [
           'AI Engineering: I work on AI agents for Microsoft 365, MCP integrations, AI observability and data parsing.',
-          'Power Platform and Microsoft 365: I build low-code agents, power automate workflows and dataverse tables.',
+          'Power Platform: I build low-code agents, power automate workflows and dataverse tables.',
           'Cloud Engineering: I use Power Platform pipelines, GitLab CI/CD, Ansible and HashiCorp tools.',
         ],
       },
       {
         title: 'Research Interests',
-        highlights: ['Computer Vision', 'Natural Language Processing'],
+        highlights: ['Computer Vision', 'NLP', 'image enhancement', 'image generation', 'cloud-hosted LLMs'],
         description: 'I also pursue research independently—unofficial title, very official curiosity. Huge interest in NLP and Computer Vision domain, especially areas such as image enhancement and image generation, with local and cloud-hosted LLMs close behind.\n\nMy first-author IEEE SPCOM 2026 paper explores unpaired Low-Light Image Enhancement, using a new architecture that combines Bidirectional Convolutional-GRU with GANs.',
       },
     ],
