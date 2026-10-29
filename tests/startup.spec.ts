@@ -139,6 +139,6 @@ test('browser theme changes update both screens without losing project explorati
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href', '/favicon-light.svg');
   await expect(page.getByRole('tab', { name: 'Projects', exact: true })).toHaveAttribute('aria-selected', 'true');
-  await expect(memex.locator('.record-details')).toContainText('Cited Local Answers');
+  await expect(memex.locator('.record-details')).toContainText('Measured results');
   await expect(memex.locator('details')).toHaveCount(0);
 });

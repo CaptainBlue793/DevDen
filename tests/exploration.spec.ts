@@ -36,13 +36,13 @@ test('four selected projects expose summaries, engineering bullets, and previews
     screenshotSources.add(source);
     await expect(project.getByRole('link', { name: `Open full-size ${title} screenshot`, exact: true })).toHaveAttribute('href', source);
     if (title === 'CodeShift') {
-      await expect(project.locator('.record-details')).toContainText('August 19, 2026 run verified 15 of 31 modules');
+      await expect(project.locator('.record-details')).toContainText('31-module run, 15 modules were verified as equivalent');
       await expect(project.locator('.record-details')).toContainText('197 functions and methods');
       await expect(project.getByRole('link', { name: /Benchmark Report/ })).toHaveAttribute('href', /scale-run-2026-08-19\.md$/);
     }
     if (title === 'FrameSmith') {
       await expect(project.locator('.description')).toContainText('prototype');
-      await expect(project.locator('.record-details')).toContainText('improvements remain unvalidated');
+      await expect(project.locator('.record-details')).toContainText('a performance gain has not been verified');
     }
     await expect(project.locator('.workflow, .cli-flow, .workflow-explanation')).toHaveCount(0);
   }
