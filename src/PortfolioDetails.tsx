@@ -26,9 +26,10 @@ export function CopyButton({ text, label, compact = false }: { text: string; lab
   </span>;
 }
 
-export function ProjectPreview({ study, title }: { study: CaseStudy; title: string }) {
+export function ProjectPreview({ study, title, theme }: { study: CaseStudy; title: string; theme: 'light' | 'dark' }) {
+  const imageSrc = theme === 'dark' ? study.image?.darkSrc ?? study.image?.src : study.image?.src;
   return <figure className="project-visual" aria-label={`${title} preview`}>
-      {study.image ? <a className="case-cover" href={study.image.src} target="_blank" rel="noopener noreferrer" aria-label={`Open full-size ${title} screenshot`}><img src={study.image.src} alt={study.image.alt} width="1440" height="1000" loading="lazy" /></a>
+      {study.image ? <a className="case-cover" href={imageSrc} target="_blank" rel="noopener noreferrer" aria-label={`Open full-size ${title} screenshot`}><img src={imageSrc} alt={study.image.alt} width="1440" height="1000" loading="lazy" /></a>
         : <div className="case-cover code-cover">
           {study.preview?.logo ? <img src={study.preview.logo} alt={`${title} logo`} width="48" height="48" loading="lazy" /> : <BrandIcon name={study.preview?.icon ?? 'Website'} />}
           <span>{study.preview?.headline ?? title}<small>{study.preview?.steps ?? study.category}</small></span>

@@ -51,7 +51,7 @@ function Technologies({ items, label }: { items: string[]; label: string }) {
   return <ul className="technologies" role="list" aria-label={label}>{items.map(item => <li className="technology" key={item}><span className="technology-marker" aria-hidden="true">-</span><BrandIcon name={item} /><span>{item}</span></li>)}</ul>;
 }
 
-function TerminalRecord({ record, index, section }: { record: RecordEntry; index: number; section: SectionId }) {
+function TerminalRecord({ record, index, section, theme }: { record: RecordEntry; index: number; section: SectionId; theme: 'light' | 'dark' }) {
   const skills = section === 'skills';
   return <article className={`record tone-${recordTones[index % recordTones.length]} ${skills ? 'skill-branch' : ''}${record.caseStudy ? ' project-row' : ''}`} style={{ '--row-delay': `${Math.min(index, 5) * 35}ms` } as CSSProperties}>
     <div className={record.caseStudy ? 'project-information' : undefined}>
@@ -70,11 +70,11 @@ function TerminalRecord({ record, index, section }: { record: RecordEntry; index
     </div>}
     {record.research && <PublicationDetails />}
     </div>
-    {record.caseStudy && <ProjectPreview study={record.caseStudy} title={record.title} />}
+    {record.caseStudy && <ProjectPreview study={record.caseStudy} title={record.title} theme={theme} />}
   </article>;
 }
 
-function SectionRecords({ section }: { section: Section }) {
+function SectionRecords({ section, theme }: { section: Section; theme: 'light' | 'dark' }) {
   return <>{section.intro && <p className="section-intro"><span className="section-marker" aria-hidden="true">&gt;&gt;</span><span>{section.intro}</span></p>}
   <div className={`records${section.id === 'skills' ? ' skill-tree' : ''}${section.layout === 'single' || section.id === 'projects' ? ' single-column' : ''}${section.id === 'projects' ? ' project-list' : ''}`}>
     {section.columns ? section.columns.map((column, columnIndex) => <section className="record-column" key={column.label} aria-label={column.hideHeading ? column.label : undefined} aria-labelledby={column.hideHeading ? undefined : `column-${section.id}-${columnIndex}`}>
@@ -83,8 +83,8 @@ function SectionRecords({ section }: { section: Section }) {
       </div>}
       {section.records.map((record, index) => ({ record, index }))
         .filter(({ record }) => record.column === (column.column ?? (columnIndex === 0 ? 'left' : 'right')))
-        .map(({ record, index }) => <TerminalRecord key={record.title} record={record} index={index} section={section.id} />)}
-    </section>) : section.records.map((record, index) => <TerminalRecord key={record.title} record={record} index={index} section={section.id} />)}
+        .map(({ record, index }) => <TerminalRecord key={record.title} record={record} index={index} section={section.id} theme={theme} />)}
+    </section>) : section.records.map((record, index) => <TerminalRecord key={record.title} record={record} index={index} section={section.id} theme={theme} />)}
   </div></>;
 }
 
@@ -100,7 +100,7 @@ function Welcome({ onExplore }: { onExplore: (id: SectionId) => void }) {
   </section>;
 }
 
-function Resume({ section }: { section: Section }) {
+function Resume({ section, theme }: { section: Section; theme: 'light' | 'dark' }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const documentRef = useRef<HTMLDivElement>(null);
@@ -124,7 +124,7 @@ function Resume({ section }: { section: Section }) {
       {resumeDocuments.map((document, index) => <button className="cli-action" type="button" key={document.id} aria-pressed={index === documentIndex} aria-controls="resume-current" onClick={() => setDocumentIndex(index)}>{document.label}</button>)}
     </div>
     <div className={`resume-layout${documentIndex === 1 ? ' resume-layout--academic' : ''}`} id="resume-current">
-    <div className="resume-about"><TerminalRecord record={section.records[documentIndex]} index={documentIndex} section="resume" /></div>
+    <div className="resume-about"><TerminalRecord record={section.records[documentIndex]} index={documentIndex} section="resume" theme={theme} /></div>
     <section className="resume-document" aria-labelledby="resume-document-title">
       <div className="resume-document-header">
         <h3 id="resume-document-title"><BrandIcon name="Resume" /> {selectedDocument.label}</h3>
@@ -338,7 +338,7 @@ function Portfolio({ activeId, onSectionChange, onReplay, theme, onToggleTheme }
           {activeId && activeSection ? <div className={`terminal-session tone-${sectionTones[activeId]}${activeId === 'resume' ? ' terminal-session--resume' : ''}`} key={activeId}>
               <h2 className="sr-only">{activeSection.label}</h2>
               <div className="invocation"><span className="path" aria-hidden="true">PS &gt; </span><span className="typed-command" style={{ '--command-length': activeSection.command.length } as CSSProperties}>{activeSection.command}</span><span className="cursor" aria-hidden="true">▌</span></div>
-              {activeId === 'resume' ? <Resume section={activeSection} /> : <SectionRecords section={activeSection} />}
+              {activeId === 'resume' ? <Resume section={activeSection} theme={theme} /> : <SectionRecords section={activeSection} theme={theme} />}
           </div> : <div className="terminal-session welcome-page tone-blue"><Welcome onExplore={switchTab} /></div>}
         </div>
         {activeSection && <TerminalReadingStatus key={activeSection.id} outputRef={outputRef} section={activeSection.label} tone={sectionTones[activeSection.id]} tabsOverflow={tabScroll.controls} />}

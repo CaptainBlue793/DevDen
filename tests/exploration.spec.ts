@@ -49,6 +49,25 @@ test('four selected projects expose summaries, engineering bullets, and previews
   expect(screenshotSources.size).toBe(4);
 });
 
+test('Engineering Atlas preview and full-size link follow the portfolio theme', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'light', reducedMotion: 'reduce' });
+  await page.goto('/#portfolio');
+  await page.getByRole('tab', { name: 'Projects', exact: true }).click();
+  const atlas = page.locator('.record').filter({ has: page.getByRole('heading', { name: '>> The Engineering Atlas', exact: true }) });
+  const screenshot = atlas.locator('.case-cover > img');
+  const fullSize = atlas.getByRole('link', { name: 'Open full-size The Engineering Atlas screenshot', exact: true });
+
+  for (const [theme, source] of [['light', '/images/projects/engineering-atlas.png'], ['dark', '/images/projects/engineering-atlas-dark.png']] as const) {
+    await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
+    await expect(screenshot).toHaveAttribute('src', source);
+    await expect(fullSize).toHaveAttribute('href', source);
+    await expect.poll(() => screenshot.evaluate(image => (image as HTMLImageElement).naturalWidth)).toBe(1440);
+    await page.getByRole('button', { name: `Switch to ${theme === 'light' ? 'dark' : 'light'} theme`, exact: true }).click();
+  }
+  await expect(screenshot).toHaveAttribute('src', '/images/projects/engineering-atlas.png');
+  await expect(fullSize).toHaveAttribute('href', '/images/projects/engineering-atlas.png');
+});
+
 test('NatWest roles use plain bullets and retain verified internship outcomes', async ({ page }) => {
   await page.goto('/#portfolio');
   await page.getByRole('tab', { name: 'Experience', exact: true }).click();

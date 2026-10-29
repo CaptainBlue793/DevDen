@@ -8,7 +8,7 @@ export interface CaseStudy {
   contribution: string;
   result: string;
   scope: string;
-  image?: { src: string; alt: string; caption: string };
+  image?: { src: string; darkSrc?: string; alt: string; caption: string };
   preview?: { headline: string; steps: string; icon?: string; logo?: string };
   evidence: { label: string; url: string };
 }
@@ -309,7 +309,7 @@ const sectionContent: Section[] = [
           contribution: 'I directed Claude’s work on the course sites and shared hub, then reviewed the learning paths, search, themes and progress tracking.',
           result: 'The live Atlas covers nine engineering subjects, with interactive study tools and courses that can be downloaded for offline use.',
           scope: 'Progress stays on the device by default. Optional account sync uses a separate API, and the downloadable courses work offline.',
-          image: { src: publicAsset('/images/projects/engineering-atlas.png'), alt: 'The Engineering Atlas live course hub with learning paths and engineering courses', caption: 'Live course hub with learning paths and progress tracking' },
+          image: { src: publicAsset('/images/projects/engineering-atlas.png'), darkSrc: publicAsset('/images/projects/engineering-atlas-dark.png'), alt: 'The Engineering Atlas live course hub with learning paths and engineering courses', caption: 'Live course hub with learning paths and progress tracking' },
           evidence: { label: 'Explore the live Atlas', url: 'https://palakdebpatra.com/palak-engineering-atlas/' },
         },
         highlights: ['Interactive Learning', 'Connected Courses'],
