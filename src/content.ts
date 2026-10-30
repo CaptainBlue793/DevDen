@@ -65,7 +65,6 @@ const publicAsset = (path: string) => `${import.meta.env.BASE_URL}${path.replace
 
 export const profile = {
   name: 'Palak Deb Patra',
-  role: 'Software Engineer · AI Engineer · ML Engineer ',
   photo: publicAsset('/images/profile-720.webp'),
   photoSrcSet: `${publicAsset('/images/profile-360.webp')} 360w, ${publicAsset('/images/profile-720.webp')} 720w`,
   photoSizes: '(max-width: 1050px) 112px, 220px',
