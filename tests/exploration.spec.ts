@@ -53,6 +53,7 @@ test('Engineering Atlas preview and full-size link follow the portfolio theme', 
   await page.emulateMedia({ colorScheme: 'light', reducedMotion: 'reduce' });
   await page.goto('/#portfolio');
   await page.getByRole('tab', { name: 'Projects', exact: true }).click();
+  await page.getByRole('button', { name: 'Switch to light theme', exact: true }).click();
   const atlas = page.locator('.record').filter({ has: page.getByRole('heading', { name: '>> The Engineering Atlas', exact: true }) });
   const screenshot = atlas.locator('.case-cover > img');
   const fullSize = atlas.getByRole('link', { name: 'Open full-size The Engineering Atlas screenshot', exact: true });
@@ -131,7 +132,7 @@ for (const method of ['button', 'Escape', 'completion'] as const) test(`replayed
   await expect(page).toHaveURL(/#welcome$/);
 });
 
-test('slower preview honors browser theme despite stale settings and completes automatically', async ({ page }) => {
+test('slower preview starts dark despite stale settings and completes automatically', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference', colorScheme: 'light' });
   await page.addInitScript(() => localStorage.setItem('portfolio-theme', 'dark'));
   await page.clock.install({ time: new Date('2026-10-09T00:00:00Z') });
@@ -139,7 +140,7 @@ test('slower preview honors browser theme despite stale settings and completes a
   await page.goto('/?theme=dark&intro=slow');
   await page.clock.runFor(5000);
   await expect(page.locator('.startup-page')).toBeVisible();
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   expect(await page.evaluate(() => localStorage.getItem('portfolio-theme'))).toBe('dark');
   await page.clock.runFor(8000);
   await expect(page).toHaveURL(/intro=slow#welcome$/);
@@ -151,6 +152,7 @@ for (const theme of ['light', 'dark'] as const) {
     await page.emulateMedia({ reducedMotion: 'reduce', colorScheme: theme });
     await page.setViewportSize({ width: 360, height: 760 });
     await page.goto('/#portfolio');
+    if (theme === 'light') await page.getByRole('button', { name: 'Switch to light theme', exact: true }).click();
     await page.getByRole('tab', { name: 'Projects', exact: true }).click();
     const output = page.locator('.terminal-output');
     for (const title of ['The Engineering Atlas', 'CodeShift', 'Memex', 'FrameSmith']) {

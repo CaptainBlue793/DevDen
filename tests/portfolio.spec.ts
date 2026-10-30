@@ -164,24 +164,23 @@ test('keyboard tab navigation and reduced motion', async ({ page }) => {
 });
 
 for (const preference of ['light', 'dark'] as const) {
-  test(`${preference} browser theme, switching, and automatic theme on reload`, async ({ page }) => {
+  test(`${preference} browser theme starts dark, switches manually, and resets on reload`, async ({ page }) => {
     await page.emulateMedia({ colorScheme: preference });
     await page.goto('/#portfolio');
-    const alternative = preference === 'dark' ? 'light' : 'dark';
-    await expect(page.locator('html')).toHaveAttribute('data-theme', preference);
-    await expect(page.locator('.profile-pane')).toHaveCSS('background-color', preference === 'light' ? 'rgb(245, 245, 245)' : 'rgb(16, 16, 16)');
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+    await expect(page.locator('.profile-pane')).toHaveCSS('background-color', 'rgb(16, 16, 16)');
     await expect(page.getByRole('heading', { name: 'Palak Deb Patra', exact: true })).toBeVisible();
     await page.getByRole('tab', { name: 'Projects', exact: true }).click();
-    await page.getByRole('button', { name: `Switch to ${alternative} theme`, exact: true }).click();
-    await expect(page.locator('html')).toHaveAttribute('data-theme', alternative);
-    await expect(page.locator('.terminal-pane')).toHaveCSS('background-color', alternative === 'light' ? 'rgb(255, 255, 255)' : 'rgb(12, 12, 12)');
-    await expect(page.locator('.profile-pane')).toHaveCSS('background-color', alternative === 'light' ? 'rgb(245, 245, 245)' : 'rgb(16, 16, 16)');
+    await page.getByRole('button', { name: 'Switch to light theme', exact: true }).click();
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+    await expect(page.locator('.terminal-pane')).toHaveCSS('background-color', 'rgb(255, 255, 255)');
+    await expect(page.locator('.profile-pane')).toHaveCSS('background-color', 'rgb(245, 245, 245)');
     await expect(page.locator('.profile-pane').getByRole('link', { name: /Google Drive/ })).toHaveCount(0);
     await expect(page.getByRole('tab', { name: 'Projects', exact: true })).toHaveAttribute('aria-selected', 'true');
     await page.reload();
-    await expect(page.locator('html')).toHaveAttribute('data-theme', preference);
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
     await page.getByRole('button', { name: 'Skip intro', exact: true }).click();
-    await expect(page.getByRole('button', { name: `Switch to ${alternative} theme`, exact: true })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Switch to light theme', exact: true })).toBeVisible();
     await page.screenshot({ path: `test-results/theme-${preference}.png`, animations: 'disabled' });
   });
 }
@@ -190,6 +189,7 @@ for (const theme of ['light', 'dark'] as const) {
   test(`coordinated title and keyword font colors remain readable in ${theme} mode`, async ({ page }) => {
     await page.emulateMedia({ colorScheme: theme, reducedMotion: 'reduce' });
     await page.goto('/#portfolio');
+    if (theme === 'light') await page.getByRole('button', { name: 'Switch to light theme', exact: true }).click();
     await page.getByRole('tab', { name: 'Projects', exact: true }).click();
     const palette = await page.evaluate(() => {
       function luminance(color: string) {

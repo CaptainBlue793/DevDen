@@ -52,6 +52,7 @@ for (const theme of ['light', 'dark'] as const) {
       await page.setViewportSize(size);
       await page.emulateMedia({ colorScheme: theme, reducedMotion: 'reduce' });
       await page.goto('/#portfolio');
+      if (theme === 'light') await page.getByRole('button', { name: 'Switch to light theme', exact: true }).click();
       const window = page.locator('.terminal-window');
       const bounds = (await window.boundingBox())!;
       expect(bounds.y + bounds.height).toBeLessThanOrEqual(size.height);

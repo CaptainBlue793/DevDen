@@ -1,19 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#0c0c0c" />
     <meta name="color-scheme" content="dark light" />
     <link rel="preload" as="image" type="image/webp" href="%BASE_URL%images/profile-720.webp" imagesrcset="%BASE_URL%images/profile-360.webp 360w, %BASE_URL%images/profile-720.webp 720w" imagesizes="(max-width: 1050px) 112px, 220px" fetchpriority="high" />
-    <script>
-      // Resolve the initial theme before rendering to avoid a flash on reload.
-      (() => {
-        const theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        document.documentElement.dataset.theme = theme;
-        document.querySelector('meta[name="theme-color"]').content = theme === 'light' ? '#ffffff' : '#0c0c0c';
-      })();
-    </script>
     <meta name="description" content="I’m Palak Deb Patra, a Software Engineer at NatWest Group. Explore my projects and research in Machine Learning, Computer Vision, and Natural Language Processing." />
     <meta property="og:title" content="Palak Deb Patra | Software Engineer · AI / ML" />
     <meta property="og:description" content="Step into my DevDen. I’m Palak Deb Patra, and this is where I share my engineering projects, experience, and AI research." />

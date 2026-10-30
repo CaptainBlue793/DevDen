@@ -358,7 +358,7 @@ function sectionFromHash() {
 }
 
 export default function App() {
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => document.documentElement.dataset.theme === 'light' ? 'light' : 'dark');
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
   const [selectedId, setSelectedId] = useState<SectionId | null>(() => {
     if (isPageReload()) return null;
     return sectionFromHash();
@@ -374,13 +374,6 @@ export default function App() {
     }
     window.addEventListener('hashchange', followHash);
     return () => window.removeEventListener('hashchange', followHash);
-  }, []);
-
-  useEffect(() => {
-    const preference = window.matchMedia('(prefers-color-scheme: dark)');
-    function followBrowser(event: MediaQueryListEvent) { setTheme(event.matches ? 'dark' : 'light'); }
-    preference.addEventListener('change', followBrowser);
-    return () => preference.removeEventListener('change', followBrowser);
   }, []);
 
   useEffect(() => {

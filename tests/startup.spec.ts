@@ -88,25 +88,25 @@ test('enabling reduced motion while typing ends the intro immediately', async ({
 });
 
 for (const theme of ['light', 'dark'] as const) {
-  test(`browser ${theme} preference determines intro and portfolio despite old saved and URL themes`, async ({ page }) => {
+  test(`browser ${theme} preference still starts dark despite old saved and URL themes`, async ({ page }) => {
     const other = theme === 'light' ? 'dark' : 'light';
     await page.emulateMedia({ colorScheme: theme, reducedMotion: 'no-preference' });
     await page.addInitScript(other => localStorage.setItem('portfolio-theme', other), other);
     await page.goto(`/?theme=${other}`);
     await expect(page.locator('.startup-page')).toBeVisible();
-    await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
     await page.getByRole('button', { name: 'Skip intro', exact: true }).click();
-    await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
     await page.reload();
-    await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   });
 
-  test(`phone startup fits the viewport in ${theme} mode`, async ({ page }) => {
+  test(`phone startup fits the viewport with ${theme} browser preference`, async ({ page }) => {
     await page.setViewportSize({ width: 360, height: 640 });
     await page.emulateMedia({ colorScheme: theme });
     await startWithControlledTime(page);
     await page.clock.runFor(4500);
-    await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
     const loadingFont = await page.locator('.startup-output').evaluate(element => parseFloat(getComputedStyle(element).fontSize));
     expect(loadingFont).toBeGreaterThanOrEqual(11);
     expect(loadingFont).toBeLessThanOrEqual(12);
@@ -124,7 +124,7 @@ for (const theme of ['light', 'dark'] as const) {
   });
 }
 
-test('browser theme changes update both screens without losing project exploration state', async ({ page }) => {
+test('browser theme changes do not override the manual choice or project exploration state', async ({ page }) => {
   await page.emulateMedia({ colorScheme: 'light' });
   await startWithControlledTime(page);
   await page.clock.runFor(600);
@@ -136,6 +136,10 @@ test('browser theme changes update both screens without losing project explorati
   const memex = page.locator('article').filter({ has: page.getByRole('heading', { name: '>> Memex', exact: true }) });
   await expect(memex.locator('.record-details li')).toHaveCount(2);
   await page.emulateMedia({ colorScheme: 'light' });
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await page.getByRole('button', { name: 'Switch to light theme', exact: true }).click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await page.emulateMedia({ colorScheme: 'dark' });
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href', '/favicon-light.svg');
   await expect(page.getByRole('tab', { name: 'Projects', exact: true })).toHaveAttribute('aria-selected', 'true');

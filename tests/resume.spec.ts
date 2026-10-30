@@ -59,6 +59,7 @@ for (const theme of ['light', 'dark'] as const) {
       await expect(entryButtons).toHaveText(['❯_Skills', '❯_Resume', '❯_Experience', '❯_Projects', '❯_Publications', '❯_Activities']);
       for (const button of await entryButtons.all()) await expect(button).toBeInViewport();
       await welcome.getByRole('button', { name: 'Resume', exact: true }).click();
+      if (theme === 'light') await page.getByRole('button', { name: 'Switch to light theme', exact: true }).click();
       await expect(page.getByRole('tab')).toHaveCount(6);
       await expect(page.locator('.welcome-page')).toHaveCount(0);
       await expect(page.locator('.welcome-atmosphere')).toHaveCount(0);

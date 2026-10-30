@@ -11,6 +11,7 @@ for (const theme of ['light', 'dark'] as const) {
       await page.setViewportSize({ width, height: 900 });
       await page.emulateMedia({ colorScheme: theme, reducedMotion: 'reduce' });
       await page.goto('/#portfolio');
+      if (theme === 'light') await page.getByRole('button', { name: 'Switch to light theme', exact: true }).click();
       for (const group of groups) {
         await page.getByRole('tab', { name: group.tab, exact: true }).click();
         const left = page.getByRole('region', { name: group.left, exact: true });
