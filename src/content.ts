@@ -65,9 +65,7 @@ const publicAsset = (path: string) => `${import.meta.env.BASE_URL}${path.replace
 
 export const profile = {
   name: 'Palak Deb Patra',
-  photo: publicAsset('/images/profile-720.webp'),
-  photoSrcSet: `${publicAsset('/images/profile-360.webp')} 360w, ${publicAsset('/images/profile-720.webp')} 720w`,
-  photoSizes: '(max-width: 1050px) 112px, 220px',
+  photo: publicAsset('/images/profile.png'),
   contacts: [
     { label: 'Email', value: 'palakdevpatra@gmail.com', url: 'mailto:palakdevpatra@gmail.com' },
     { label: 'Phone', value: '+91 95562 10524', url: 'tel:+919556210524' },

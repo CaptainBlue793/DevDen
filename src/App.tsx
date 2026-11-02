@@ -302,7 +302,7 @@ function Portfolio({ activeId, onSectionChange, onReplay, theme, onToggleTheme }
         </div>
         <div className="profile-details" id="profile-details">
           <div className="profile-identity">
-          <div className="portrait"><img src={profile.photo} srcSet={profile.photoSrcSet} sizes={profile.photoSizes} alt="Profile image chosen by Palak Deb Patra" width="720" height="1280" loading="eager" fetchPriority="high" decoding="async" /></div>
+          <div className="portrait"><img src={profile.photo} alt="Profile image chosen by Palak Deb Patra" width="1024" height="1024" loading="eager" fetchPriority="high" decoding="async" /></div>
           <h1>{profile.name}</h1>
           </div>
           <div className="contacts">{profile.contacts.map(contact => <div className={`contact tone-${contactTones[contact.label]}`} key={contact.label}>

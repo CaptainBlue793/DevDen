@@ -54,10 +54,10 @@ test('supplied image, accessible brand links, and resume viewer entry', async ({
   await page.goto('/#portfolio');
   const image = page.getByRole('img', { name: 'Profile image chosen by Palak Deb Patra' });
   await expect(image).toBeVisible();
-  await expect(image).toHaveAttribute('src', '/images/profile-720.webp');
+  await expect(image).toHaveAttribute('src', '/images/profile.png');
   await expect(page.locator('.profile-details .role')).toHaveCount(0);
   await expect.poll(() => image.evaluate(element => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
-  expect((await request.get('/images/profile-720.webp')).status()).toBe(200);
+  expect((await request.get('/images/profile.png')).status()).toBe(200);
   await expect(page.locator('.profile-pane').getByRole('link', { name: /Google Drive/ })).toHaveCount(0);
   await page.getByRole('tab', { name: 'Resume', exact: true }).click();
   await expect(page.getByRole('button', { name: 'View Professional CV', exact: true })).toBeVisible();
