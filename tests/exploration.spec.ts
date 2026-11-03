@@ -69,20 +69,31 @@ test('Engineering Atlas preview and full-size link follow the portfolio theme', 
   await expect(fullSize).toHaveAttribute('href', '/images/projects/engineering-atlas.png');
 });
 
-test('NatWest roles use plain bullets and retain verified internship outcomes', async ({ page }) => {
+test('NatWest experience groups bullets under the correct work projects', async ({ page }) => {
   await page.goto('/#portfolio');
   await page.getByRole('tab', { name: 'Experience', exact: true }).click();
   await expect(page.locator('.record-column > article')).toHaveCount(2);
   const roles = page.locator('.record-column > article');
+  const engineerProjects = roles.nth(0).locator('.work-project');
+  await expect(engineerProjects).toHaveCount(2);
+  await expect(engineerProjects.nth(0).locator('h4')).toHaveText('Project: Colleague Learning Assistant (CLA)');
+  await expect(engineerProjects.nth(0).locator('.record-details li')).toHaveCount(6);
+  await expect(engineerProjects.nth(0)).toContainText('Azure Blob Storage');
+  await expect(engineerProjects.nth(1).locator('h4')).toHaveText('Project: ChLoE');
+  await expect(engineerProjects.nth(1).locator('.record-details li')).toHaveCount(3);
+  await expect(engineerProjects.nth(1)).toContainText('Power Platform FAQ');
+  const internshipProject = roles.nth(1).locator('.work-project');
+  await expect(internshipProject.locator('h4')).toHaveText('Project: OSPO Metrics');
+  await expect(internshipProject.locator('.record-details li')).toHaveCount(3);
   await expect(roles.nth(0).locator('.record-details li')).toHaveCount(9);
   await expect(roles.nth(1).locator('.record-details li')).toHaveCount(3);
   await expect(roles.nth(0).locator('.record-meta')).toHaveText('July 2025 – Present · Bangalore, India');
-  await expect(roles.nth(0).locator('.record-details')).toContainText('131 automated tests');
-  await expect(roles.nth(0).locator('.record-details')).toContainText('23 out of 26 test cases passed');
+  await expect(engineerProjects.nth(0)).toContainText('131 automated tests');
+  await expect(engineerProjects.nth(1)).toContainText('23 out of 26 test cases passed');
   await expect(roles.nth(1).locator('.record-meta')).toHaveText('May – July 2024 · Gurgaon, India');
-  await expect(roles.nth(1).locator('.record-details')).toContainText('reducing manual processing time by 28%');
-  await expect(roles.nth(1).locator('.record-details')).toContainText('16 datasets');
-  await expect(roles.nth(1).locator('.record-details')).toContainText('ThoughtSpot');
+  await expect(internshipProject).toContainText('reducing manual processing time by 28%');
+  await expect(internshipProject).toContainText('16 datasets');
+  await expect(internshipProject).toContainText('ThoughtSpot');
   await expect(page.getByRole('tabpanel').locator('mark, .experience-outcomes, .career-progression, .workflow, .record-stack, .description-label')).toHaveCount(0);
   const keyword = page.getByRole('tabpanel').locator('[class^="keyword-"]').first();
   await expect(keyword).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');

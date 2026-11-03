@@ -245,6 +245,11 @@ h1 { font-size: var(--font-name); font-weight: 500; letter-spacing: -.7px; }
 .record-facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; color: var(--secondary); }
 .record-details { padding: 0; margin: var(--space-small) 0 0 var(--record-indent); list-style: none; }
 .record-details li { display: grid; grid-template-columns: var(--marker-width) minmax(0, 1fr); gap: var(--list-gap); margin-top: 6px; color: var(--secondary); font-size: var(--font-body); }
+.work-project { margin: var(--space-group) 0 0 var(--record-indent); padding-left: var(--space-group); border-left: 1px solid var(--border); }
+.work-project + .work-project { margin-top: 1.5rem; }
+.work-project h4 { margin: 0; color: var(--text); font-size: var(--font-body); font-weight: 600; line-height: 1.65; }
+.work-project-label { color: var(--accent); }
+.work-project .record-details { margin-left: 0; }
 .detail-marker { color: var(--muted); }
 .keyword-default { color: var(--accent); }
 .keyword-blue { color: var(--blue); }

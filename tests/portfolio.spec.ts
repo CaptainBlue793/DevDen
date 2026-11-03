@@ -14,7 +14,7 @@ test('six formatted tabs, narrower sidebar, and stationary desktop panes', async
   const toolbar = await page.locator('.terminal-toolbar').boundingBox();
   expect(sidebar!.width / (await page.locator('.terminal-window').boundingBox())!.width).toBeCloseTo(0.25, 2);
   await expect(page.locator('.profile-command')).toContainText('Get-Portfolio');
-  await expect(page.getByRole('tabpanel')).toContainText('I’m a Software Engineer at NatWest Group');
+  await expect(page.getByRole('tabpanel')).toContainText('currently a SWE at NatWest Group');
   await expect(page.getByRole('tabpanel')).toContainText('MCP integrations, AI observability and data parsing');
   const portrait = (await page.locator('.portrait').boundingBox())!;
   expect(portrait.y + portrait.height / 2).toBeLessThan(sidebar!.y + sidebar!.height / 2);
@@ -86,7 +86,7 @@ test('supplied image, accessible brand links, and resume viewer entry', async ({
 test('important facts, skill icons, and project details', async ({ page }) => {
   await page.goto('/#portfolio');
   await page.getByRole('tab', { name: 'Resume', exact: true }).click();
-  await expect(page.locator('.keyword-default').filter({ hasText: 'Software Engineer' })).toBeVisible();
+  await expect(page.locator('.keyword-default').filter({ hasText: 'SWE' })).toBeVisible();
   await expect(page.locator('mark')).toHaveCount(0);
   await page.getByRole('tab', { name: 'Skills', exact: true }).click();
   await expect(page.locator('.skill-tree')).toBeVisible();
@@ -135,7 +135,8 @@ test('important facts, skill icons, and project details', async ({ page }) => {
   await expect(page.locator('.records > .record')).toHaveCount(4);
   await page.getByRole('tab', { name: 'Experience', exact: true }).click();
   await expect(page.locator('.record-details li')).toHaveCount(12);
-  await expect(page.locator('.record-details')).toContainText(['131 automated tests', 'reducing manual processing time by 28%']);
+  await expect(page.locator('.record-column > article').nth(0)).toContainText('131 automated tests');
+  await expect(page.locator('.record-column > article').nth(1)).toContainText('reducing manual processing time by 28%');
   await expect(page.getByRole('tabpanel').locator('.keyword-cyan').first()).toContainText('OpenTelemetry');
   await expect(page.getByRole('tabpanel').locator('.keyword-green').first()).toContainText('131 automated tests');
   await page.getByRole('tab', { name: 'Activities', exact: true }).click();

@@ -51,6 +51,10 @@ function Technologies({ items, label }: { items: string[]; label: string }) {
   return <ul className="technologies" role="list" aria-label={label}>{items.map(item => <li className="technology" key={item}><span className="technology-marker" aria-hidden="true">-</span><BrandIcon name={item} /><span>{item}</span></li>)}</ul>;
 }
 
+function RecordDetails({ details, highlights }: { details: string[]; highlights?: RecordEntry['highlights'] }) {
+  return <ul className="record-details" role="list">{details.map(detail => <li key={detail}><span className="detail-marker" aria-hidden="true">-</span><span><EmphasizedText text={detail} highlights={highlights} /></span></li>)}</ul>;
+}
+
 function TerminalRecord({ record, index, section, theme }: { record: RecordEntry; index: number; section: SectionId; theme: 'light' | 'dark' }) {
   const skills = section === 'skills';
   return <article className={`record tone-${recordTones[index % recordTones.length]} ${skills ? 'skill-branch' : ''}${record.caseStudy ? ' project-row' : ''}`} style={{ '--row-delay': `${Math.min(index, 5) * 35}ms` } as CSSProperties}>
@@ -62,7 +66,14 @@ function TerminalRecord({ record, index, section, theme }: { record: RecordEntry
       : record.research ? <section className="detail-block research-overview"><h4>Research Overview</h4><p className="description">{record.research.overview}</p></section>
       : section !== 'work' && record.description.split('\n\n').map((paragraph, paragraphIndex) => <p className="description" key={paragraphIndex}><EmphasizedText text={paragraph} highlights={record.highlights} /></p>)}
     {record.metadata && <dl className="record-facts">{record.metadata.map(field => <div key={field.label}><dt>{field.label}:</dt><dd>{field.url ? <ExternalLink url={field.url}>{field.value}</ExternalLink> : <EmphasizedText text={field.value} highlights={record.highlights} />}</dd></div>)}</dl>}
-    {record.details && <ul className="record-details" role="list">{record.details.map(detail => <li key={detail}><span className="detail-marker" aria-hidden="true">-</span><span><EmphasizedText text={detail} highlights={record.highlights} /></span></li>)}</ul>}
+    {record.details && <RecordDetails details={record.details} highlights={record.highlights} />}
+    {record.workProjects?.map((project, projectIndex) => {
+      const headingId = `work-project-${index}-${projectIndex}`;
+      return <section className="work-project" aria-labelledby={headingId} key={project.title}>
+        <h4 id={headingId}><span className="work-project-label">Project:</span> {project.title}</h4>
+        <RecordDetails details={project.details} highlights={record.highlights} />
+      </section>;
+    })}
     {record.stack && <div className="record-stack"><span className="stack-label">Stack:</span><Technologies items={record.stack} label={`${record.title} tech stack`} /></div>}
     {(record.links || (record.caseStudy && record.url)) && <div className="record-links">
       {record.caseStudy && record.url && <ExternalLink url={record.url}><BrandIcon name="GitHub" />GitHub<span className="external-mark" aria-hidden="true">↗</span></ExternalLink>}
