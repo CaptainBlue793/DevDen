@@ -11,7 +11,7 @@
   --purple: #cdb9ee; --cyan: #a3d9de; --pink: #e6b4d8; --border: #353535;
   --blue-wash: #233447; --green-wash: #21382a; --yellow-wash: #383124;
   --red-wash: #40272d; --purple-wash: #332b43; --cyan-wash: #21363b; --pink-wash: #3b2938;
-  --profile-surface: #141414; --portrait-surface: #0c0c0c; --portrait-ring: #f5f5f5;
+  --profile-surface: #141414; --portrait-surface: #0c0c0c; --portrait-ring: #777777;
   --font-body: 1rem; --font-small: .875rem; --font-heading: 1.0625rem; --font-name: 1.75rem;
   --font-profile: 1.0625rem;
   --record-indent: 2rem; --nested-indent: 1.25rem;
@@ -34,7 +34,7 @@
   --purple: #7a3bb8; --cyan: #00747e; --pink: #ab2b80; --border: #dce3ec;
   --blue-wash: #edf3ff; --green-wash: #ebf7ef; --yellow-wash: #fff4df;
   --red-wash: #fff0f3; --purple-wash: #f3ecff; --cyan-wash: #e5f7f8; --pink-wash: #fff0fa;
-  --profile-surface: #f7f9fc; --portrait-surface: #edf3f9; --portrait-ring: #404040;
+  --profile-surface: #f7f9fc; --portrait-surface: #edf3f9;
   --hover: #e7edf5; --scrollbar: #b0bbc8; --selection: #dceaf8;
   --comet-color: #557b99;
   --devden: #146782;
@@ -82,7 +82,7 @@ a, .path, .stack-label, .section-marker, [class^="keyword-"] {
 .profile-details { width: 100%; text-align: center; margin-top: calc(clamp(88px, 17dvh, 176px) + var(--profile-drop, 0px)); }
 .profile-identity, .contact-key { min-width: 0; }
 .contact-key { overflow-wrap: anywhere; }
-.portrait { width: min(220px, 90%, 26dvh); aspect-ratio: 1; padding: 6px; border-radius: 50%; margin: 0 auto 22px; overflow: hidden; background: repeating-conic-gradient(from -90deg, var(--portrait-ring) 0deg 10deg, var(--sidebar) 10deg 12deg); box-shadow: 0 0 0 2px var(--portrait-ring); }
+.portrait { width: min(220px, 90%, 26dvh); aspect-ratio: 1; border: 7px solid var(--portrait-ring); border-radius: 50%; margin: 0 auto 22px; overflow: hidden; background: var(--portrait-surface); }
 .portrait img { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; object-position: 50% 35%; }
 h1 { font-size: var(--font-name); font-weight: 500; letter-spacing: -.7px; }
 .contacts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 20px 6px; margin: 64px auto 0; width: 100%; max-width: 380px; padding-inline: 12px 8px; text-align: left; font-size: clamp(.8rem, .88vw, 1rem); }
