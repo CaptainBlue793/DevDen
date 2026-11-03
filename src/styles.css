@@ -83,7 +83,7 @@ a, .path, .stack-label, .section-marker, [class^="keyword-"] {
 .profile-identity, .contact-key { min-width: 0; }
 .contact-key { overflow-wrap: anywhere; }
 .portrait { width: min(220px, 90%, 26dvh); aspect-ratio: 1; border-radius: 50%; margin: 0 auto 22px; overflow: hidden; background: var(--portrait-surface); }
-.portrait img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
+.portrait img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
 h1 { font-size: var(--font-name); font-weight: 500; letter-spacing: -.7px; }
 .contacts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 20px 6px; margin: 64px auto 0; width: 100%; max-width: 380px; padding-inline: 12px 8px; text-align: left; font-size: clamp(.8rem, .88vw, 1rem); }
 .contact { display: grid; grid-column: 1 / -1; grid-template-columns: subgrid; align-items: start; column-gap: inherit; min-width: 0; line-height: 1.5; }
