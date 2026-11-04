@@ -93,17 +93,17 @@ const sectionContent: Section[] = [
       {
         title: 'About Me',
         highlights: ['SWE', 'AI Engineering', 'Cloud Engineering', 'Power Platform'],
-        description: 'I’m currently a SWE at NatWest Group, working across three areas:',
+        description: 'I am currently working as a SWE at NatWest Group, working across three areas primarily:',
         details: [
-          'AI Engineering: I work on AI agents for Microsoft 365, MCP integrations, AI observability and data parsing.',
+          'AI Engineering: I work on AI agents related to Microsoft 365, MCP integrations, AI observability and Data Parsing.',
           'Power Platform: I build low-code agents, power automate workflows and dataverse tables.',
           'Cloud Engineering: I use Power Platform pipelines, GitLab CI/CD, Ansible and HashiCorp tools.',
         ],
       },
       {
         title: 'Research Interests',
-        highlights: ['Computer Vision', 'NLP', 'image enhancement', 'image generation', 'cloud-hosted LLMs'],
-        description: 'I pursue research independently, with a focus on NLP and Computer Vision, especially image enhancement and image generation. I’m also interested in local and cloud-hosted LLMs.\n\nMy first research project resulted in a first-author IEEE SPCOM 2026 paper on unpaired Low-Light Image Enhancement. It explores an architecture combining Bidirectional Convolutional-GRU modules with GANs.',
+        highlights: ['Individual Researcher', 'Computer Vision', 'NLP', 'image enhancement', 'image generation', 'local', 'cloud-hosted LLMs', 'IEEE SPCOM 2026', 'Bidirectional Convolutional-GRU', 'GANs','Unpaired Low-Light Image Enhancement'],
+        description: 'I am an Individual Researcher, who focuses mainly on NLP and Computer Vision domain, and in particular image enhancement and image generation, with slight here-and-there interests in local and cloud-hosted LLMs.\n\nMy first research project in college resulted in a first-author IEEE SPCOM 2026 paper on unpaired Low-Light Image Enhancement. It explores an architecture which combines Bidirectional Convolutional-GRU modules with GANs.',
       },
     ],
   },
@@ -219,7 +219,7 @@ const sectionContent: Section[] = [
   },
   {
     id: 'projects', label: 'Projects', directory: 'Projects', command: 'Get-Projects',
-    intro: 'These projects cover engineering education, code migration, document AI, and GPU optimization. I set the direction, gave detailed instructions, reviewed and tested the results, and made the final decisions; Claude wrote the code.',
+    intro: 'These are some of my featured projects which cover engineering education, code migration, document AI and GPU optimization.\n I did not code these projects entirely by myself and had to leverage Claude CLI for some of the implementation.\nHowever, I directed Claude’s work on the project architecture, agents, adapters, evaluation and analytics, then reviewed and tested the results.',
     records: [
       {
         title: 'Memex',
