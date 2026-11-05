@@ -5,7 +5,7 @@ import FallingComets from './FallingComets';
 const startupLines = [
   { prefix: '>> ', text: profile.name, tone: 'purple' },
   { prefix: 'PS > ', text: 'Start-Portfolio', tone: 'blue', command: true },
-  { prefix: '', text: 'Opening portfolio...', tone: 'green' },
+  { prefix: '', text: 'Opening Portfolio ...', tone: 'green' },
 ];
 
 export default function StartupTerminal({ onComplete }: { onComplete: () => void }) {
@@ -61,17 +61,17 @@ export default function StartupTerminal({ onComplete }: { onComplete: () => void
 
   return <main className={`startup-page ${leaving ? 'startup-leaving' : ''}`} aria-labelledby="startup-title">
     <FallingComets variant="startup" />
-    <h1 id="startup-title" className="sr-only">Palak Deb Patra portfolio startup</h1>
+    <h1 id="startup-title" className="sr-only">Palak Deb Patra Portfolio Startup</h1>
     <section className="startup-window" aria-label="Opening terminal">
       <div className="startup-toolbar"><span className="tab-icon" aria-hidden="true">❯_</span><span>portfolio.ps1</span><span className="startup-location">C:\Portfolio</span></div>
       {/* Announce startup once, rather than reading every typed character. */}
-      <p className="sr-only" role="status">Opening Palak Deb Patra’s portfolio. You can skip the intro.</p>
+      <p className="sr-only" role="status">Opening Palak Deb Patra’s Portfolio ...</p>
       <div className="startup-output" aria-hidden="true">
         {startupLines.slice(0, frame.line + 1).map((entry, index) => <p className={`startup-line tone-${entry.tone} ${entry.command ? 'startup-command' : ''}`} key={index}>
           <span className="startup-prefix">{entry.prefix}</span><span>{index < frame.line ? entry.text : entry.text.slice(0, frame.characters)}</span>{index === frame.line && <span className="cursor">▌</span>}
         </p>)}
       </div>
-      <div className="startup-footer"><span>Opening automatically · Esc to skip</span><button ref={skipRef} type="button" onClick={onComplete}>Skip intro <span aria-hidden="true">→</span></button></div>
+      <div className="startup-footer"><span>DevDen Starting ...</span><button ref={skipRef} type="button" onClick={onComplete}>Skip intro <span aria-hidden="true">→</span></button></div>
     </section>
   </main>;
 }
